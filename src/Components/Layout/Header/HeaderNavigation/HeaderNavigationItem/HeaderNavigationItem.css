@@ -1,0 +1,22 @@
+.HeaderNavigationItem {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.HeaderNavigationItem a{
+    color: #fff;
+    text-decoration: none;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.HeaderNavigationItem a:hover,
+.HeaderNavigationItem a:active,
+.HeaderNavigationItem a.active{
+    color: #00E689;
+}

@@ -1,0 +1,17 @@
+.NewsCards{
+    margin: 25px auto;
+    height: 400px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 70%
+}
+
+.CardContent{
+    height: 100%;
+    border: 0;
+}
+
+.NewsCards p{
+    font-size: 12px;
+    margin-bottom: 5px;
+}

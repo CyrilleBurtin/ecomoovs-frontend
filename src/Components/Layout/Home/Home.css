@@ -1,0 +1,45 @@
+.Home{
+    background-image: url('/images/homeBg.webp');
+    background-size: cover;
+    background-position: top;
+    padding-top: 150px;
+}
+.H1Small{
+    text-align: center;
+    margin-bottom: 20;
+    font-size: 28px;
+    font-weight: bold;
+}
+.H1Strong{
+    font-size: 43px;
+    font-weight: bold;
+    color:#77eebe;
+}
+H4{
+    font-size: 21px;
+    font-weight: bold;
+    text-align: center;
+}
+.greens{
+    background-color:#6dbbad;
+    color: #fff;
+    display: flex;
+    justify-content : space-evenly;
+    flex-direction: column;
+    align-items: center;
+}
+.default{ 
+    color: #f6f6f6;
+    text-decoration: none;
+    margin-right: 8;
+    margin-left: 8
+}
+.activeStyle{
+color: #00e689;
+}
+
+.bottom{
+    background-image: url('/images/together.webp');
+    background-position: center center;
+    background-size: cover;
+}

@@ -1,0 +1,7 @@
+.MoovCards{
+    height: 200px;
+}
+
+.MoovCards .CardBody{
+    min-height: 124px;;
+}
