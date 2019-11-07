@@ -12,7 +12,7 @@ const HeaderNavigation = () => {
     console.log('newUser', newUser)
 
     return (
-        <Navbar expand="lg" className="NavBar">
+        <Navbar expand="sm" className="NavBar">
             <Navbar.Brand href="#home">
                 <NavLink to="/home"><Logo /></NavLink>
             </Navbar.Brand>
@@ -33,7 +33,7 @@ const HeaderNavigation = () => {
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
-            <p style={{color:"#fff"}}>{newUser.name}</p>
+            {/* <p style={{color:"#fff"}}>{newUser.name}</p> */}
         </Navbar>
     )
 }
