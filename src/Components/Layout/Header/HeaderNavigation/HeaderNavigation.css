@@ -7,7 +7,10 @@
     position:fixed;
     z-index:1000;
     width:100%;
+}
 
+.navbar{
+    padding: 0 1rem;
 }
 
 .navbar-light .navbar-nav .nav-link  {
