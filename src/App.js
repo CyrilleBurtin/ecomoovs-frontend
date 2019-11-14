@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './Components/Layout/Home/Home'
 import MoovsList from './Components/Layout/MoovsList/MoovsList'

@@ -1,17 +1,16 @@
-import React, { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import passwordChecker from '../../../Hoc/checkers/passwordChecker/passwordChecker'
 import emailChecker from '../../../Hoc/checkers/emailChecker/emailChecker'
 import jwtDecode from 'jwt-decode';
 import ip from "../../../Hoc/ip"
 import './Login.css'
-import UserContext from '../../Context/UserContext'
+import { connect } from 'react-redux'
 
 
-const Login = () => {
+const Login = (props) => {
 
-    const { user, updateUser } = useContext(UserContext)
-    console.log('user', user)
+    const [user, setUser] = useStateate({})
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -20,9 +19,7 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('')
 
     const loginChangeHandler = event => {
-
         const { name, value } = event.target;
-
         switch (name) {
             case 'password':
                 let password = passwordChecker(value, setPasswordIsValid)
@@ -55,17 +52,20 @@ const Login = () => {
                 return response.json()
             })
             .then(token => {
-                var decoded = jwtDecode(token)
-                updateUser(decoded)
                 localStorage.setItem('AUTH_TOKEN', JSON.stringify(token))
+                var decoded = jwtDecode(token)
+                console.log('decoded', decoded)
+                setUser(decoded.user)
+                props.onLogin(decoded.user)
 
+                // props.history.push('/backoffice')
             })
             .catch(error => {
                 console.log('Mot de passe', error)
                 setErrorMessage("email ou mot de passe non valide")
             })
     }
-
+    console.log('props', props)
     return (
         <Container fluid className="Registration">
             <Row>
@@ -75,6 +75,7 @@ const Login = () => {
             </Row>
             <Row>
                 <Col>
+                    {/* <p>{props.userProps.user.name}</p> */}
                     <Form>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Control required type="email" name="email" placeholder="Email" onChange={loginChangeHandler} style={emailIsValid} autoComplete="username" />
@@ -95,4 +96,18 @@ const Login = () => {
     )
 }
 
-export default Login
+// input
+const mapStateToProps = state => {
+    return { user: state }
+}
+
+//output
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLogin: user => dispatch({ type:'LOGIN', user})
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

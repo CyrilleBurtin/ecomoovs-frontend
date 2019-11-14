@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import HeaderNavigationItem from './HeaderNavigationItem/HeaderNavigationItem'
 import UserContext from '../../../Context/UserContext'
 import Logo from '../../../assets/Logo/Logo'
@@ -13,7 +13,7 @@ const HeaderNavigation = () => {
 
     return (
         <Navbar expand="sm" className="NavBar">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand>
                 <NavLink to="/home"><Logo /></NavLink>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -33,7 +33,7 @@ const HeaderNavigation = () => {
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
-            {/* <p style={{color:"#fff"}}>{newUser.name}</p> */}
+            <p className="Initials">{newUser.name.slice(0,1)}{newUser.firstName.slice(0,1)}</p>
         </Navbar>
     )
 }
