@@ -1,4 +1,4 @@
-const reducer = (state = {}, action) => {
+const user = (state, action) => {
 
    if(action.type === "LOGIN"){
        return action.user
@@ -11,4 +11,4 @@ const reducer = (state = {}, action) => {
 }
 
 
-export default reducer
+export default user

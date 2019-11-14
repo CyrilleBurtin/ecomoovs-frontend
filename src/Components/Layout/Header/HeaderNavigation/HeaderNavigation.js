@@ -1,22 +1,23 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import HeaderNavigationItem from './HeaderNavigationItem/HeaderNavigationItem'
-import UserContext from '../../../Context/UserContext'
 import Logo from '../../../assets/Logo/Logo'
 import './HeaderNavigation.css'
 
-const HeaderNavigation = () => {
+// *redux
+import { connect } from 'react-redux'
 
-    const newUser = useContext(UserContext)
-    console.log('newUser', newUser)
+const HeaderNavigation = (props) => {
 
     return (
         <Navbar expand="sm" className="NavBar">
             <Navbar.Brand>
                 <NavLink to="/home"><Logo /></NavLink>
             </Navbar.Brand>
+
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
             <Navbar.Collapse id="basic-navbar-nav" >
                 <Nav className="mr-auto">
                     <HeaderNavigationItem link='/home'>Home</HeaderNavigationItem>
@@ -26,16 +27,46 @@ const HeaderNavigation = () => {
                     <NavDropdown title="Compte" id="basic-nav-dropdown">
                         <HeaderNavigationItem link='/soumettre-une-nouvelle-action'>Ajouter un Moov</HeaderNavigationItem>
                         <HeaderNavigationItem link='/addNews'>Ajouter une actus</HeaderNavigationItem>
-                        <NavDropdown.Divider />
-                        <HeaderNavigationItem link='/connexion'>Connexion</HeaderNavigationItem>
-                        <HeaderNavigationItem link='/inscription'>Inscription</HeaderNavigationItem>
-                        <HeaderNavigationItem link='/BackOffice'>BackOffice</HeaderNavigationItem>
+                       
+                        {/* login and subscribe menu display handler */}
+                        {
+                            !props.user ?
+                                <>
+                                    <NavDropdown.Divider />
+                                    <HeaderNavigationItem link='/inscription'>Inscription</HeaderNavigationItem>
+                                    <HeaderNavigationItem link='/connexion'>Connexion</HeaderNavigationItem>
+                                </>
+                                : null
+                        }
+
+                        {/* backoffice menu display handler */}
+                        {
+                            props.user ?
+                                props.user.admin ?
+                                    <>
+                                        <NavDropdown.Divider />
+                                        <HeaderNavigationItem link='/BackOffice'>BackOffice</HeaderNavigationItem>
+                                    </>
+                                    : null
+                                : null
+                        }
+
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
-            <p className="Initials">{newUser.name.slice(0,1)}{newUser.firstName.slice(0,1)}</p>
+            {props.user ? <p className="Initials">{props.user.firstname.slice(0, 1)}{props.user.lastname.slice(0, 1)}</p> : null}
         </Navbar>
     )
 }
 
-export default HeaderNavigation
+const mapStateToProps = state => {
+    return {
+        user: state
+    }
+}
+
+
+export default connect(
+    mapStateToProps,
+    null
+)(HeaderNavigation)

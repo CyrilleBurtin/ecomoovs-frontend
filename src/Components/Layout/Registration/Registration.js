@@ -21,7 +21,9 @@ const NewUser = (props) => {
     })
 
          //    checkers
-        const [formIsValid, setFormIsValid] = useState(true)
+
+         // ! const [formIsValid, setFormIsValid] = useState(true)
+        const [formIsValid] = useState(true)
         const [passwordIsValid, setPasswordIsValid] = useState({})
         const [emailIsValid, setEmailIsValid] = useState({})
         const [cguIsValid, setCguIsValid] = useState({})

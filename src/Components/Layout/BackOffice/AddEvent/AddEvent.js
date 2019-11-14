@@ -6,22 +6,11 @@ import ip from "../../../../Hoc/ip"
 const AddEvent = (props) => {
 
     const [newEvent, setNewEvent] = useState({
-        name: "",
-        punchLine:"",
-        description: "",
-        dateIn: "",
-        dateOut: "",
-        email: "",
-        phone: "",
-        address: "",
-        zipcode: "",
-        city: "",
-        country: "France",
+        country: "France"
     })
-    console.log('newevent', newEvent)
+    console.log('newEvent', newEvent)
 
     const [emailIsValid, setEmailIsValid] = useState({})
-
 
 
     const formChangeHandler = event => {
@@ -38,7 +27,6 @@ const AddEvent = (props) => {
                 setNewEvent({ ...newEvent, [name]: value });
                 break;
         }
-
     };
 
 
@@ -77,14 +65,14 @@ const AddEvent = (props) => {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 {/* <Form.Label>Nom</Form.Label> */}
-                                <Form.Control autoComplete="name" type="text" name="name" onChange={formChangeHandler} placeholder="Nom" required={true} />
+                                <Form.Control type="text" name="name" onChange={formChangeHandler} placeholder="Nom" required={true} />
                             </Form.Group>
                         </Form.Row>
                        {/* PunchLine */}
                         <Form.Row>
                             <Form.Group as={Col}>
                                 {/* <Form.Label>Nom</Form.Label> */}
-                                <Form.Control autoComplete="name" type="text" name="punchLine" onChange={formChangeHandler} placeholder="Punchline" required={true} />
+                                <Form.Control type="text" name="punchLine" onChange={formChangeHandler} placeholder="Punchline" required={true} />
                             </Form.Group>
                         </Form.Row>
                         {/* dateIn */}
@@ -110,8 +98,6 @@ const AddEvent = (props) => {
                                 <Form.Control as="textarea" rows="10" name="description" onChange={formChangeHandler} placeholder="Description" required={true} />
                             </Form.Group>
                         </Form.Row>
-
-
 
                         {/* email */}
                         <Form.Row>

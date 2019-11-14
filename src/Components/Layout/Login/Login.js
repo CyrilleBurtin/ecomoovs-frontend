@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import passwordChecker from '../../../Hoc/checkers/passwordChecker/passwordChecker'
 import emailChecker from '../../../Hoc/checkers/emailChecker/emailChecker'
@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 
 const Login = (props) => {
 
-    const [user, setUser] = useStateate({})
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -55,17 +54,15 @@ const Login = (props) => {
                 localStorage.setItem('AUTH_TOKEN', JSON.stringify(token))
                 var decoded = jwtDecode(token)
                 console.log('decoded', decoded)
-                setUser(decoded.user)
                 props.onLogin(decoded.user)
-
-                // props.history.push('/backoffice')
+                props.history.push('/backoffice')
             })
             .catch(error => {
                 console.log('Mot de passe', error)
                 setErrorMessage("email ou mot de passe non valide")
             })
     }
-    console.log('props', props)
+
     return (
         <Container fluid className="Registration">
             <Row>
@@ -75,7 +72,6 @@ const Login = (props) => {
             </Row>
             <Row>
                 <Col>
-                    {/* <p>{props.userProps.user.name}</p> */}
                     <Form>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Control required type="email" name="email" placeholder="Email" onChange={loginChangeHandler} style={emailIsValid} autoComplete="username" />
@@ -96,11 +92,6 @@ const Login = (props) => {
     )
 }
 
-// input
-const mapStateToProps = state => {
-    return { user: state }
-}
-
 //output
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -110,4 +101,4 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(null, mapDispatchToProps)(Login)
