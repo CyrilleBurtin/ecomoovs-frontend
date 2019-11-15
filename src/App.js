@@ -11,15 +11,15 @@ import BackOffice from './Components/Layout/BackOffice/BackOffice'
 
 
 
-function App() {
+function App(props) {
 
-  
+  console.log('props', props)
   return (
     <Router>
-        <Header />
+        <Header history={props.history}/>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/Home" component={Home} />
+          <Route path="/home" component={Home} />
           <Route path="/annuaire-des-actions" component={MoovsList} />
           <Route path="/actus" component={News} />
           <Route path="/inscription" component={Registration} />

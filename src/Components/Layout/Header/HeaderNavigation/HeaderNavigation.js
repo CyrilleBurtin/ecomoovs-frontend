@@ -5,16 +5,16 @@ import HeaderNavigationItem from './HeaderNavigationItem/HeaderNavigationItem'
 import Logo from '../../../assets/Logo/Logo'
 import './HeaderNavigation.css'
 import jwtDecode from 'jwt-decode';
-
+import { withRouter } from 'react-router-dom'
 // *redux
 import { connect } from 'react-redux'
 
 
 
 const HeaderNavigation = (props) => {
-
+console.log('HEADER-props', props)
     const [userData, setUserData] = useState(false)
-console.log('userData', userData)
+
     useEffect(() => {
         let localToken = localStorage.getItem('AUTH_TOKEN')
         if (localToken) {
@@ -31,9 +31,10 @@ console.log('userData', userData)
     }, [props.userData])
 
     const logout = () => {
-        localStorage.removeItem('AUTH_TOKEN')
-        setUserData(false)
-        props.onLogout()
+        localStorage.removeItem('AUTH_TOKEN');
+        setUserData(false);
+        props.onLogout();
+        props.history.push('/home')
     }
 
     return (
@@ -53,7 +54,17 @@ console.log('userData', userData)
                     <NavDropdown title="Compte" id="basic-nav-dropdown">
                         <HeaderNavigationItem link='/soumettre-une-nouvelle-action'>Ajouter un Moov</HeaderNavigationItem>
                         <HeaderNavigationItem link='/addNews'>Ajouter une actus</HeaderNavigationItem>
-
+                        {/* backoffice menu display handler */}
+                        {
+                            userData ?
+                                userData.user.admin ?
+                                    <>
+                                        <NavDropdown.Divider />
+                                        <HeaderNavigationItem link='/BackOffice'>BackOffice</HeaderNavigationItem>
+                                    </>
+                                    : null
+                                : null
+                        }
                         {/* login and subscribe menu display handler */}
                         {
                             !userData
@@ -66,21 +77,8 @@ console.log('userData', userData)
                                 :
                                 <>
                                     <NavDropdown.Divider />
-                                    <button onClick={logout}>Déconnexion</button>
-                                    <HeaderNavigationItem link='home' onClick={logout}>Déconnexion</HeaderNavigationItem>
+                                    <p className="logout" onClick={logout}>Déconnexion</p>                                    
                                 </>
-                        }
-
-                        {/* backoffice menu display handler */}
-                        {
-                            userData ?
-                                userData.user.admin?
-                                    <>
-                                        <NavDropdown.Divider />
-                                        <HeaderNavigationItem link='/BackOffice'>BackOffice</HeaderNavigationItem>
-                                    </>
-                                    : null
-                                : null
                         }
 
                     </NavDropdown>
@@ -101,12 +99,12 @@ const mapStateToProps = state => {
 //output
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogout: user => dispatch({ type:'LOGOUT'})
+        onLogout: user => dispatch({ type: 'LOGOUT' })
     }
 }
 
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(HeaderNavigation)
+)(HeaderNavigation))

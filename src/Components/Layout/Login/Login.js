@@ -54,7 +54,7 @@ const Login = (props) => {
                 localStorage.setItem('AUTH_TOKEN', JSON.stringify(token))
                 var decoded = jwtDecode(token)
                 props.onLogin({user: decoded.user, token: token})
-                props.history.push('/backoffice')
+                props.history.push('/home')
             })
             .catch(error => {
                 console.log('Mot de passe', error)

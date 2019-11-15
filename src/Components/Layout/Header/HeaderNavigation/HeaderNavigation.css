@@ -13,6 +13,21 @@
     padding: 0 1rem;
 }
 
+
+.navbar a.logout{
+    background-color: #4C4C4C;
+    border: none;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 0.6rem;
+}
+.navbar a.logout:focus,
+.navbar a.logout:hover{
+    color: #E62500;
+}
+
+
+
 .navbar-light .navbar-nav .nav-link  {
     color: #fff;
 }
