@@ -1,14 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import HeaderNavigationItem from './HeaderNavigationItem/HeaderNavigationItem'
 import Logo from '../../../assets/Logo/Logo'
 import './HeaderNavigation.css'
+import jwtDecode from 'jwt-decode';
 
 // *redux
 import { connect } from 'react-redux'
 
+
+
 const HeaderNavigation = (props) => {
+
+    const [userData, setUserData] = useState(false)
+console.log('userData', userData)
+    useEffect(() => {
+        let localToken = localStorage.getItem('AUTH_TOKEN')
+        if (localToken) {
+            let decodedUser = (jwtDecode(localToken))
+            if (decodedUser.exp > Date.now() / 1000) {
+                setUserData({
+                    user: decodedUser.user,
+                    token: localToken
+                })
+            }
+        } else if (props.userData) {
+            setUserData(props.userData)
+        }
+    }, [props.userData])
+
+    const logout = () => {
+        localStorage.removeItem('AUTH_TOKEN')
+        setUserData(false)
+        props.onLogout()
+    }
 
     return (
         <Navbar expand="sm" className="NavBar">
@@ -27,22 +53,28 @@ const HeaderNavigation = (props) => {
                     <NavDropdown title="Compte" id="basic-nav-dropdown">
                         <HeaderNavigationItem link='/soumettre-une-nouvelle-action'>Ajouter un Moov</HeaderNavigationItem>
                         <HeaderNavigationItem link='/addNews'>Ajouter une actus</HeaderNavigationItem>
-                       
+
                         {/* login and subscribe menu display handler */}
                         {
-                            !props.user ?
+                            !userData
+                                ?
                                 <>
                                     <NavDropdown.Divider />
                                     <HeaderNavigationItem link='/inscription'>Inscription</HeaderNavigationItem>
                                     <HeaderNavigationItem link='/connexion'>Connexion</HeaderNavigationItem>
                                 </>
-                                : null
+                                :
+                                <>
+                                    <NavDropdown.Divider />
+                                    <button onClick={logout}>Déconnexion</button>
+                                    <HeaderNavigationItem link='home' onClick={logout}>Déconnexion</HeaderNavigationItem>
+                                </>
                         }
 
                         {/* backoffice menu display handler */}
                         {
-                            props.user ?
-                                props.user.admin ?
+                            userData ?
+                                userData.user.admin?
                                     <>
                                         <NavDropdown.Divider />
                                         <HeaderNavigationItem link='/BackOffice'>BackOffice</HeaderNavigationItem>
@@ -54,19 +86,27 @@ const HeaderNavigation = (props) => {
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
-            {props.user ? <p className="Initials">{props.user.firstname.slice(0, 1)}{props.user.lastname.slice(0, 1)}</p> : null}
+            {userData.user ? <p className="Initials">{userData.user.firstname.slice(0, 1)}{userData.user.lastname.slice(0, 1)}</p> : null}
         </Navbar>
     )
 }
 
+//input
 const mapStateToProps = state => {
     return {
-        user: state
+        userData: state
+    }
+}
+
+//output
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLogout: user => dispatch({ type:'LOGOUT'})
     }
 }
 
 
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(HeaderNavigation)

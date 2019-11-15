@@ -8,7 +8,6 @@ const AddEvent = (props) => {
     const [newEvent, setNewEvent] = useState({
         country: "France"
     })
-    console.log('newEvent', newEvent)
 
     const [emailIsValid, setEmailIsValid] = useState({})
 
