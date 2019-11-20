@@ -52,15 +52,13 @@ const HeaderNavigation = (props) => {
                     <HeaderNavigationItem link='/actus'>Actus</HeaderNavigationItem>
                     <HeaderNavigationItem link='/events'>Events</HeaderNavigationItem>
                     <NavDropdown title="Compte" id="basic-nav-dropdown">
-                        <HeaderNavigationItem link='/soumettre-une-nouvelle-action'>Ajouter un Moov</HeaderNavigationItem>
-                        <HeaderNavigationItem link='/addNews'>Ajouter une actus</HeaderNavigationItem>
                         {/* backoffice menu display handler */}
                         {
                             userData ?
                                 userData.user.admin ?
                                     <>
-                                        <NavDropdown.Divider />
                                         <HeaderNavigationItem link='/BackOffice'>BackOffice</HeaderNavigationItem>
+                                        <HeaderNavigationItem link='/addNews'>Ajouter une actus</HeaderNavigationItem>
                                     </>
                                     : null
                                 : null
@@ -70,12 +68,13 @@ const HeaderNavigation = (props) => {
                             !userData
                                 ?
                                 <>
-                                    <NavDropdown.Divider />
                                     <HeaderNavigationItem link='/inscription'>Inscription</HeaderNavigationItem>
                                     <HeaderNavigationItem link='/connexion'>Connexion</HeaderNavigationItem>
                                 </>
                                 :
                                 <>
+                                    <NavDropdown.Divider />
+                                    <HeaderNavigationItem link='/soumettre-une-nouvelle-action'>Ajouter un Moov</HeaderNavigationItem>
                                     <NavDropdown.Divider />
                                     <p className="logout" onClick={logout}>Déconnexion</p>
                                 </>
