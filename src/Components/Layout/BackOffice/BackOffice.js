@@ -1,11 +1,11 @@
 import React from 'react'
-// import UserManagement from './UserManagement/Usermangement'
+import UserManagement from './UserManagement/Usermangement'
 import AddEvent from './AddEvent/AddEvent'
 
 const BackOffice = () => {
     return (
         <>
-            {/* <UserManagement /> */}
+            <UserManagement />
             <AddEvent />
         </>
     )

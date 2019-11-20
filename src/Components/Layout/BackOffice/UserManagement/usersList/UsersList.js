@@ -6,10 +6,10 @@ const UsersList = () =>{
 
   // const [errors, setErrors] = useState(false);
   const [users, setUsers] = useState([]);
-
+console.log('users', users)
   useEffect(() => {
     const getUsersList = () => {
-      return fetch(`${ip}/users/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVkYmZmNjFmNzIyMzI2MGYxZjRhZmY1YyIsImZpcnN0bmFtZSI6IkN5cmlsbGUiLCJsYXN0bmFtZSI6IkJ1cnRpbiIsImVtYWlsIjoiY3lyaWxsZS5idXJ0aW5AZ21haWwuY29tIiwicGhvbmUiOiIwMTAyMDMwNDA1IiwibG9jYXRpb24iOnsiYWRkcmVzcyI6IjUgYWxsw6llcyBkZXMgQ2hhbXBpZ25vbnMiLCJ6aXBjb2RlIjoiNzQwMDAiLCJjaXR5IjoiQW5uZWN5IiwiY291bnRyeSI6IkZyYW5jZSJ9LCJ2YWxpZGF0ZWQiOmZhbHNlLCJhY3RpdmUiOnRydWUsImFkbWluIjpmYWxzZX0sImlhdCI6MTU3Mjg2MTc1N30.hBPPz22R5pyMjJqrSCzKvsMQUZAT3fG4b0wLFbtAY5M`)
+      return fetch(`${ip}/users`)
           .then( res =>  res.json() )
           .then( res => setUsers(res) )
           .catch( err  => console.log(err));
