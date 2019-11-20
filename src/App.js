@@ -8,12 +8,11 @@ import News from './Components/Layout/News/News'
 import Registration from './Components/Layout/Registration/Registration'
 import Login from './Components/Layout/Login/Login'
 import BackOffice from './Components/Layout/BackOffice/BackOffice'
-
+import MoovSubmit from './Components/Layout/MoovSubmit/MoovSubmit'
 
 
 function App(props) {
 
-  console.log('props', props)
   return (
     <Router>
         <Header history={props.history}/>
@@ -25,8 +24,8 @@ function App(props) {
           <Route path="/inscription" component={Registration} />
           <Route path="/connexion" component={Login} />
           <Route path="/backOffice" component={BackOffice} />
-          {/* <Route path="/soumettre-une-action" component={MoovSubmit} />
-      <Route path="/events" component={EventsList} />
+          <Route path="/soumettre-une-nouvelle-action" component={MoovSubmit} />
+      {/*<Route path="/events" component={EventsList} />
       <Route path="/a-propos" component={About} />
     <Route path="/Contact" component={Contact} /> */}
         </Switch>

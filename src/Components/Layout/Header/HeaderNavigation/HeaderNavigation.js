@@ -4,31 +4,31 @@ import { NavLink } from 'react-router-dom'
 import HeaderNavigationItem from './HeaderNavigationItem/HeaderNavigationItem'
 import Logo from '../../../assets/Logo/Logo'
 import './HeaderNavigation.css'
-import jwtDecode from 'jwt-decode';
+import jwtDecode from 'jwt-decode'
 import { withRouter } from 'react-router-dom'
-// *redux
 import { connect } from 'react-redux'
 
-
-
 const HeaderNavigation = (props) => {
-console.log('HEADER-props', props)
+
     const [userData, setUserData] = useState(false)
 
     useEffect(() => {
-        let localToken = localStorage.getItem('AUTH_TOKEN')
-        if (localToken) {
-            let decodedUser = (jwtDecode(localToken))
-            if (decodedUser.exp > Date.now() / 1000) {
-                setUserData({
-                    user: decodedUser.user,
-                    token: localToken
-                })
+        const getUser = () => {
+            let localToken = localStorage.getItem('AUTH_TOKEN')
+            if (localToken) {
+                let decodedUser = (jwtDecode(localToken))
+                if (decodedUser.exp > Date.now() / 1000) {
+                    setUserData({
+                        user: decodedUser.user,
+                        token: localToken
+                    })
+                }
+            } else {
+                return false
             }
-        } else if (props.userData) {
-            setUserData(props.userData)
         }
-    }, [props.userData])
+        getUser()
+    }, [props])
 
     const logout = () => {
         localStorage.removeItem('AUTH_TOKEN');
@@ -77,7 +77,7 @@ console.log('HEADER-props', props)
                                 :
                                 <>
                                     <NavDropdown.Divider />
-                                    <p className="logout" onClick={logout}>Déconnexion</p>                                    
+                                    <p className="logout" onClick={logout}>Déconnexion</p>
                                 </>
                         }
 
