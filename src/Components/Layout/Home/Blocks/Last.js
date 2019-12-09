@@ -10,7 +10,6 @@ const Last = (props) =>
         <Row className="justify-content-center">
             <Button className="rounded-0 mt-5 p-3 font-weight-bold border-0" style={{ backgroundColor: "#00e689" }}>En voir plus</Button>
         </Row>
-
     </Container>
 
 export default Last

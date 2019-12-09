@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Home from './Components/Layout/Home/Home'
 import MoovsList from './Components/Layout/MoovsList/MoovsList'
 import Header from './Components/Layout/Header/Header'
@@ -28,6 +28,7 @@ function App(props) {
       {/*<Route path="/events" component={EventsList} />
       <Route path="/a-propos" component={About} />
     <Route path="/Contact" component={Contact} /> */}
+          <Redirect to="/" /> 
         </Switch>
         <Footer />
 
