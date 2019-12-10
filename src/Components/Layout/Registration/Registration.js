@@ -46,6 +46,7 @@ const NewUser = () => {
 
   const registrationClickHandler = event => {
     event.preventDefault();
+    console.log('test ok')
     // fetch(`${ip}/users/`, {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },

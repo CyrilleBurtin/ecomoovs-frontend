@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import HeaderNavigationItem from './HeaderNavigationItem/HeaderNavigationItem'
@@ -8,8 +8,10 @@ import jwtDecode from 'jwt-decode'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const HeaderNavigation = (props) => {
+import { AuthContext } from '../../../shared/AuthContext';
 
+const HeaderNavigation = (props) => {
+    const Auth = useContext(AuthContext)
     const [userData, setUserData] = useState(false)
 
     useEffect(() => {

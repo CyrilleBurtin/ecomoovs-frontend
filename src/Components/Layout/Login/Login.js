@@ -1,103 +1,95 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import passwordChecker from '../../../Hoc/checkers/passwordChecker/passwordChecker'
-import emailChecker from '../../../Hoc/checkers/emailChecker/emailChecker'
-import jwtDecode from 'jwt-decode';
-import ip from "../../../Hoc/ip"
-import './Login.css'
-import { connect } from 'react-redux'
+import React from "react";
 
+import "./Login.css";
+import ip from "../../../Hoc/ip";
+import jwtDecode from "jwt-decode";
+import { connect } from "react-redux";
+import { useForm } from "../../hooks/form-hook";
+import FormInput from "../Registration/formInput";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { VALIDATOR_EMAIL, VALIDATOR_PASSWORD } from "../../Util/validators";
 
-const Login = (props) => {
-
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
-    const [emailIsValid, setEmailIsValid] = useState({})
-    const [passwordIsValid, setPasswordIsValid] = useState({})
-    const [errorMessage, setErrorMessage] = useState('')
-
-    const loginChangeHandler = event => {
-        const { name, value } = event.target;
-        switch (name) {
-            case 'password':
-                let password = passwordChecker(value, setPasswordIsValid)
-                if (password) {
-                    setPassword(value)
-                }
-                break;
-            case 'email':
-                let email = emailChecker(value, setEmailIsValid)
-                if (email) {
-                    setEmail(value)
-                }
-                break;
-            default:
-                return true;
-        }
+const Login = props => {
+  const [formState, inputHandler] = useForm({
+    email: {
+      value: "",
+      isValid: false
+    },
+    password: {
+      value: "",
+      isValid: false
     }
+  });
 
-    const handleClick = () => {
-        setErrorMessage('')
-        fetch(`${ip}/users/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email,
-                password,
-            })
-        })
-            .then(response => {
-                return response.json()
-            })
-            .then(token => {
-                localStorage.setItem('AUTH_TOKEN', JSON.stringify(token))
-                var decoded = jwtDecode(token)
-                props.onLogin({user: decoded.user, token: token})
-                props.history.push('/home')
-            })
-            .catch(error => {
-                console.log('Mot de passe', error)
-                setErrorMessage("email ou mot de passe non valide")
-            })
-    }
+  const loginHandler = event => {
+    event.preventDefault();
 
-    return (
-        <Container fluid className="Registration">
-            <Row>
-                <Col className='RegistrationHeader'>
-                    <p className="text-center RegistrationTitle">CONNEXION</p>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <Form>
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Control required type="email" name="email" placeholder="Email" onChange={loginChangeHandler} style={emailIsValid} autoComplete="username" />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                            <Form.Text className="text-muted">
-                            </Form.Text>
-                        </Form.Group>
+    fetch(`${ip}/users/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: formState.inputs.email.value,
+        password: formState.inputs.password.value
+      })
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(token => {
+          console.log('token', token)
+        localStorage.setItem("AUTH_TOKEN", JSON.stringify(token));
+        var decoded = jwtDecode(token);
+        props.onLogin({ user: decoded.user, token: token });
+        props.history.push("/home");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Control required type="password" name="password" placeholder="Mot de passe" onChange={loginChangeHandler} style={passwordIsValid} autoComplete="current-password" />
-                        </Form.Group>
-                        <p className="LoginError">{errorMessage}</p>
-                        <Button variant="primary" onClick={handleClick}>Submit</Button>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
-    )
-}
+  return (
+    <Container fluid className="Registration">
+      <Row>
+        <Col className="RegistrationHeader">
+          <p className="text-center RegistrationTitle">CONNEXION</p>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <form onSubmit={loginHandler}>
+            <FormInput
+              element="input"
+              type="text"
+              name="email"
+              placeholder="email"
+              errorText="Email non valid"
+              validators={[VALIDATOR_EMAIL()]}
+              onInput={inputHandler}
+            />
+            <FormInput
+              element="input"
+              type="password"
+              name="password"
+              placeholder="Mot de passe"
+              errorText="Email non valide"
+              validators={[VALIDATOR_PASSWORD()]}
+              onInput={inputHandler}
+            />
+          <Button type="submit" variant="primary" disabled={!formState.isValid}>
+            Se connecter
+          </Button>
+          </form>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
 //output
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onLogin: user => dispatch({ type:'LOGIN', user})
-    }
-}
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: user => dispatch({ type: "LOGIN", user })
+  };
+};
 
-
-
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(null, mapDispatchToProps)(Login);

@@ -58,7 +58,6 @@ const FormInput = props => {
         name={props.name}
         onChange={formChangeHandler}
         placeholder={props.placeholder}
-        value={inputState.value}
         onBlur={touchHandler}
       />
     ) : (
@@ -67,7 +66,6 @@ const FormInput = props => {
         name={props.name}
         onChange={formChangeHandler}
         placeholder={props.placeholder}
-        value={inputState.value}
         rows={props.rows || 3}
       />
     );
