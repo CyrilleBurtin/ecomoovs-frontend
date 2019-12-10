@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 
 import { validate } from "../../Util/validators";
 import "./Registration.css";
@@ -22,19 +22,27 @@ const inputReducer = (state, action) => {
 };
 
 const FormInput = props => {
+
   const [inputState, dispatch] = useReducer(inputReducer, {
     value: "",
     isValid: false,
     touched: false
   });
 
+  const { name, onInput } = props;
+  const { value, isValid } = inputState;
+
+  useEffect(() => {
+    onInput(name, value, isValid);
+  }, [name, value, isValid, onInput]);
+
   const formChangeHandler = event => {
     dispatch({
       type: "CHANGE",
       val: event.target.value,
       validators: props.validators
-    });
-  };
+    },[]);
+  }
 
   const touchHandler = () => {
     dispatch({
@@ -42,7 +50,6 @@ const FormInput = props => {
     });
   };
 
-  console.log("inputState.touched", inputState.touched);
   const element =
     props.element === "input" ? (
       <input

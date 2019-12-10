@@ -17,11 +17,12 @@ const Home = () => {
 
     useEffect(() => {
         const getSeedList = () => {
-            return fetch(`${ip}/moovs/`)
+            return (fetch(`${ip}/moovs/`)
                 .then(response => response.json())
                 .then(data => setMoovs(data))
                 .catch(error => console.log(error))
-        }
+            )
+            }
         getSeedList();
     }, [])
 

@@ -29,7 +29,7 @@ function MoovSubmit(props) {
             }
         }
         getUser()
-    }, [props])
+    }, [])
 
     useEffect(() => {
         const updateMoov = () => {
@@ -39,7 +39,7 @@ function MoovSubmit(props) {
         }
         updateMoov()
         
-    }, [userData, setMoov])
+    }, [userData, setMoov, moov])
 
 
 const [img, setImg] = useState({})
