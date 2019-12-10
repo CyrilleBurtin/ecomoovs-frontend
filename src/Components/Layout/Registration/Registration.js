@@ -1,88 +1,51 @@
-import React, { useCallback, useReducer } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 import FormInput from "./formInput";
 // import ip from "../../../Hoc/ip";
 import { VALIDATOR_REQUIRE, VALIDATOR_EMAIL } from "../../Util/validators";
-
-const formReducer = (state, action) => {
-  switch (action.type) {
-    case "INPUT_CHANGE":
-      let formIsValid = true;
-      for (const inputName in state.inputs) {
-        if (inputName === action.inputName) {
-          formIsValid = formIsValid && action.isValid;
-        } else {
-          formIsValid = formIsValid && state.inputs[inputName].isValid;
-        }
-      }
-      return {
-        ...state,
-        inputs: {
-          ...state.inputs,
-          [action.inputName]: {
-            value: action.value,
-            isValid: action.isValid
-          }
-        },
-        isValid: formIsValid
-      };
-    default:
-      return state;
-  }
-};
-
-
+import { useForm } from "../../hooks/form-hook";
 
 const NewUser = () => {
-  const [formState, dispatch] = useReducer(formReducer, {
-    inputs: {
-      firstname: {
-        value: "",
-        isValid: false
-      },
-      name: {
-        value: "",
-        isValid: false
-      },
-      email: {
-        value: "",
-        isValid: false
-      },
-      password: {
-        value: "",
-        isValid: false
-      },
-      phone: {
-        value: "",
-        isValid: false
-      },
-      adress: {
-        value: "",
-        isValid: false
-      },
-      zipcode: {
-        value: "",
-        isValid: false
-      },
-      city: {
-        value: "",
-        isValid: false
-      }
+  const [formState, inputHandler] = useForm(
+    {
+    firstname: {
+      value: "",
+      isValid: false
     },
-    isValid: false
+    name: {
+      value: "",
+      isValid: false
+    },
+    email: {
+      value: "",
+      isValid: false
+    },
+    password: {
+      value: "",
+      isValid: false
+    },
+    phone: {
+      value: "",
+      isValid: false
+    },
+    adress: {
+      value: "",
+      isValid: false
+    },
+    zipcode: {
+      value: "",
+      isValid: false
+    },
+    city: {
+      value: "",
+      isValid: false
+    }
   });
 
-  const inputHandler = useCallback((name, value, isValid) => {
-    dispatch({
-      type: "INPUT_CHANGE",
-      inputName: name,
-      value: value,
-      isValid: isValid
-    });
-  }, []);
+  
 
   const registrationClickHandler = event => {
-    event.preventDefault()
+    event.preventDefault();
     // fetch(`${ip}/users/`, {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
@@ -101,7 +64,7 @@ const NewUser = () => {
     // }).catch(error => {
     //   console.log('Request failed', error);
     // });
-  }
+  };
 
   return (
     <form className="place-form" onSubmit={registrationClickHandler}>
@@ -177,7 +140,9 @@ const NewUser = () => {
         errorText="ville non valide"
         onInput={inputHandler}
       />
-      <Button type="submit" variant="primary" disabled={!formState.isValid}>S'inscrire</Button>
+      <Button type="submit" variant="primary" disabled={!formState.isValid}>
+        S'inscrire
+      </Button>
     </form>
   );
 };
