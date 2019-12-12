@@ -22,7 +22,7 @@ const inputReducer = (state, action) => {
 };
 
 const FormInput = props => {
-
+  
   const [inputState, dispatch] = useReducer(inputReducer, {
     value: props.value || "",
     isValid: props.valid || false,
@@ -37,12 +37,15 @@ const FormInput = props => {
   }, [name, value, isValid, onInput]);
 
   const formChangeHandler = event => {
-    dispatch({
-      type: "CHANGE",
-      val: event.target.value,
-      validators: props.validators
-    },[]);
-  }
+    dispatch(
+      {
+        type: "CHANGE",
+        val: event.target.value,
+        validators: props.validators
+      },
+      []
+    );
+  };
 
   const touchHandler = () => {
     dispatch({
@@ -60,15 +63,15 @@ const FormInput = props => {
         placeholder={props.placeholder}
         onBlur={touchHandler}
       />
-    ) : (
-      <textrea
-        type={props.type}
-        name={props.name}
-        onChange={formChangeHandler}
-        placeholder={props.placeholder}
-        rows={props.rows || 3}
-      />
-    );
+    ) : props.element === "select" ? (
+      <select value="Suisse" name={props.name} onChange={formChangeHandler}>
+        <option>France</option>
+        <option>Belgique</option>
+        <option>Suisse</option>
+        <option>Luxembourg</option>
+        <option>Monaco</option>
+      </select>
+    ) : null;
 
   return (
     <div

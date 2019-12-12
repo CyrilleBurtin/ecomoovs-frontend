@@ -8,10 +8,9 @@ import jwtDecode from 'jwt-decode'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { AuthContext } from '../../../shared/AuthContext';
 
 const HeaderNavigation = (props) => {
-    const Auth = useContext(AuthContext)
+
     const [userData, setUserData] = useState(false)
 
     useEffect(() => {
@@ -30,7 +29,7 @@ const HeaderNavigation = (props) => {
             }
         }
         getUser()
-    }, [props])
+    }, [])
 
     const logout = () => {
         localStorage.removeItem('AUTH_TOKEN');

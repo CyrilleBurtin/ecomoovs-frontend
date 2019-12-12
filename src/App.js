@@ -19,6 +19,7 @@ import { Provider } from "react-redux";
 
 const App = props => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState("")
 
   const login = useCallback(() => {
     setIsLoggedIn(true)
@@ -27,8 +28,12 @@ const App = props => {
     setIsLoggedIn(false)
   }, []);
 
+ const setUser = useCallback(()=> {
+    setUserData({})
+ },[])
+
   return (
-    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login : login, logout: logout}}>
+    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login : login, logout: logout, user: setUser}}>
       <Router>
         <Header history={props.history} />
         <Switch>

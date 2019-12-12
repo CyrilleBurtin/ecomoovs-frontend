@@ -6,8 +6,7 @@ import { VALIDATOR_REQUIRE, VALIDATOR_EMAIL } from "../../Util/validators";
 import { useForm } from "../../hooks/form-hook";
 
 const NewUser = () => {
-  const [formState, inputHandler] = useForm(
-    {
+  const [formState, inputHandler] = useForm({
     firstname: {
       value: "",
       isValid: false
@@ -28,7 +27,7 @@ const NewUser = () => {
       value: "",
       isValid: false
     },
-    adress: {
+    address: {
       value: "",
       isValid: false
     },
@@ -39,14 +38,22 @@ const NewUser = () => {
     city: {
       value: "",
       isValid: false
+    },
+    country: {
+      value: "France",
+      isValid: true
+    },
+    cgu: {
+      value: false,
+      isValid: false
     }
   });
 
-  
+  console.log('formState', formState)
 
   const registrationClickHandler = event => {
     event.preventDefault();
-    console.log('test ok')
+    console.log("test ok");
     // fetch(`${ip}/users/`, {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
@@ -70,6 +77,7 @@ const NewUser = () => {
   return (
     <form className="place-form" onSubmit={registrationClickHandler}>
       <FormInput
+        autocomplete="given-name"
         element="input"
         type="text"
         name="firstname"
@@ -79,6 +87,7 @@ const NewUser = () => {
         onInput={inputHandler}
       />
       <FormInput
+        autocomplete="family-name"
         element="input"
         type="text"
         name="name"
@@ -88,6 +97,7 @@ const NewUser = () => {
         onInput={inputHandler}
       />
       <FormInput
+        autocomplete="email"
         element="input"
         type="email"
         name="email"
@@ -97,6 +107,7 @@ const NewUser = () => {
         onInput={inputHandler}
       />
       <FormInput
+        autocomplete="new-password"
         element="input"
         type="text"
         name="password"
@@ -106,6 +117,7 @@ const NewUser = () => {
         onInput={inputHandler}
       />
       <FormInput
+        autocomplete="tel"
         element="input"
         type="text"
         name="phone"
@@ -115,15 +127,17 @@ const NewUser = () => {
         onInput={inputHandler}
       />
       <FormInput
+        autocomplete="address-line1"
         element="input"
         type="text"
-        name="adress"
+        name="address"
         placeholder="adresse"
         validators={[VALIDATOR_REQUIRE()]}
         errorText="adresse non valide"
         onInput={inputHandler}
       />
       <FormInput
+        autocomplete="postal-code"
         element="input"
         type="text"
         name="zipcode"
@@ -133,6 +147,7 @@ const NewUser = () => {
         onInput={inputHandler}
       />
       <FormInput
+        autocomplete="address-level2"
         element="input"
         type="text"
         name="city"
@@ -141,6 +156,23 @@ const NewUser = () => {
         errorText="ville non valide"
         onInput={inputHandler}
       />
+      <FormInput
+        element="select"
+        autocomlpete="country"
+        type="select"
+        name="country"
+        validators={[VALIDATOR_REQUIRE()]}
+        onInput={inputHandler}
+      />
+      <FormInput
+        element="input"
+        type="checkbox"
+        name="cgu"
+        validators={[VALIDATOR_REQUIRE()]}
+        onInput={inputHandler}
+        label='CGU'
+      />
+      <label>J'ai lu et accepte les CGU</label>
       <Button type="submit" variant="primary" disabled={!formState.isValid}>
         S'inscrire
       </Button>
