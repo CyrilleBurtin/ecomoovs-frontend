@@ -6,7 +6,7 @@ import './index.css'
 import * as serviceWorker from './serviceWorker'
 
 // *redux
-import user from './Components/Store/user'
+import user from './shared/store/user'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 

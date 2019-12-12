@@ -5,17 +5,18 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-import Home from "./Components/Layout/Home/Home";
-import MoovsList from "./Components/Layout/MoovsList/MoovsList";
-import Header from "./Components/Layout/Header/Header";
-import Footer from "./Components/Layout/Footer/Footer";
-import News from "./Components/Layout/News/News";
-import Registration from "./Components/Layout/Registration/Registration";
-import Login from "./Components/Layout/Login/Login";
-import BackOffice from "./Components/Layout/BackOffice/BackOffice";
-import MoovSubmit from "./Components/Layout/MoovSubmit/MoovSubmit";
-import { AuthContext } from "./Components/shared/AuthContext";
+import Home from "./home/pages/Home";
+import MoovsList from "./moovs/pages/moovsList/MoovsList";
+import Header from "./header/pages/Header";
+import Footer from "./footer/pages/Footer";
+import News from "./news/pages/News";
+import Registration from "./users/pages/registration/Registration";
+import Login from "./users/pages/login/Login";
+import BackOffice from "./backOffice/pages/BackOffice";
+import MoovSubmit from "./moovs/pages/moovSubmit/MoovSubmit";
+import { AuthContext } from "./shared/auth/AuthContext";
 import { Provider } from "react-redux";
+
 
 const App = props => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
