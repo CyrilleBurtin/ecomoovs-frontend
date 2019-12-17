@@ -5,7 +5,13 @@ export const useLogin = () => {
   const time = useRef(Math.floor(Date.now() / 1000));
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
-  
+
+  const logout = useCallback(() => {
+    localStorage.removeItem("AUTH_TOKEN");
+    setIsLoggedIn(false);
+    setUser(false);
+  }, []);
+
   const login = useCallback(
     token => {
       if (token) {
@@ -17,16 +23,15 @@ export const useLogin = () => {
         if (decodedToken.exp > time.current) {
           setUser(decodedToken.user);
           setIsLoggedIn(true);
+        } else if (decodedToken.exp > time.current){
+          logout()
         }
       }
     },
-    [time]
+    [time, logout]
   );
 
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-    setUser(false);
-  }, []);
+
 
   useEffect(() => {
     login();

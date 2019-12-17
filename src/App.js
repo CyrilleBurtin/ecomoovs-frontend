@@ -23,7 +23,6 @@ const App = props => {
   
   const { user, login, logout, isLoggedIn } = useLogin();
 
-  console.log('user', user, 'isLoggedIn', isLoggedIn)
   return (
     <AuthContext.Provider value={{ user, login, logout, isLoggedIn }}>
       <Router>

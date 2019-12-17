@@ -10,10 +10,8 @@ import { AuthContext } from "../../shared/auth/AuthContext";
 
 const Header = props => {
   const Auth = useContext(AuthContext);
-  console.log("Auth", Auth.user);
-
+  
   const logout = () => {
-    localStorage.removeItem("AUTH_TOKEN");
     Auth.logout();
     props.history.push("/home");
   };
@@ -36,7 +34,7 @@ const Header = props => {
           <NavigationItem link="/events">Events</NavigationItem>
           <NavDropdown title="Compte" id="basic-nav-dropdown">
             {/* backoffice menu display handler */}
-            {Auth && Auth.isLoggedIn && Auth.user && Auth.user.admin && (
+            {Auth.isLoggedIn && Auth.user.admin && (
               <>
                 <NavigationItem link="/BackOffice">BackOffice</NavigationItem>
                 <NavigationItem link="/addNews">
@@ -66,12 +64,12 @@ const Header = props => {
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
-      {/* {Auth && Auth.isLoggedIn ? (
+      {Auth.isLoggedIn ? (
         <p className="Initials">
           {Auth.user.firstname.slice(0, 1)}
           {Auth.user.lastname.slice(0, 1)}
         </p>
-      ) : null} */}
+      ) : null}
     </Navbar>
   );
 };
