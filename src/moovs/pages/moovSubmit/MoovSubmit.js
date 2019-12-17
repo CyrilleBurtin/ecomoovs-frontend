@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Col, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import ip from "../../../shared/ip/Ip";
-import jwtDecode from "jwt-decode";
+
 
 function MoovSubmit(props) {
-  const [userData, setUserData] = useState(false);
+  // const [userData, setUserData] = useState(false);
 
   const [moov, setMoov] = useState({
     country: "France",
@@ -30,14 +30,14 @@ function MoovSubmit(props) {
   //     getUser()
   // }, [setUserData])
 
-  useEffect(() => {
-    const updateMoov = () => {
-      if (userData) {
-        setMoov({ ...moov, userId: userData.user._id });
-      }
-    };
-    updateMoov();
-  }, [userData, setMoov, moov]);
+  // useEffect(() => {
+  //   const updateMoov = () => {
+  //     if (userData) {
+  //       setMoov({ ...moov, userId: userData.user._id });
+  //     }
+  //   };
+  //   updateMoov();
+  // }, [userData, setMoov, moov]);
 
   const [img, setImg] = useState({});
   const [imagePreview, setImagePreview] = useState(null);

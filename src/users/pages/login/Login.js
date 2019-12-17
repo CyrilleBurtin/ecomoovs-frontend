@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "./Login.css";
 import ip from "../../../shared/ip/Ip";
-import jwtDecode from "jwt-decode";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { useForm } from "../../../shared/hooks/Form-hook";
 import FormInput from "../../components/FormInput";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import { AuthContext } from "../../../shared/auth/AuthContext";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_PASSWORD
 } from "../../../shared/validators/Validators";
 
 const Login = props => {
+  const Auth = useContext(AuthContext);
+
   const [formState, inputHandler] = useForm({
     email: {
       value: "",
@@ -39,10 +41,7 @@ const Login = props => {
         return response.json();
       })
       .then(token => {
-        console.log("token", token);
-        localStorage.setItem("AUTH_TOKEN", JSON.stringify(token));
-        var decoded = jwtDecode(token);
-        props.onLogin({ user: decoded.user, token: token });
+        Auth.login(token);
         props.history.push("/home");
       })
       .catch(error => {
@@ -64,6 +63,7 @@ const Login = props => {
               element="input"
               type="text"
               name="email"
+              autocomplete="email"
               placeholder="email"
               errorText="Email non valid"
               validators={[VALIDATOR_EMAIL()]}
@@ -73,6 +73,7 @@ const Login = props => {
               element="input"
               type="password"
               name="password"
+              autocomplete="current-password"
               placeholder="Mot de passe"
               errorText="Email non valide"
               validators={[VALIDATOR_PASSWORD()]}
@@ -83,7 +84,7 @@ const Login = props => {
               variant="primary"
               disabled={!formState.isValid}
             >
-              Se connecter
+              Connexion
             </Button>
           </form>
         </Col>
@@ -93,10 +94,11 @@ const Login = props => {
 };
 
 //output
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogin: user => dispatch({ type: "LOGIN", user })
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     onLogin: user => dispatch({ type: "LOGIN", user })
+//   };
+// };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;
+// export default connect(null, mapDispatchToProps)(Login);

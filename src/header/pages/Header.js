@@ -1,38 +1,20 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import NavigationItem from "../components/navigationItems/NavigationItems";
 import Logo from "../../shared/assets/logo/Logo";
 import "./Header.css";
-import jwtDecode from "jwt-decode";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
+import { AuthContext } from "../../shared/auth/AuthContext";
 
 const Header = props => {
-  const [userData, setUserData] = useState(false);
-
-  useEffect(() => {
-    const getUser = () => {
-      let localToken = localStorage.getItem("AUTH_TOKEN");
-      if (localToken) {
-        let decodedUser = jwtDecode(localToken);
-        if (decodedUser.exp > Date.now() / 1000) {
-          setUserData({
-            user: decodedUser.user,
-            token: localToken
-          });
-        }
-      } else {
-        return false;
-      }
-    };
-    getUser();
-  }, []);
+  const Auth = useContext(AuthContext);
+  console.log("Auth", Auth.user);
 
   const logout = () => {
     localStorage.removeItem("AUTH_TOKEN");
-    setUserData(false);
-    props.onLogout();
+    Auth.logout();
     props.history.push("/home");
   };
 
@@ -49,36 +31,27 @@ const Header = props => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <NavigationItem link="/home">Home</NavigationItem>
-          <NavigationItem link="/annuaire-des-actions">
-            Moovs
-          </NavigationItem>
+          <NavigationItem link="/annuaire-des-actions">Moovs</NavigationItem>
           <NavigationItem link="/actus">Actus</NavigationItem>
           <NavigationItem link="/events">Events</NavigationItem>
           <NavDropdown title="Compte" id="basic-nav-dropdown">
             {/* backoffice menu display handler */}
-            {userData ? (
-              userData.user.admin ? (
-                <>
-                  <NavigationItem link="/BackOffice">
-                    BackOffice
-                  </NavigationItem>
-                  <NavigationItem link="/addNews">
-                    Ajouter une actus
-                  </NavigationItem>
-                </>
-              ) : null
-            ) : null}
-            {/* login and subscribe menu display handler */}
-            {!userData ? (
+            {Auth && Auth.isLoggedIn && Auth.user && Auth.user.admin && (
               <>
-                <NavigationItem link="/inscription">
-                  Inscription
-                </NavigationItem>
-                <NavigationItem link="/connexion">
-                  Connexion
+                <NavigationItem link="/BackOffice">BackOffice</NavigationItem>
+                <NavigationItem link="/addNews">
+                  Ajouter une actus
                 </NavigationItem>
               </>
-            ) : (
+            )}
+            {/* login and subscribe menu display handler */}
+            {!Auth.isLoggedIn && (
+              <>
+                <NavigationItem link="/inscription">Inscription</NavigationItem>
+                <NavigationItem link="/connexion">Connexion</NavigationItem>
+              </>
+            )}
+            {Auth.isLoggedIn && (
               <>
                 <NavDropdown.Divider />
                 <NavigationItem link="/soumettre-une-nouvelle-action">
@@ -93,28 +66,29 @@ const Header = props => {
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
-      {userData.user ? (
+      {/* {Auth && Auth.isLoggedIn ? (
         <p className="Initials">
-          {userData.user.firstname.slice(0, 1)}
-          {userData.user.lastname.slice(0, 1)}
+          {Auth.user.firstname.slice(0, 1)}
+          {Auth.user.lastname.slice(0, 1)}
         </p>
-      ) : null}
+      ) : null} */}
     </Navbar>
   );
 };
 
-//input
-const mapStateToProps = state => {
-  return {
-    userData: state
-  };
-};
+// //input
+// const mapStateToProps = state => {
+//   return {
+//     userData: state
+//   };
+// };
 
-//output
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogout: user => dispatch({ type: "LOGOUT" })
-  };
-};
+// //output
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     onLogout: user => dispatch({ type: "LOGOUT" })
+//   };
+// };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
+export default withRouter(Header);

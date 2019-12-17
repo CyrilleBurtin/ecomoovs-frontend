@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -15,26 +15,17 @@ import Login from "./users/pages/login/Login";
 import BackOffice from "./backOffice/pages/BackOffice";
 import MoovSubmit from "./moovs/pages/moovSubmit/MoovSubmit";
 import { AuthContext } from "./shared/auth/AuthContext";
-import { Provider } from "react-redux";
+import { useLogin } from "./shared/hooks/Login-hook";
 
+// import { Provider } from "react-redux";
 
 const App = props => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState("")
+  
+  const { user, login, logout, isLoggedIn } = useLogin();
 
-  const login = useCallback(() => {
-    setIsLoggedIn(true)
-  }, []);
-  const logout = useCallback(() => {
-    setIsLoggedIn(false)
-  }, []);
-
- const setUser = useCallback(()=> {
-    setUserData({})
- },[])
-
+  console.log('user', user, 'isLoggedIn', isLoggedIn)
   return (
-    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login : login, logout: logout, user: setUser}}>
+    <AuthContext.Provider value={{ user, login, logout, isLoggedIn }}>
       <Router>
         <Header history={props.history} />
         <Switch>
