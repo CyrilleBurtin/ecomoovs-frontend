@@ -18,8 +18,9 @@ import { AuthContext } from "./shared/auth/AuthContext";
 import { useLogin } from "./shared/hooks/Login-hook";
 
 const App = props => {
+  
   const { user, token, login, logout, isLoggedIn } = useLogin();
-  console.log('user', user)
+
   return (
     <AuthContext.Provider value={{ user, token, login, logout, isLoggedIn }}>
       <Router>
