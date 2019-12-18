@@ -17,14 +17,11 @@ import MoovSubmit from "./moovs/pages/moovSubmit/MoovSubmit";
 import { AuthContext } from "./shared/auth/AuthContext";
 import { useLogin } from "./shared/hooks/Login-hook";
 
-// import { Provider } from "react-redux";
-
 const App = props => {
-  
-  const { user, login, logout, isLoggedIn } = useLogin();
-
+  const { user, token, login, logout, isLoggedIn } = useLogin();
+  console.log('user', user)
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoggedIn }}>
+    <AuthContext.Provider value={{ user, token, login, logout, isLoggedIn }}>
       <Router>
         <Header history={props.history} />
         <Switch>
@@ -37,8 +34,8 @@ const App = props => {
           <Route path="/backOffice" component={BackOffice} />
           <Route path="/soumettre-une-nouvelle-action" component={MoovSubmit} />
           {/*<Route path="/events" component={EventsList} />
-      <Route path="/a-propos" component={About} />
-    <Route path="/Contact" component={Contact} /> */}
+          <Route path="/a-propos" component={About} />
+          <Route path="/Contact" component={Contact} /> */}
           <Redirect to="/" />
         </Switch>
         <Footer />

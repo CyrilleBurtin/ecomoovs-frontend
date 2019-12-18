@@ -62,7 +62,7 @@ const FormInput = props => {
         onBlur={touchHandler}
       />
     ) : props.element === "select" ? (
-      <select value="Suisse" name={props.name} onChange={formChangeHandler}>
+      <select value="France" name={props.name} onChange={formChangeHandler}>
         <option>France</option>
         <option>Belgique</option>
         <option>Suisse</option>

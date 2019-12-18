@@ -5,7 +5,6 @@ import NavigationItem from "../components/navigationItems/NavigationItems";
 import Logo from "../../shared/assets/logo/Logo";
 import "./Header.css";
 import { withRouter } from "react-router-dom";
-// import { connect } from "react-redux";
 import { AuthContext } from "../../shared/auth/AuthContext";
 
 const Header = props => {
@@ -74,19 +73,4 @@ const Header = props => {
   );
 };
 
-// //input
-// const mapStateToProps = state => {
-//   return {
-//     userData: state
-//   };
-// };
-
-// //output
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onLogout: user => dispatch({ type: "LOGOUT" })
-//   };
-// };
-
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
 export default withRouter(Header);

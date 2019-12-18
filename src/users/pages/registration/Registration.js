@@ -165,7 +165,6 @@ const NewUser = () => {
         autocomlpete="country"
         type="select"
         name="country"
-        validators={[VALIDATOR_REQUIRE()]}
         onInput={inputHandler}
       />
       <FormInput

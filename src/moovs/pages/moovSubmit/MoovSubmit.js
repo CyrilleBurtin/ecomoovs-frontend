@@ -1,58 +1,71 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Col, Form, Button } from "react-bootstrap";
-import { connect } from "react-redux";
 import ip from "../../../shared/ip/Ip";
+import { AuthContext } from "../../../shared/auth/AuthContext";
+import { useForm } from "../../../shared/hooks/Form-hook";
+import FormInput from "../../../users/components/FormInput";
+import { VALIDATOR_REQUIRE, VALIDATOR_EMAIL } from "../../../shared/validators/Validators";
 
-
-function MoovSubmit(props) {
-  // const [userData, setUserData] = useState(false);
-
-  const [moov, setMoov] = useState({
-    country: "France",
-    userId: ""
-  });
-
-  // useEffect(() => {
-  //     const getUser = () => {
-  //         let localToken = localStorage.getItem('AUTH_TOKEN')
-  //         if (localToken) {
-  //             let decodedUser = (jwtDecode(localToken))
-  //             if (decodedUser.exp > Date.now() / 1000) {
-  //                 setUserData({
-  //                     user: decodedUser.user,
-  //                     token: localToken
-  //                 })
-  //             }
-  //         } else {
-  //             return false
-  //         }
-  //     }
-  //     getUser()
-  // }, [setUserData])
-
-  // useEffect(() => {
-  //   const updateMoov = () => {
-  //     if (userData) {
-  //       setMoov({ ...moov, userId: userData.user._id });
-  //     }
-  //   };
-  //   updateMoov();
-  // }, [userData, setMoov, moov]);
-
+const  MoovSubmit = props => {
+  const Auth = useContext(AuthContext);
+  
   const [img, setImg] = useState({});
   const [imagePreview, setImagePreview] = useState(null);
 
-  const formHandler = e => {
-    const { name, value } = e.target;
-    setMoov({ ...moov, [name]: value });
-  };
+  const [formState, inputHandler] = useForm({
+    type: {
+      value: "",
+      isValid: false
+    },
+    name: {
+      value: "",
+      isValid: false
+    },
+    email: {
+      value: "",
+      isValid: false
+    },
+    password: {
+      value: "",
+      isValid: false
+    },
+    phone: {
+      value: "",
+      isValid: false
+    },
+    address: {
+      value: "",
+      isValid: false
+    },
+    zipcode: {
+      value: "",
+      isValid: false
+    },
+    city: {
+      value: "",
+      isValid: false
+    },
+    country: {
+      value: "France",
+      isValid: true
+    },
+    cgu: {
+      value: false,
+      isValid: false
+    },
+    userId: {
+      value: Auth.user._id,
+      isValid: true
+    } 
+  });
 
-  const handleClick = () => {
+
+    const handleClick = () => {
     fetch(`${ip}/moovs/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        moov
+        formState
       })
     })
       .then(response => {
@@ -106,21 +119,27 @@ function MoovSubmit(props) {
       <Form.Row>Ajouter un moov</Form.Row>
       <Form.Row>
         <Form.Group as={Col} controlId="Type">
-          <Form.Label>Prénom</Form.Label>
-          <Form.Control
+          <Form.Label>Type</Form.Label>
+          <FormInput
+            element="input"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Type non valide"
             type="text"
             name="type"
-            onChange={formHandler}
+            onInput={inputHandler}
             placeholder="Type"
           />
         </Form.Group>
 
         <Form.Group as={Col} controlId="name">
           <Form.Label>Nom</Form.Label>
-          <Form.Control
+          <FormInput
+            element="input"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Nom non valide"
             type="text"
             name="name"
-            onChange={formHandler}
+            onInput={inputHandler}
             placeholder="Nom"
           />
         </Form.Group>
@@ -129,9 +148,12 @@ function MoovSubmit(props) {
       <Form.Row>
         <Form.Group controlId="Address">
           <Form.Label>Adresse</Form.Label>
-          <Form.Control
+          <FormInput
+            element="input"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Adresse non valide"
             type="text"
-            onChange={formHandler}
+            onInput={inputHandler}
             name="address"
             placeholder="5 rue des Peupliers"
           />
@@ -140,43 +162,62 @@ function MoovSubmit(props) {
         <Form.Row>
           <Form.Group as={Col} controlId="Zip">
             <Form.Label>Code Postal</Form.Label>
-            <Form.Control typse="text" name="zipcode" onChange={formHandler} />
+            <FormInput
+              element="input"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Code postal non valide"
+              typse="text"
+              name="zipcode"
+              onInput={inputHandler}
+            />
           </Form.Group>
 
           <Form.Group as={Col} controlId="City">
             <Form.Label>Ville</Form.Label>
-            <Form.Control type="text" name="city" onChange={formHandler} />
+            <FormInput
+              element="input"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Ville non valide"
+              type="text"
+              name="city"
+              onInput={inputHandler}
+            />
           </Form.Group>
 
           <Form.Group as={Col} controlId="State">
             <Form.Label>Pays</Form.Label>
-            <Form.Control as="select" name="country" onChange={formHandler}>
-              <option>France</option>
-              <option>Belgique</option>
-              <option>Suisse</option>
-              <option>Luxembourg</option>
-              <option>Monaco</option>
-            </Form.Control>
+            <FormInput
+              element="select"
+              autocomlpete="country"
+              type="select"
+              name="country"
+              onInput={inputHandler}
+            ></FormInput>
           </Form.Group>
         </Form.Row>
 
         <Form.Row>
           <Form.Group as={Col} controlId="Email">
             <Form.Label>Email</Form.Label>
-            <Form.Control
+            <FormInput
+              element="input"
+              validators={[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
+              errorText="Email non valide"
               type="email"
               name="email"
-              onChange={formHandler}
+              onInput={inputHandler}
               placeholder="Email"
             />
           </Form.Group>
 
           <Form.Group as={Col} controlId="Phone">
             <Form.Label>Téléphone</Form.Label>
-            <Form.Control
+            <FormInput
+              element="input"
+              errorText=""
               type="tel"
               name="phone"
-              onChange={formHandler}
+              onInput={inputHandler}
               placeholder="Téléphone"
             />
           </Form.Group>
@@ -185,40 +226,52 @@ function MoovSubmit(props) {
         <Form.Row>
           <Form.Group as={Col} controlId="Url">
             <Form.Label>Site web</Form.Label>
-            <Form.Control
+            <FormInput
+              element="input"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Site web non valide"
               type="text"
               name="url"
-              onChange={formHandler}
+              onInput={inputHandler}
               placeholder="https://monsite.com "
             />
           </Form.Group>
 
           <Form.Group as={Col} controlId="Title">
             <Form.Label>Titre</Form.Label>
-            <Form.Control
+            <FormInput
+              element="input"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Titre non valide"
               type="text"
               name="title"
-              onChange={formHandler}
+              onInput={inputHandler}
               placeholder="Titre"
             />
           </Form.Group>
 
           <Form.Group as={Col} controlId="PunchLine">
-            <Form.Label>Puncline</Form.Label>
-            <Form.Control
+            <Form.Label>Punchline</Form.Label>
+            <FormInput
+              element="input"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Punchline non valide"
               type="text"
               name="punchLine"
-              onChange={formHandler}
+              onInput={inputHandler}
               placeholder="Punchline"
             />
           </Form.Group>
 
           <Form.Group as={Col} controlId="Desc">
             <Form.Label>Description</Form.Label>
-            <Form.Control
+            <FormInput
+              element="input"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Description non valide"
               type="text"
               name="description"
-              onChange={formHandler}
+              onInput={inputHandler}
               placeholder="Description"
             />
           </Form.Group>
@@ -227,20 +280,25 @@ function MoovSubmit(props) {
         <Form.Row>
           <Form.Group as={Col} controlId="RegNumber">
             <Form.Label>Numéro Siret/Siren</Form.Label>
-            <Form.Control
+            <FormInput
+              element="input"
+              errorText="Numéro de société non valide"
               type="text"
               name="regNumber"
-              onChange={formHandler}
+              onInput={inputHandler}
               placeholder="RegNumber"
             />
           </Form.Group>
 
           <Form.Group as={Col} controlId="Tags">
             <Form.Label>Tags</Form.Label>
-            <Form.Control
+            <FormInput
+              element="input"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Tags non valides"
               type="text"
               name="tags"
-              onChange={formHandler}
+              onInput={inputHandler}
               placeholder="Tags"
             />
           </Form.Group>
@@ -249,9 +307,10 @@ function MoovSubmit(props) {
         <Form.Row>
           <Form.Group as={Col} controlId="image">
             <Form.Label>Image</Form.Label>
-            <Form.Control
+            <FormInput
+              element="input"
               type="file"
-              onChange={e => handleImageChange(e)}
+              onInput={e => handleImageChange(e)}
               placeholder="Ajouter une photo"
             />
             <div>{imagePreview}</div>
@@ -261,30 +320,36 @@ function MoovSubmit(props) {
         <Form.Row>
           <Form.Group as={Col} controlId="Facebook">
             <Form.Label>Facebook</Form.Label>
-            <Form.Control
+            <FormInput
+              element="input"
+              errorText=""
               type="text"
               name="facebook"
-              onChange={formHandler}
+              onInput={inputHandler}
               placeholder="Facebook"
             />
           </Form.Group>
 
           <Form.Group as={Col} controlId="Instagram">
             <Form.Label>Instagram</Form.Label>
-            <Form.Control
+            <FormInput
+              element="input"              
+              errorText=""
               type="text"
               name="instagram"
-              onChange={formHandler}
+              onInput={inputHandler}
               placeholder="Instagram"
             />
           </Form.Group>
 
           <Form.Group as={Col} controlId="Twitter">
             <Form.Label>Twitter</Form.Label>
-            <Form.Control
+            <FormInput
+              element="input"
+              errorText=""
               type="text"
               name="twitter"
-              onChange={formHandler}
+              onInput={inputHandler}
               placeholder="Twitter"
             />
           </Form.Group>
@@ -298,10 +363,4 @@ function MoovSubmit(props) {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    userData: state
-  };
-};
-
-export default connect(mapStateToProps, null)(MoovSubmit);
+export default MoovSubmit;
