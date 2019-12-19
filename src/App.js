@@ -16,6 +16,7 @@ import BackOffice from "./backOffice/pages/BackOffice";
 import MoovSubmit from "./moovs/pages/moovSubmit/MoovSubmit";
 import { AuthContext } from "./shared/auth/AuthContext";
 import { useLogin } from "./shared/hooks/Login-hook";
+import UserManagement from './backOffice/pages/Usermangement';
 
 const App = props => {
   
@@ -33,6 +34,7 @@ const App = props => {
           <Route path="/inscription" component={Registration} />
           <Route path="/connexion" component={Login} />
           <Route path="/backOffice" component={BackOffice} />
+          <Route path="/backOffice/addnews" component={UserManagement} />
           <Route path="/soumettre-une-nouvelle-action" component={MoovSubmit} />
           {/*<Route path="/events" component={EventsList} />
           <Route path="/a-propos" component={About} />

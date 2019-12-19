@@ -35,8 +35,8 @@ const Header = props => {
             {/* backoffice menu display handler */}
             {Auth.isLoggedIn && Auth.user.admin && (
               <>
-                <NavigationItem link="/BackOffice">BackOffice</NavigationItem>
-                <NavigationItem link="/addNews">
+                <NavigationItem link="/backOffice">BackOffice</NavigationItem>
+                <NavigationItem link="/backoffice/addNews">
                   Ajouter une actus
                 </NavigationItem>
               </>

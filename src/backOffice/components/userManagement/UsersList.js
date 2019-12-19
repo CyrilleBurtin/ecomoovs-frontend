@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
-import ip from "../../../shared/ip/Ip";
 
 const UsersList = props => {
-
   return (
     <Container>
       <Row>
         <Col style={{ fontWeight: "bold", fontSize: "22px" }}>
-          <Col  xs="6" md="3">
+          <Col xs="6" md="3">
             <Card style={{ width: "18rem" }}>
               <Card.Body>
                 <Card.Title>User {props.cle + 1} </Card.Title>

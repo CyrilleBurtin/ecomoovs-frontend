@@ -162,7 +162,6 @@ const NewUser = () => {
       />
       <FormInput
         element="select"
-        autocomlpete="country"
         type="select"
         name="country"
         onInput={inputHandler}

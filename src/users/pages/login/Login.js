@@ -28,7 +28,6 @@ const Login = props => {
 
   const loginHandler = event => {
     event.preventDefault();
-
     fetch(`${ip}/users/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
