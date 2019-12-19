@@ -6,7 +6,6 @@ import ip from "../../shared/ip/Ip";
 const UserManagement = () => {
   const Auth = useContext(AuthContext);
   const [userList, setUserList] = useState([]);
-
   useEffect(() => {
     fetch(`${ip}/users`, {
       method: "GET",
