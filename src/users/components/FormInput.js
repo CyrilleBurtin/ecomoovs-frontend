@@ -22,8 +22,8 @@ const inputReducer = (state, action) => {
 
 const FormInput = props => {
   const [inputState, dispatch] = useReducer(inputReducer, {
-    value: props.value || "",
-    isValid: props.valid || false,
+    value: props.initialValue || "",
+    isValid: props.initialValidate || false,
     touched: false
   });
 
@@ -35,6 +35,7 @@ const FormInput = props => {
   }, [name, value, isValid, onInput]);
 
   const formChangeHandler = event => {
+    console.log('event.target.value', event.target.value)
     dispatch(
       {
         type: "CHANGE",
@@ -62,8 +63,11 @@ const FormInput = props => {
         onBlur={touchHandler}
       />
     ) : props.element === "select" ? (
-      <select name={props.name} onChange={formChangeHandler}>
-        <option>Choisir</option>
+      <select
+        name={props.name}
+        onChange={formChangeHandler}
+        type={props.type}
+      >
         <option>France</option>
         <option>Belgique</option>
         <option>Suisse</option>

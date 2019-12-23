@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 
 import "./Login.css";
 import ip from "../../../shared/ip/Ip";
-// import { connect } from "react-redux";
 import { useForm } from "../../../shared/hooks/Form-hook";
 import FormInput from "../../components/FormInput";
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -11,6 +10,7 @@ import {
   VALIDATOR_EMAIL,
   VALIDATOR_PASSWORD
 } from "../../../shared/validators/Validators";
+// import { connect } from "react-redux";
 
 const Login = props => {
   const Auth = useContext(AuthContext);

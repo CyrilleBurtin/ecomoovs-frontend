@@ -14,46 +14,50 @@ const AddEvent = () => {
   const [formState, inputHandler] = useForm({
     name: {
       value: "",
-      isValide: false
+      isValid: false
     },
     punchline: {
       value: "",
-      isValide: false
+      isValid: false
     },
     dateIn: {
       value: "",
-      isValide: false
+      isValid: false
     },
     dateOut: {
       value: "",
-      isValide: false
+      isValid: false
     },
     description: {
       value: "",
-      isValide: false
+      isValid: false
     },
     email: {
       value: "",
-      isValide: false
+      isValid: false
     },
     phone: {
       value: "",
-      isValide: false
+      isValid: false
     },
     zipcode: {
       value: "",
-      isValide: false
+      isValid: false
+    },
+    address: {
+      value: "",
+      isValid: false
     },
     city: {
       value: "",
-      isValide: false
+      isValid: false
     },
     country: {
-      value: "",
-      isValide: true
+      value: "France",
+      isValid: true
     }
   });
-console.log('formState', formState)
+  console.log("formState", formState);
   const registrationClickHandler = event => {
     event.preventDefault();
 
@@ -101,6 +105,8 @@ console.log('formState', formState)
                 {/* <Form.Label>Nom</Form.Label> */}
                 <FormInput
                   element="input"
+                  initialValue={formState.inputs.name.value}
+                  initialValidate={formState.inputs.name.isValid}
                   type="text"
                   name="name"
                   onInput={inputHandler}
@@ -116,6 +122,8 @@ console.log('formState', formState)
                 {/* <Form.Label>Nom</Form.Label> */}
                 <FormInput
                   element="input"
+                  initialValue={formState.inputs.punchline.value}
+                  initialValidate={formState.inputs.punchline.isValid}
                   type="text"
                   name="punchline"
                   onInput={inputHandler}
@@ -131,6 +139,8 @@ console.log('formState', formState)
                 {/* <Form.Label>Nom</Form.Label> */}
                 <FormInput
                   element="input"
+                  initialValue={formState.inputs.dateIn.value}
+                  initialValidate={formState.inputs.dateIn.isValid}
                   type="date"
                   name="dateIn"
                   onInput={inputHandler}
@@ -147,6 +157,8 @@ console.log('formState', formState)
                 {/* <Form.Label>Nom</Form.Label> */}
                 <FormInput
                   element="input"
+                  initialValue={formState.inputs.dateOut.value}
+                  initialValidate={formState.inputs.dateOut.isValid}
                   type="date"
                   name="dateOut"
                   onInput={inputHandler}
@@ -163,6 +175,8 @@ console.log('formState', formState)
                 {/* <Form.Label>Nom</Form.Label> */}
                 <FormInput
                   element="input"
+                  initialValue={formState.inputs.description.value}
+                  initialValidate={formState.inputs.description.isValid}
                   as="textarea"
                   rows="10"
                   name="description"
@@ -180,6 +194,8 @@ console.log('formState', formState)
                 {/* <Form.Label>Email</Form.Label> */}
                 <FormInput
                   element="input"
+                  initialValue={formState.inputs.email.value}
+                  initialValidate={formState.inputs.email.isValid}
                   autoComplete="email"
                   type="email"
                   name="email"
@@ -197,6 +213,8 @@ console.log('formState', formState)
                 {/* <Form.Label>Téléphone</Form.Label> */}
                 <FormInput
                   element="input"
+                  initialValue={formState.inputs.phone.value}
+                  initialValidate={formState.inputs.phone.isValid}
                   type="tel"
                   name="phone"
                   onInput={inputHandler}
@@ -212,6 +230,8 @@ console.log('formState', formState)
               {/* <Form.Label>Adresse</Form.Label> */}
               <FormInput
                 element="input"
+                initialValue={formState.inputs.address.value}
+                initialValidate={formState.inputs.address.isValid}
                 autoComplete="address-line1"
                 name="address"
                 onInput={inputHandler}
@@ -227,6 +247,8 @@ console.log('formState', formState)
                 {/* <Form.Label>Code Postal</Form.Label> */}
                 <FormInput
                   element="input"
+                  initialValue={formState.inputs.zipcode.value}
+                  initialValidate={formState.inputs.zipcode.isValid}
                   autoComplete="postal-code"
                   name="zipcode"
                   onInput={inputHandler}
@@ -243,6 +265,8 @@ console.log('formState', formState)
                 {/* <Form.Label>Ville</Form.Label> */}
                 <FormInput
                   element="input"
+                  initialValue={formState.inputs.city.value}
+                  initialValidate={formState.inputs.city.isValid}
                   autoComplete="address-level2"
                   name="city"
                   onInput={inputHandler}
@@ -259,6 +283,8 @@ console.log('formState', formState)
                 {/* <Form.Label>Pays</Form.Label> */}
                 <FormInput
                   element="select"
+                  initialValue={formState.inputs.country.value}
+                  initialValidate={formState.inputs.country.isValid}
                   as="select"
                   name="country"
                   onInput={inputHandler}
