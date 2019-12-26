@@ -1,20 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Col, Form, Button } from "react-bootstrap";
 import ip from "../../../shared/ip/Ip";
 import { AuthContext } from "../../../shared/auth/AuthContext";
 import { useForm } from "../../../shared/hooks/Form-hook";
 import FormInput from "../../../users/components/FormInput";
+import ImageUpload from "../../../users/components/ImageUpload";
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_EMAIL
 } from "../../../shared/validators/Validators";
-
 const MoovSubmit = props => {
   const Auth = useContext(AuthContext);
-
-  const [img, setImg] = useState({});
-  const [imagePreview, setImagePreview] = useState(null);
-
+  console.log('Auth', Auth)
   const [formState, inputHandler] = useForm({
     type: {
       value: "",
@@ -72,6 +69,10 @@ const MoovSubmit = props => {
       value: "",
       isValid: false
     },
+    image: {
+      value: null,
+      isValid: false
+    },
     facebook: {
       value: "",
       isValid: true
@@ -85,31 +86,38 @@ const MoovSubmit = props => {
       isValid: true
     }
   });
-  console.log("formState", formState);
-  const handleClick = () => {
+
+  const handleClick = (event) => {
+
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("type", formState.inputs.type.value);
+    formData.append("name", formState.inputs.name.value);
+    formData.append("address", formState.inputs.address.value);
+    formData.append("zipcode", formState.inputs.zipcode.value);
+    formData.append("city", formState.inputs.city.value);
+    formData.append("country", formState.inputs.country.value);
+    formData.append("email", formState.inputs.email.value);
+    formData.append("phone", formState.inputs.phone.value);
+    formData.append("url", formState.inputs.url.value);
+    formData.append("title", formState.inputs.title.value);
+    formData.append("punchline", formState.inputs.punchline.value);
+    formData.append("description", formState.inputs.description.value);
+    formData.append("regNumber", formState.inputs.regNumber.value);
+    formData.append("tags", formState.inputs.tags.value);
+    formData.append("image", formState.inputs.image.value);
+    formData.append("facebook", formState.inputs.facebook.value);
+    formData.append("instagram", formState.inputs.instagram.value);
+    formData.append("twitter", formState.inputs.twitter.value);
+    formData.append("userId", Auth.user._id);
+    
     fetch(`${ip}/moovs`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: formState.inputs.type.value,
-        name: formState.inputs.name.value,
-        address: formState.inputs.address.value,
-        zipcode: formState.inputs.zipcode.value,
-        city: formState.inputs.city.value,
-        country: formState.inputs.country.value,
-        email: formState.inputs.email.value,
-        phone: formState.inputs.phone.value,
-        url: formState.inputs.url.value,
-        title: formState.inputs.title.value,
-        punchline: formState.inputs.punchline.value,
-        description: formState.inputs.description.value,
-        regNumber: formState.inputs.regNumber.value,
-        tags: formState.inputs.tags.value,
-        facebook: formState.inputs.facebook.value,
-        instagram: formState.inputs.instagram.value,
-        twitter: formState.inputs.twitter.value,
-        userId: Auth.user._id
-      })
+      body: formData,
+      headers: {
+        'authorization': `Bearer ${Auth.token}`      
+      }
     })
       .then(response => {
         return response.json();
@@ -122,43 +130,8 @@ const MoovSubmit = props => {
       });
   };
 
-  const handleImageChange = photo => {
-    //var file = photo.target;
-
-    var reader = new FileReader();
-
-    reader.onload = () => {
-      var fileUri = reader.result;
-      setImg({ uri: fileUri });
-    };
-
-    reader.onloadend = () => console.log(img);
-
-    //   formData.append('photo', );
-
-    //   for (var key in photo) {
-    //     console.log(key, photo[key]);
-    //     formData.append(key, photo[key]);
-    // }
-
-    //   fetch(`${ip}moovs/photo`, {
-    //     method: 'post',
-    //     body: FormData
-    //   })
-  };
-
-  useEffect(() => {
-    if (img.imagePreviewUrl) {
-      setImagePreview(<img src={img.imagePreviewUrl} alt="preview" />);
-    } else {
-      setImagePreview(
-        <div className="previewText">Please select an Image for Preview</div>
-      );
-    }
-  }, [img]);
-
   return (
-    <Form>
+    <form type="submit" onSubmit={handleClick} id="moov">
       <Form.Row>Ajouter un moov</Form.Row>
       <Form.Row>
         <Form.Group as={Col} controlId="Type">
@@ -201,7 +174,8 @@ const MoovSubmit = props => {
             initialValidate={formState.inputs.address.isValid}
             validators={[VALIDATOR_REQUIRE()]}
             errorText="Adresse non valide"
-            type="text"zipcode
+            type="text"
+            zipcode
             onInput={inputHandler}
             name="address"
             placeholder="5 rue des Peupliers"
@@ -378,21 +352,11 @@ const MoovSubmit = props => {
           </Form.Group>
         </Form.Row>
 
-        {/* <Form.Row>
-          <Form.Group as={Col} controlId="image">
-            <Form.Label>Image</Form.Label>
-            <FormInput
-              element="input"
-              initialValue={formState.inputs..value}
-              initialValidate={formState.inputs..isValid}
-              type="file"
-              onInput={e => handleImageChange(e)}
-              placeholder="Ajouter une photo"
-              validators={[]}
-            />
-            <div>{imagePreview}</div>
-          </Form.Group>
-        </Form.Row> */}
+        <ImageUpload
+          id="image"
+          onInput={inputHandler}
+          errorText="Votre Image n'est pas valide"
+        />
 
         <Form.Row>
           <Form.Group as={Col} controlId="Facebook">
@@ -445,7 +409,7 @@ const MoovSubmit = props => {
       <Button type="submit" variant="primary" disabled={!formState.isValid}>
         Valider
       </Button>
-    </Form>
+    </form>
   );
 };
 

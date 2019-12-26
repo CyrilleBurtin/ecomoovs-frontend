@@ -3,12 +3,13 @@ import { Card, CardColumns } from "react-bootstrap";
 import "./MoovCards.css";
 
 const MoovsCards = props => {
+  console.log('props.moovList', props.moovList)
   return (
     <>
       <CardColumns>
         {props.moovList.map((e, i) => (
           <Card key={i} className="MoovCards">
-            <Card.Img variant="top" src="holder.js/100px160" />
+            <Card.Img variant="top" src={e.img} />
             <Card.Body className="CardBody">
               <Card.Title>
                 {i}. {e.name}

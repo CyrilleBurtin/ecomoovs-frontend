@@ -1,5 +1,4 @@
 import React, { useReducer, useEffect } from "react";
-
 import { validate } from "../../shared/validators/Validators";
 
 const inputReducer = (state, action) => {
@@ -35,7 +34,7 @@ const FormInput = props => {
   }, [name, value, isValid, onInput]);
 
   const formChangeHandler = event => {
-    console.log('event.target.value', event.target.value)
+
     dispatch(
       {
         type: "CHANGE",

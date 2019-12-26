@@ -53,10 +53,12 @@ const NewUser = props => {
     cgu: {
       value: 0,
       isValid: false
+    },
+    image: {
+      value: "",
+      isValid: false
     }
   });
-
-  console.log("formState", formState);
 
   const registrationClickHandler = event => {
     event.preventDefault();
@@ -90,7 +92,7 @@ const NewUser = props => {
   };
 
   return (
-    <form className="place-form" onSubmit={registrationClickHandler}>
+    <form className="place-form" encType="multipart/form-data" onSubmit={registrationClickHandler}>
       <FormInput
         autocomplete="given-name"
         element="input"

@@ -14,13 +14,13 @@ const Home = () => {
   const [moovs, setMoovs] = useState([]);
 
   useEffect(() => {
-    const getSeedList = () => {
+    const getMoovsList = () => {
       return fetch(`${ip}/moovs/`)
         .then(response => response.json())
         .then(data => setMoovs(data))
         .catch(error => console.log(error));
     };
-    getSeedList();
+    getMoovsList();
   }, []);
 
   return (
