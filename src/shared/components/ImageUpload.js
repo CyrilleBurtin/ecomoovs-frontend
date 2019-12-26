@@ -38,7 +38,7 @@ const ImageUpload = props => {
   };
 
   return (
-    <div style={{ border: "1px solid red" }}>
+    <div>
       <input
         id={props.id}
         ref={filePickerRef}
@@ -49,7 +49,7 @@ const ImageUpload = props => {
       />
       <div>
         <div>
-          {previewUrl && <img src={previewUrl} alt="Preview" />}
+          {previewUrl && <img src={previewUrl} alt="Preview" width="100%" />}
           {!previewUrl && <p>Choisissez une photo</p>}
           </div>
         <Button type="button" onClick={pickImageHandler}>
