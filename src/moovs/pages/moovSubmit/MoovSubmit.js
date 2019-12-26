@@ -1,17 +1,20 @@
 import React, { useContext } from "react";
-import { Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
+
 import ip from "../../../shared/ip/Ip";
-import { AuthContext } from "../../../shared/auth/AuthContext";
 import { useForm } from "../../../shared/hooks/Form-hook";
-import FormInput from "../../../users/components/FormInput";
-import ImageUpload from "../../../users/components/ImageUpload";
+import FormInput from "../../../shared/components/FormInput";
+import { AuthContext } from "../../../shared/auth/AuthContext";
+import ImageUpload from "../../../shared/components/ImageUpload";
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_EMAIL
 } from "../../../shared/validators/Validators";
-const MoovSubmit = props => {
+import "../../../shared/css/forms.css";
+
+const MoovSubmit = () => {
   const Auth = useContext(AuthContext);
-  console.log('Auth', Auth)
+
   const [formState, inputHandler] = useForm({
     type: {
       value: "",
@@ -87,8 +90,7 @@ const MoovSubmit = props => {
     }
   });
 
-  const handleClick = (event) => {
-
+  const handleClick = event => {
     event.preventDefault();
 
     const formData = new FormData();
@@ -111,13 +113,11 @@ const MoovSubmit = props => {
     formData.append("instagram", formState.inputs.instagram.value);
     formData.append("twitter", formState.inputs.twitter.value);
     formData.append("userId", Auth.user._id);
-    
+
     fetch(`${ip}/moovs`, {
       method: "POST",
       body: formData,
-      headers: {
-        'authorization': `Bearer ${Auth.token}`      
-      }
+      headers: { authorization: `Bearer ${Auth.token}` }
     })
       .then(response => {
         return response.json();
@@ -131,74 +131,61 @@ const MoovSubmit = props => {
   };
 
   return (
-    <form type="submit" onSubmit={handleClick} id="moov">
-      <Form.Row>Ajouter un moov</Form.Row>
-      <Form.Row>
-        <Form.Group as={Col} controlId="Type">
-          <Form.Label>Type</Form.Label>
-          <FormInput
-            element="input"
-            initialValue={formState.inputs.type.value}
-            initialValidate={formState.inputs.type.isValid}
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Type non valide"
-            type="text"
-            name="type"
-            onInput={inputHandler}
-            placeholder="Type"
-          />
-        </Form.Group>
+    <Container fluid className="SharedForm">
+      <Row>
+        <Col className="SharedFormHeader">
+          <p className="text-center SharedFormTitle">INSCRIPTION</p>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <form onSubmit={handleClick}>
+            <FormInput
+              element="input"
+              initialValue={formState.inputs.type.value}
+              initialValidate={formState.inputs.type.isValid}
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Type non valide"
+              type="text"
+              name="type"
+              onInput={inputHandler}
+              placeholder="Type"
+            />
 
-        <Form.Group as={Col} controlId="name">
-          <Form.Label>Nom</Form.Label>
-          <FormInput
-            element="input"
-            initialValue={formState.inputs.name.value}
-            initialValidate={formState.inputs.name.isValid}
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Nom non valide"
-            type="text"
-            name="name"
-            onInput={inputHandler}
-            placeholder="Nom"
-          />
-        </Form.Group>
-      </Form.Row>
-
-      <Form.Row>
-        <Form.Group controlId="Address">
-          <Form.Label>Adresse</Form.Label>
-          <FormInput
-            element="input"
-            initialValue={formState.inputs.address.value}
-            initialValidate={formState.inputs.address.isValid}
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Adresse non valide"
-            type="text"
-            zipcode
-            onInput={inputHandler}
-            name="address"
-            placeholder="5 rue des Peupliers"
-          />
-        </Form.Group>
-
-        <Form.Row>
-          <Form.Group as={Col} controlId="Zip">
-            <Form.Label>Code Postal</Form.Label>
+            <FormInput
+              element="input"
+              initialValue={formState.inputs.name.value}
+              initialValidate={formState.inputs.name.isValid}
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Nom non valide"
+              type="text"
+              name="name"
+              onInput={inputHandler}
+              placeholder="Nom"
+            />
+            <FormInput
+              element="input"
+              initialValue={formState.inputs.address.value}
+              initialValidate={formState.inputs.address.isValid}
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Adresse non valide"
+              type="text"
+              zipcode
+              name="address"
+              onInput={inputHandler}
+              placeholder="adresse"
+            />
             <FormInput
               element="input"
               initialValue={formState.inputs.zipcode.value}
               initialValidate={formState.inputs.zipcode.isValid}
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Code postal non valide"
-              typse="text"
+              type="text"
               name="zipcode"
               onInput={inputHandler}
+              placeholder="Code postal"
             />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="City">
-            <Form.Label>Ville</Form.Label>
             <FormInput
               element="input"
               initialValue={formState.inputs.city.value}
@@ -208,11 +195,8 @@ const MoovSubmit = props => {
               type="text"
               name="city"
               onInput={inputHandler}
+              placeholder="Ville"
             />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="State">
-            <Form.Label>Pays</Form.Label>
             <FormInput
               element="select"
               initialValue={formState.inputs.country.value}
@@ -222,13 +206,7 @@ const MoovSubmit = props => {
               name="country"
               onInput={inputHandler}
               validators={[]}
-            ></FormInput>
-          </Form.Group>
-        </Form.Row>
-
-        <Form.Row>
-          <Form.Group as={Col} controlId="Email">
-            <Form.Label>Email</Form.Label>
+            />
             <FormInput
               element="input"
               initialValue={formState.inputs.email.value}
@@ -240,10 +218,6 @@ const MoovSubmit = props => {
               onInput={inputHandler}
               placeholder="Email"
             />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="Phone">
-            <Form.Label>Téléphone</Form.Label>
             <FormInput
               element="input"
               initialValue={formState.inputs.phone.value}
@@ -255,12 +229,6 @@ const MoovSubmit = props => {
               placeholder="Téléphone"
               validators={[]}
             />
-          </Form.Group>
-        </Form.Row>
-
-        <Form.Row>
-          <Form.Group as={Col} controlId="Url">
-            <Form.Label>Site web</Form.Label>
             <FormInput
               element="input"
               initialValue={formState.inputs.url.value}
@@ -270,12 +238,8 @@ const MoovSubmit = props => {
               type="text"
               name="url"
               onInput={inputHandler}
-              placeholder="https://monsite.com "
+              placeholder="Votre site web"
             />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="Title">
-            <Form.Label>Titre</Form.Label>
             <FormInput
               element="input"
               initialValue={formState.inputs.title.value}
@@ -287,10 +251,6 @@ const MoovSubmit = props => {
               onInput={inputHandler}
               placeholder="Titre"
             />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="Punchline">
-            <Form.Label>Punchline</Form.Label>
             <FormInput
               element="input"
               initialValue={formState.inputs.punchline.value}
@@ -302,10 +262,6 @@ const MoovSubmit = props => {
               onInput={inputHandler}
               placeholder="Punchline"
             />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="Desc">
-            <Form.Label>Description</Form.Label>
             <FormInput
               element="input"
               initialValue={formState.inputs.description.value}
@@ -317,12 +273,6 @@ const MoovSubmit = props => {
               onInput={inputHandler}
               placeholder="Description"
             />
-          </Form.Group>
-        </Form.Row>
-
-        <Form.Row>
-          <Form.Group as={Col} controlId="RegNumber">
-            <Form.Label>Numéro Siret/Siren</Form.Label>
             <FormInput
               element="input"
               initialValue={formState.inputs.regNumber.value}
@@ -334,10 +284,6 @@ const MoovSubmit = props => {
               placeholder="RegNumber"
               validators={[]}
             />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="Tags">
-            <Form.Label>Tags</Form.Label>
             <FormInput
               element="input"
               initialValue={formState.inputs.tags.value}
@@ -349,18 +295,11 @@ const MoovSubmit = props => {
               onInput={inputHandler}
               placeholder="Tags"
             />
-          </Form.Group>
-        </Form.Row>
-
-        <ImageUpload
-          id="image"
-          onInput={inputHandler}
-          errorText="Votre Image n'est pas valide"
-        />
-
-        <Form.Row>
-          <Form.Group as={Col} controlId="Facebook">
-            <Form.Label>Facebook</Form.Label>
+            <ImageUpload
+              id="image"
+              onInput={inputHandler}
+              errorText="Votre Image n'est pas valide"
+            />
             <FormInput
               element="input"
               initialValue={formState.inputs.facebook.value}
@@ -372,10 +311,6 @@ const MoovSubmit = props => {
               placeholder="Facebook"
               validators={[]}
             />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="Instagram">
-            <Form.Label>Instagram</Form.Label>
             <FormInput
               element="input"
               initialValue={formState.inputs.instagram.value}
@@ -387,10 +322,6 @@ const MoovSubmit = props => {
               placeholder="Instagram"
               validators={[]}
             />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="Twitter">
-            <Form.Label>Twitter</Form.Label>
             <FormInput
               element="input"
               initialValue={formState.inputs.twitter.value}
@@ -402,14 +333,22 @@ const MoovSubmit = props => {
               placeholder="Twitter"
               validators={[]}
             />
-          </Form.Group>
-        </Form.Row>
-      </Form.Row>
-
-      <Button type="submit" variant="primary" disabled={!formState.isValid}>
-        Valider
-      </Button>
-    </form>
+            <Button
+              type="submit"
+              variant="primary"
+              style={{
+                margin: "50px Auto",
+                textAlign: "center",
+                display: "block"
+              }}
+              disabled={!formState.isValid}
+            >
+              Valider
+            </Button>
+          </form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

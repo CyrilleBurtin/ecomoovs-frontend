@@ -1,0 +1,16 @@
+.FormInput {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+}
+
+.form-control {
+  margin-top: 30px;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #bbb;
+}
+.form-control--invalid {
+  color: red;
+}

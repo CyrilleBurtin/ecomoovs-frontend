@@ -1,16 +1,15 @@
 import React, { useContext } from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
-import "./Login.css";
 import ip from "../../../shared/ip/Ip";
 import { useForm } from "../../../shared/hooks/Form-hook";
-import FormInput from "../../components/FormInput";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import FormInput from "../../../shared/components/FormInput";
 import { AuthContext } from "../../../shared/auth/AuthContext";
 import {
   VALIDATOR_EMAIL,
-  VALIDATOR_PASSWORD
+  VALIDATOR_REQUIRE
 } from "../../../shared/validators/Validators";
-// import { connect } from "react-redux";
+import "../../../shared/css/forms.css";
 
 const Login = props => {
   const Auth = useContext(AuthContext);
@@ -49,9 +48,9 @@ const Login = props => {
   };
 
   return (
-    <Container fluid className="Registration">
+    <Container fluid className="SharedForm">
       <Row>
-        <Col className="RegistrationHeader">
+        <Col className="SharedFormHeader">
           <p className="text-center RegistrationTitle">CONNEXION</p>
         </Col>
       </Row>
@@ -74,13 +73,14 @@ const Login = props => {
               name="password"
               autocomplete="current-password"
               placeholder="Mot de passe"
-              errorText="Email non valide"
-              validators={[VALIDATOR_PASSWORD()]}
+              errorText="Mot de passe non valide"
+              validators={[VALIDATOR_REQUIRE()]}
               onInput={inputHandler}
             />
             <Button
               type="submit"
               variant="primary"
+              style={{ margin:"50px Auto", textAlign:"center", display:"block"}}
               disabled={!formState.isValid}
             >
               Connexion
@@ -92,12 +92,4 @@ const Login = props => {
   );
 };
 
-//output
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onLogin: user => dispatch({ type: "LOGIN", user })
-//   };
-// };
-
 export default Login;
-// export default connect(null, mapDispatchToProps)(Login);

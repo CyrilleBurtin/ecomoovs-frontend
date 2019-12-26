@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
-import { useForm } from "../../../shared/hooks/Form-hook";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+
 import ip from "../../../shared/ip/Ip";
+import { AuthContext } from "../../../shared/auth/AuthContext";
+import { useForm } from "../../../shared/hooks/Form-hook";
+import FormInput from "../../../shared/components/FormInput";
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_EMAIL
 } from "../../../shared/validators/Validators";
-import FormInput from "../../../users/components/FormInput";
-import { AuthContext } from "../../../shared/auth/AuthContext";
+import "../../../shared/css/forms.css";
 
 const AddEvent = () => {
   const Auth = useContext(AuthContext);
@@ -57,8 +59,8 @@ const AddEvent = () => {
       isValid: true
     }
   });
-  console.log("formState", formState);
-  const registrationClickHandler = event => {
+
+  const handleClick = event => {
     event.preventDefault();
 
     fetch(`${ip}/event/`, {
@@ -90,15 +92,15 @@ const AddEvent = () => {
   };
 
   return (
-    <Container fluid className="Registration">
+    <Container fluid className="SharedForm">
       <Row>
-        <Col className="RegistrationHeader">
-          <p className="text-center RegistrationTitle">AJOUTER UN ÉVÉNEMENT</p>
+        <Col className="SharedFormHeader">
+          <p className="text-center SharedFormTitle">AJOUTER UN ÉVÉNEMENT</p>
         </Col>
       </Row>
       <Row>
         <Col className="pt-5 pb-5">
-          <form onSubmit={registrationClickHandler}>
+          <form onSubmit={handleClick}>
             {/* name */}
             <Form.Row>
               <Form.Group as={Col}>

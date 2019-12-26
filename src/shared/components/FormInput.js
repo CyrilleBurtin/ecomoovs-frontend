@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import { validate } from "../../shared/validators/Validators";
+import "./FormInput.css";
 
 const inputReducer = (state, action) => {
   switch (action.type) {
@@ -34,7 +35,6 @@ const FormInput = props => {
   }, [name, value, isValid, onInput]);
 
   const formChangeHandler = event => {
-
     dispatch(
       {
         type: "CHANGE",
@@ -60,13 +60,10 @@ const FormInput = props => {
         onChange={formChangeHandler}
         placeholder={props.placeholder}
         onBlur={touchHandler}
+        className="FormInput"
       />
     ) : props.element === "select" ? (
-      <select
-        name={props.name}
-        onChange={formChangeHandler}
-        type={props.type}
-      >
+      <select name={props.name} onChange={formChangeHandler} type={props.type}>
         <option>France</option>
         <option>Belgique</option>
         <option>Suisse</option>
@@ -80,10 +77,11 @@ const FormInput = props => {
       className={`form-control ${!inputState.isValid &&
         inputState.touched &&
         "form-control--invalid"}`}
-      style={{ marginTop: "50px" }}
     >
       {element}
-      {!inputState.isValid && inputState.touched && <p>{props.errorText}</p>}
+      {!inputState.isValid && inputState.touched ? (
+        <p style={{ marginTop: "5px" }}>{props.errorText}</p>
+      ) : null}
     </div>
   );
 };
