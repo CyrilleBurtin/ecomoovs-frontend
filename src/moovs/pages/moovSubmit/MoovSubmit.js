@@ -69,7 +69,7 @@ const MoovSubmit = () => {
       isValid: false
     },
     tags: {
-      value: "",
+      value: [],
       isValid: false
     },
     image: {
@@ -93,6 +93,11 @@ const MoovSubmit = () => {
   const handleClick = event => {
     event.preventDefault();
 
+    // shapping tags into array with removal of special charatcers space and uppecase
+    let ponctuation = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+    let tags = formState.inputs.tags.value.toLowerCase().trim().split(" ");
+    tags = tags.filter(item => item.length > 2 && item != ponctuation);
+
     const formData = new FormData();
     formData.append("type", formState.inputs.type.value);
     formData.append("name", formState.inputs.name.value);
@@ -107,7 +112,7 @@ const MoovSubmit = () => {
     formData.append("punchline", formState.inputs.punchline.value);
     formData.append("description", formState.inputs.description.value);
     formData.append("regNumber", formState.inputs.regNumber.value);
-    formData.append("tags", formState.inputs.tags.value);
+    formData.append("tags", tags);
     formData.append("image", formState.inputs.image.value);
     formData.append("facebook", formState.inputs.facebook.value);
     formData.append("instagram", formState.inputs.instagram.value);

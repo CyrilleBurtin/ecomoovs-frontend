@@ -8,13 +8,17 @@ const MoovsCards = props => {
     <>
       <CardColumns>
         {props.moovList.map((e, i) => (
-          <Card key={i} className="MoovCards">
+          <Card key={i+1} className="MoovCards">
             <Card.Img variant="top" src={e.img} />
             <Card.Body className="CardBody">
               <Card.Title>
-                {i}. {e.name}
+                {i+1}. {e.name}
               </Card.Title>
               <Card.Text>{e.description}</Card.Text>
+              <Card.Text>{e.location.city}</Card.Text>
+              <Card.Text></Card.Text>
+              <Card.Text>{e.type}</Card.Text>
+
             </Card.Body>
             <Card.Footer>
               <small className="text-muted">{e.punchLine}</small>
