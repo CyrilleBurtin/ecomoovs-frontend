@@ -11,15 +11,20 @@ const NewsCard = props => {
       month: "short"
     }).format(date)} ${date.getFullYear()}`;
   };
-
+  console.log('props', props)
   return (
     <>
       {props.news.map((e, i) => {
         const publishDate = dateGen(e.creationDate);
+        let tags = ""
+       for (const tag of e.tags) {
+           tags = tags + " " + tag
+           console.log(tags)
+        }
         return (
           <Row key={i} className="justify-content-md-center NewsCards">
             <Col className="col-md-5 pl-0 pr-0">
-              <Image src="/images/monkey.jpg" style={{ width: "100%" }} />
+              <Image src={e.image} style={{ width: "100%" }} />
             </Col>
             <Col className="col-md-7 pl-0 pr-0">
               <Card className="p-5 CardContent" key={i}>
@@ -42,6 +47,7 @@ const NewsCard = props => {
                   </Row>
                 </Card.Subtitle>
                 <Card.Title>{e.title}</Card.Title>
+                <Card.Text>{e.description}</Card.Text>
                 <Card.Text>{e.description}</Card.Text>
               </Card>
             </Col>

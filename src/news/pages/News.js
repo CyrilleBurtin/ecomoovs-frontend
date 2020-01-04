@@ -8,13 +8,10 @@ const News = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    const getNews = () => {
-      return fetch(`${ip}/news/`)
-        .then(result => result.json())
-        .then(data => setNews(data))
-        .catch(error => console.log("error", error));
-    };
-    getNews();
+    fetch(`${ip}/news/`)
+      .then(result => result.json())
+      .then(data => setNews(data))
+      .catch(error => console.log("error", error));
   }, []);
 
   return (

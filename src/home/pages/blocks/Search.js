@@ -14,18 +14,23 @@ import { faSearch, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import ip from "../../../shared/ip/Ip";
 
 const Search = () => {
-  const [tags, setTags] = useState("");
-  
-  const searchHanlder = event => {
-      event.preventDefault();
 
-      let ponctuation = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-      
-      let cleanTags = tags.toLowerCase().trim().split(" ");
-      cleanTags = cleanTags.filter(
+  const [tags, setTags] = useState("");
+  const [result, setResult] = useState([]);
+
+  const searchHanlder = event => {
+    event.preventDefault();
+    console.log('toto')
+
+    let ponctuation = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+
+    let cleanTags = tags
+      .toLowerCase()
+      .trim()
+      .split(" ");
+    cleanTags = cleanTags.filter(
       item => item.length > 2 && item !== ponctuation
     );
-
 
     fetch(`${ip}/moovs/findTags`, {
       method: "POST",
@@ -36,7 +41,8 @@ const Search = () => {
         return response.json();
       })
       .then(data => {
-        console.log(data);
+        setResult(data);
+        console.log("dataaaaaaa", data);
       })
       .catch(error => {
         console.log("Request failed", error);
@@ -46,6 +52,12 @@ const Search = () => {
   const inputHandler = event => {
     setTags(event.target.value);
   };
+
+
+  const liste = result.map((e, i) => <div key={i}>{e.name} {e.location.city}</div>);
+
+
+  console.log("liste", liste);
 
   return (
     <Container fluid className="pl-0 pr-0 pb-5 Home">
@@ -62,18 +74,19 @@ const Search = () => {
         </Col>
       </Row>
 
-      <form onSubmit={searchHanlder} type="submit">
-        <input
-          placeholder="Que cherchez vous ?"
-          type="input"
-          onChange={inputHandler}
-        />
-        <button>chercher</button>
-      </form>
-
       <Row style={{ marginTop: 30, justifyContent: "center" }}>
         <Col sm="10" md="5" className="mb-2">
-          <InputGroup style={{ backgroundColor: "#fff" }}>
+          <form type="submit" onSubmit={searchHanlder}>
+            <input
+              placeholder="Que cherchez vous ?"
+              type="input"
+              onChange={inputHandler}
+            />
+            <button >
+              chercher
+            </button>
+          </form>
+          {/* <InputGroup style={{ backgroundColor: "#fff" }}>
             <FormControl placeholder="Que cherchez-vous ?" />
             <DropdownButton
               as={InputGroup.Append}
@@ -86,9 +99,10 @@ const Search = () => {
               <Dropdown.Divider />
               <Dropdown.Item href="#">Separated link</Dropdown.Item>
             </DropdownButton>
-          </InputGroup>
-        </Col>
+          </InputGroup> */}
 
+          {liste}
+        </Col>
         <Col sm="10" md="5" className="mb-2">
           <InputGroup style={{ backgroundColor: "#FFF" }}>
             <FormControl placeholder="Où" />

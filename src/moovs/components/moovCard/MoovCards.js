@@ -3,7 +3,7 @@ import { Card, CardColumns } from "react-bootstrap";
 import "./MoovCards.css";
 
 const MoovsCards = props => {
-  console.log('props.moovList', props.moovList)
+
   return (
     <>
       <CardColumns>

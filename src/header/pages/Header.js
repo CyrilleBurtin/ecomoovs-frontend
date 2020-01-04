@@ -36,9 +36,8 @@ const Header = props => {
             {Auth.isLoggedIn && Auth.user.admin && (
               <>
                 <NavigationItem link="/backOffice">BackOffice</NavigationItem>
-                <NavigationItem link="/backoffice/addNews">
-                  Ajouter une actus
-                </NavigationItem>
+                <NavigationItem link="/addnews">Ajouter une actus</NavigationItem>
+                <NavigationItem link="/addevent">Ajouter un évent</NavigationItem>
               </>
             )}
             {/* login and subscribe menu display handler */}

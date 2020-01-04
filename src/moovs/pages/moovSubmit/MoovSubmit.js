@@ -96,7 +96,7 @@ const MoovSubmit = () => {
     // shapping tags into array with removal of special charatcers space and uppecase
     let ponctuation = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
     let tags = formState.inputs.tags.value.toLowerCase().trim().split(" ");
-    tags = tags.filter(item => item.length > 2 && item != ponctuation);
+    tags = tags.filter(item => item.length > 2 && item !== ponctuation);
 
     const formData = new FormData();
     formData.append("type", formState.inputs.type.value);
@@ -139,36 +139,37 @@ const MoovSubmit = () => {
     <Container fluid className="SharedForm">
       <Row>
         <Col className="SharedFormHeader">
-          <p className="text-center SharedFormTitle">INSCRIPTION</p>
+          <p className="text-center SharedFormTitle">AJOUTER UN MOOV</p>
         </Col>
       </Row>
       <Row>
         <Col>
           <form onSubmit={handleClick}>
             <FormInput
+              name="type"
               element="input"
               initialValue={formState.inputs.type.value}
               initialValidate={formState.inputs.type.isValid}
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Type non valide"
               type="text"
-              name="type"
               onInput={inputHandler}
               placeholder="Type"
             />
 
             <FormInput
+              name="name"
               element="input"
               initialValue={formState.inputs.name.value}
               initialValidate={formState.inputs.name.isValid}
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Nom non valide"
               type="text"
-              name="name"
               onInput={inputHandler}
               placeholder="Nom"
             />
             <FormInput
+              name="address"
               element="input"
               initialValue={formState.inputs.address.value}
               initialValidate={formState.inputs.address.isValid}
@@ -176,129 +177,128 @@ const MoovSubmit = () => {
               errorText="Adresse non valide"
               type="text"
               zipcode
-              name="address"
               onInput={inputHandler}
               placeholder="adresse"
             />
             <FormInput
+              name="zipcode"
               element="input"
               initialValue={formState.inputs.zipcode.value}
               initialValidate={formState.inputs.zipcode.isValid}
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Code postal non valide"
               type="text"
-              name="zipcode"
               onInput={inputHandler}
               placeholder="Code postal"
             />
             <FormInput
+              name="city"
               element="input"
               initialValue={formState.inputs.city.value}
               initialValidate={formState.inputs.city.isValid}
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Ville non valide"
               type="text"
-              name="city"
               onInput={inputHandler}
               placeholder="Ville"
             />
             <FormInput
+              name="country"
               element="select"
               initialValue={formState.inputs.country.value}
               initialValidate={formState.inputs.country.isValid}
               autocomlpete="country"
               type="select"
-              name="country"
               onInput={inputHandler}
               validators={[]}
             />
             <FormInput
+              name="email"
               element="input"
               initialValue={formState.inputs.email.value}
               initialValidate={formState.inputs.email.isValid}
               validators={[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
               errorText="Email non valide"
               type="email"
-              name="email"
               onInput={inputHandler}
               placeholder="Email"
             />
             <FormInput
+              name="phone"
               element="input"
               initialValue={formState.inputs.phone.value}
               initialValidate={formState.inputs.phone.isValid}
               errorText=""
               type="tel"
-              name="phone"
               onInput={inputHandler}
               placeholder="Téléphone"
               validators={[]}
             />
             <FormInput
+              name="url"
               element="input"
               initialValue={formState.inputs.url.value}
               initialValidate={formState.inputs.url.isValid}
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Site web non valide"
               type="text"
-              name="url"
               onInput={inputHandler}
               placeholder="Votre site web"
             />
             <FormInput
+              name="title"
               element="input"
               initialValue={formState.inputs.title.value}
               initialValidate={formState.inputs.title.isValid}
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Titre non valide"
               type="text"
-              name="title"
               onInput={inputHandler}
               placeholder="Titre"
             />
             <FormInput
+              name="punchline"
               element="input"
               initialValue={formState.inputs.punchline.value}
               initialValidate={formState.inputs.punchline.isValid}
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Punchline non valide"
               type="text"
-              name="punchline"
               onInput={inputHandler}
               placeholder="Punchline"
             />
             <FormInput
+              name="description"
               element="input"
               initialValue={formState.inputs.description.value}
               initialValidate={formState.inputs.description.isValid}
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Description non valide"
               type="text"
-              name="description"
               onInput={inputHandler}
               placeholder="Description"
             />
             <FormInput
+              name="regNumber"
               element="input"
               initialValue={formState.inputs.regNumber.value}
               initialValidate={formState.inputs.regNumber.isValid}
               errorText="Numéro de société non valide"
               type="text"
-              name="regNumber"
               onInput={inputHandler}
               placeholder="RegNumber"
               validators={[]}
             />
             <FormInput
+              name="tags"
               element="input"
               initialValue={formState.inputs.tags.value}
               initialValidate={formState.inputs.tags.isValid}
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Tags non valides"
               type="text"
-              name="tags"
               onInput={inputHandler}
-              placeholder="Tags"
+              placeholder="Tags ( mots séparés par un espace )"
             />
             <ImageUpload
               id="image"
@@ -306,34 +306,34 @@ const MoovSubmit = () => {
               errorText="Votre Image n'est pas valide"
             />
             <FormInput
+              name="facebook"
               element="input"
               initialValue={formState.inputs.facebook.value}
               initialValidate={formState.inputs.facebook.isValid}
               errorText=""
               type="text"
-              name="facebook"
               onInput={inputHandler}
               placeholder="Facebook"
               validators={[]}
             />
             <FormInput
+              name="instagram"
               element="input"
               initialValue={formState.inputs.instagram.value}
               initialValidate={formState.inputs.instagram.isValid}
               errorText=""
               type="text"
-              name="instagram"
               onInput={inputHandler}
               placeholder="Instagram"
               validators={[]}
             />
             <FormInput
+              name="twitter"
               element="input"
               initialValue={formState.inputs.twitter.value}
               initialValidate={formState.inputs.twitter.isValid}
               errorText=""
               type="text"
-              name="twitter"
               onInput={inputHandler}
               placeholder="Twitter"
               validators={[]}

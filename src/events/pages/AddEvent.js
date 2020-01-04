@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
-import ip from "../../../shared/ip/Ip";
-import { AuthContext } from "../../../shared/auth/AuthContext";
-import { useForm } from "../../../shared/hooks/Form-hook";
-import FormInput from "../../../shared/components/FormInput";
+import ip from "../../shared/ip/Ip";
+
+import { AuthContext } from "../../shared/auth/AuthContext";
+import { useForm } from "../../shared/hooks/Form-hook";
+import FormInput from "../../shared/components/FormInput";
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_EMAIL
-} from "../../../shared/validators/Validators";
-import "../../../shared/css/forms.css";
+} from "../../shared/validators/Validators";
+import "../../shared/css/forms.css";
 
 const AddEvent = () => {
   const Auth = useContext(AuthContext);

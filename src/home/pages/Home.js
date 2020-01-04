@@ -5,7 +5,7 @@ import Search from "./blocks/Search";
 import Explain from "./blocks/Explain";
 import Last from "./blocks/Last";
 import Quotations from "./blocks/Quotations";
-import Next from "./blocks/Next";
+import NextEvents from "./blocks/NextEvents";
 import Help from "./blocks/Help";
 
 import "./Home.css";
@@ -29,7 +29,7 @@ const Home = () => {
       <Explain />
       <Last last={moovs} />
       <Quotations />
-      <Next next={moovs} />
+      <NextEvents nextEvents={moovs} />
       <Help />
     </>
   );
