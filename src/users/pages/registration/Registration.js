@@ -55,11 +55,7 @@ const NewUser = props => {
     cgu: {
       value: 0,
       isValid: false
-    },
-    // image: {
-    //   value: "",
-    //   isValid: false
-    // }
+    }
   });
   console.log('formState', formState)
 
