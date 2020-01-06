@@ -15,7 +15,6 @@ import "../../../shared/css/forms.css";
 
 const NewUser = props => {
   const Auth = useContext(AuthContext);
-
   const [formState, inputHandler] = useForm({
     firstname: {
       value: "",
@@ -57,11 +56,12 @@ const NewUser = props => {
       value: 0,
       isValid: false
     },
-    image: {
-      value: "",
-      isValid: false
-    }
+    // image: {
+    //   value: "",
+    //   isValid: false
+    // }
   });
+  console.log('formState', formState)
 
   const handleCLick = event => {
     event.preventDefault();
