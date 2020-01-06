@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import ip from "../../../shared/ip/Ip";
-
+ 
 const Search = () => {
 
   const [tags, setTags] = useState("");

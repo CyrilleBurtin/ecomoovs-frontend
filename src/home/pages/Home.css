@@ -1,5 +1,5 @@
 .Home{
-    background-image: url('/images/homeBg.webp');
+    background-image: url('/images/home-bg.jpg');
     background-size: cover;
     background-position: top;
     padding-top: 150px;
@@ -39,7 +39,7 @@ color: #00e689;
 }
 
 .bottom{
-    background-image: url('/images/together.webp');
+    background-image: url('/images/together.jpg');
     background-position: center center;
     background-size: cover;
 }
