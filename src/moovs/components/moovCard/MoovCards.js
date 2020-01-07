@@ -1,12 +1,12 @@
 import React from "react";
-import { Card, CardColumns } from "react-bootstrap";
+import { Card, CardDeck } from "react-bootstrap";
 import "./MoovCards.css";
 
 const MoovsCards = props => {
-
+  console.log('props', props)
   return (
     <>
-      <CardColumns>
+      <CardDeck>
         {props.moovList.map((e, i) => (
           <Card key={i+1} className="MoovCards">
             <Card.Img variant="top" src={e.img} />
@@ -21,11 +21,11 @@ const MoovsCards = props => {
 
             </Card.Body>
             <Card.Footer>
-              <small className="text-muted">{e.punchLine}</small>
+              <small className="text-muted">{e.email}</small>
             </Card.Footer>
           </Card>
         ))}
-      </CardColumns>
+      </CardDeck>
     </>
   );
 };

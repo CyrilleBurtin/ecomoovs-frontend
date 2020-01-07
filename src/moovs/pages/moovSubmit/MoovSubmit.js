@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 import ip from "../../../shared/ip/Ip";
@@ -11,9 +11,12 @@ import {
   VALIDATOR_EMAIL
 } from "../../../shared/validators/Validators";
 import "../../../shared/css/forms.css";
+import Loading from "../../../shared/components/Loading";
 
-const MoovSubmit = () => {
+const MoovSubmit = (props) => {
   const Auth = useContext(AuthContext);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formState, inputHandler] = useForm({
     type: {
@@ -92,10 +95,13 @@ const MoovSubmit = () => {
 
   const handleClick = event => {
     event.preventDefault();
-
+    setIsLoading(true);
     // shapping tags into array with removal of special charatcers space and uppecase
     let ponctuation = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-    let tags = formState.inputs.tags.value.toLowerCase().trim().split(" ");
+    let tags = formState.inputs.tags.value
+      .toLowerCase()
+      .trim()
+      .split(" ");
     tags = tags.filter(item => item.length > 2 && item !== ponctuation);
 
     const formData = new FormData();
@@ -129,6 +135,8 @@ const MoovSubmit = () => {
       })
       .then(data => {
         console.log(data);
+        setIsLoading(false);
+        props.history.push("/home");
       })
       .catch(error => {
         console.log("Request failed", error);
@@ -139,7 +147,7 @@ const MoovSubmit = () => {
     <Container fluid className="SharedForm">
       <Row>
         <Col className="SharedFormHeader">
-          <p className="text-center SharedFormTitle">AJOUTER UN MOOV</p>
+          <p className="text-center SharedFormTitle">AJOUTER UN MOOV</p>          
         </Col>
       </Row>
       <Row>
@@ -338,6 +346,7 @@ const MoovSubmit = () => {
               placeholder="Twitter"
               validators={[]}
             />
+              <div style={{position:"absolute", left:"50%", transform: "translate(-50%, -50%)" }}>{isLoading && <Loading />}</div>
             <Button
               type="submit"
               variant="primary"
