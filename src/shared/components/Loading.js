@@ -1,17 +1,20 @@
 import React from "react";
 import "./Loading.css";
 
-const Loading = () => {
+const Loading = props => {
   return (
-    <div className="lds-roller">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div className="loadingBg">
+      <p>{props.msg}</p>
+      <div className="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   );
 };

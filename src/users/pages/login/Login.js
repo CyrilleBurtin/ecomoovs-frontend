@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 import ip from "../../../shared/ip/Ip";
@@ -10,10 +10,11 @@ import {
   VALIDATOR_REQUIRE
 } from "../../../shared/validators/Validators";
 import "../../../shared/css/forms.css";
+import Loading from "../../../shared/components/Loading";
 
 const Login = props => {
   const Auth = useContext(AuthContext);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [formState, inputHandler] = useForm({
     email: {
       value: "",
@@ -27,6 +28,7 @@ const Login = props => {
 
   const loginHandler = event => {
     event.preventDefault();
+    setIsLoading(true);
     fetch(`${ip}/users/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -39,6 +41,7 @@ const Login = props => {
         return response.json();
       })
       .then(token => {
+        setIsLoading(false);
         Auth.login(token);
         props.history.push("/home");
       })
@@ -77,10 +80,15 @@ const Login = props => {
               validators={[VALIDATOR_REQUIRE()]}
               onInput={inputHandler}
             />
+            {isLoading && <Loading msg="Connexion en cours" />}
             <Button
               type="submit"
               variant="primary"
-              style={{ margin:"50px Auto", textAlign:"center", display:"block"}}
+              style={{
+                margin: "50px Auto",
+                textAlign: "center",
+                display: "block"
+              }}
               disabled={!formState.isValid}
             >
               Connexion

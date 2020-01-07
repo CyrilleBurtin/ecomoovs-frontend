@@ -13,7 +13,7 @@ import {
 import "../../../shared/css/forms.css";
 import Loading from "../../../shared/components/Loading";
 
-const MoovSubmit = (props) => {
+const MoovSubmit = props => {
   const Auth = useContext(AuthContext);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -147,7 +147,7 @@ const MoovSubmit = (props) => {
     <Container fluid className="SharedForm">
       <Row>
         <Col className="SharedFormHeader">
-          <p className="text-center SharedFormTitle">AJOUTER UN MOOV</p>          
+          <p className="text-center SharedFormTitle">AJOUTER UN MOOV</p>
         </Col>
       </Row>
       <Row>
@@ -346,7 +346,7 @@ const MoovSubmit = (props) => {
               placeholder="Twitter"
               validators={[]}
             />
-              <div style={{position:"absolute", left:"50%", transform: "translate(-50%, -50%)" }}>{isLoading && <Loading />}</div>
+            {isLoading && <Loading msg="Enregistrement du moov en cours ..." />}
             <Button
               type="submit"
               variant="primary"

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 import ip from "../../../shared/ip/Ip";
@@ -10,11 +10,12 @@ import {
   VALIDATOR_EMAIL,
   VALIDATOR_PASSWORD
 } from "../../../shared/validators/Validators";
-
+import Loading from "../../../shared/components/Loading";
 import "../../../shared/css/forms.css";
 
 const NewUser = props => {
   const Auth = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [formState, inputHandler] = useForm({
     firstname: {
       value: "",
@@ -57,11 +58,11 @@ const NewUser = props => {
       isValid: false
     }
   });
-  console.log('formState', formState)
+  console.log("formState", formState);
 
   const handleCLick = event => {
     event.preventDefault();
-
+    setIsLoading(true);
     fetch(`${ip}/users/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -82,6 +83,7 @@ const NewUser = props => {
       })
       .then(data => {
         console.log("data", data);
+        setIsLoading(false);
         Auth.login(data.token);
         props.history.push("/home");
       })
@@ -99,10 +101,7 @@ const NewUser = props => {
       </Row>
       <Row>
         <Col>
-          <form
-            encType="multipart/form-data"
-            onSubmit={handleCLick}
-          >
+          <form encType="multipart/form-data" onSubmit={handleCLick}>
             <FormInput
               autocomplete="given-name"
               element="input"
@@ -208,17 +207,18 @@ const NewUser = props => {
               onInput={inputHandler}
             />
             <div>
-            <FormInput
-              element="input"
-              initialValue={formState.inputs.cgu.value}
-              initialValidate={formState.inputs.cgu.isValid}
-              type="checkbox"
-              name="cgu"
-              validators={[VALIDATOR_REQUIRE()]}
-              onInput={inputHandler}              
-            />
-            <label>J'ai lu et accepte les CGU</label>
+              <FormInput
+                element="input"
+                initialValue={formState.inputs.cgu.value}
+                initialValidate={formState.inputs.cgu.isValid}
+                type="checkbox"
+                name="cgu"
+                validators={[VALIDATOR_REQUIRE()]}
+                onInput={inputHandler}
+              />
+              <label>J'ai lu et accepte les CGU</label>
             </div>
+            {isLoading && <Loading msg="Inscription en cours..." />}
             <Button
               type="submit"
               variant="primary"
