@@ -13,7 +13,7 @@ import "../../../shared/css/forms.css";
 
 const AddNews = () => {
   const Auth = useContext(AuthContext);
-
+console.log('Auth', Auth)
   const [formState, inputHandler] = useForm({
     author: {
       value: "",

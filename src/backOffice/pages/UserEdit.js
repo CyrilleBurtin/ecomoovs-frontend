@@ -1,75 +1,80 @@
 import React, { useState, useContext } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
-import ip from "../../../shared/ip/Ip";
-import Loading from "../../../shared/components/Loading";
-import { useForm } from "../../../shared/hooks/Form-hook";
-import FormInput from "../../../shared/components/FormInput";
-import { AuthContext } from "../../../shared/auth/AuthContext";
+import ip from "../../shared/ip/Ip";
+import { useForm } from "../../shared/hooks/Form-hook";
+import FormInput from "../../shared/components/FormInput";
+import { AuthContext } from "../../shared/auth/AuthContext";
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_EMAIL,
   VALIDATOR_PASSWORD
-} from "../../../shared/validators/Validators";
-import "../../../shared/css/forms.css";
+} from "../../shared/validators/Validators";
+import Loading from "../../shared/components/Loading";
+import "../../shared/css/forms.css";
 
-const NewUser = props => {
+const UserEdit = props => {
+
   const Auth = useContext(AuthContext);
+ 
+
   const [isLoading, setIsLoading] = useState(false);
+
   const [formState, inputHandler] = useForm({
     firstname: {
-      value: "",
-      isValid: false
+      value: Auth.user.firstname,
+      isValid: true
     },
     lastname: {
-      value: "",
-      isValid: false
+      value: Auth.user.lastname,
+      isValid: true
     },
     email: {
-      value: "",
-      isValid: false
+      value: Auth.user.email,
+      isValid: true
     },
     password: {
-      value: "",
-      isValid: false
+      value: Auth.user.password,
+      isValid: true
     },
     phone: {
-      value: "",
-      isValid: false
+      value: Auth.user.phone,
+      isValid: true
     },
     address: {
-      value: "",
-      isValid: false
+      value: Auth.user.location.address,
+      isValid: true
     },
     zipcode: {
-      value: "",
-      isValid: false
+      value: Auth.user.location.zipcode,
+      isValid: true
     },
     city: {
-      value: "",
-      isValid: false
+      value: Auth.user.location.city,
+      isValid: true
     },
     country: {
-      value: "France",
+      value: Auth.user.location.country,
       isValid: true
     },
     cgu: {
-      value: 0,
-      isValid: false
+      value: 1,
+      isValid: true
     }
-  },false);
-
+  },
+  true
+  );
+console.log('formState', formState)
   const handleCLick = event => {
     event.preventDefault();
     setIsLoading(true);
-    fetch(`${ip}/users/`, {
-      method: "POST",
+    fetch(`${ip}/users/${Auth.user._id}`, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+      body: JSON.stringify({        
         firstname: formState.inputs.firstname.value,
         lastname: formState.inputs.lastname.value,
         email: formState.inputs.email.value,
-        password: formState.inputs.password.value,
         phone: formState.inputs.phone.value,
         address: formState.inputs.address.value,
         zipcode: formState.inputs.zipcode.value,
@@ -81,9 +86,9 @@ const NewUser = props => {
         return response.json();
       })
       .then(data => {
+        localStorage.setItem("AUTH_TOKEN", JSON.stringify(data));
         setIsLoading(false);
-        Auth.login(data.token);
-        props.history.push("/home");
+        Auth.login(data.token);   
       })
       .catch(error => {
         console.log("Request failed", error);
@@ -94,7 +99,7 @@ const NewUser = props => {
     <Container fluid className="SharedForm">
       <Row>
         <Col className="SharedFormHeader">
-          <p className="text-center SharedFormTitle">INSCRIPTION</p>
+          <p className="text-center SharedFormTitle">Mes Infos</p>
         </Col>
       </Row>
       <Row>
@@ -139,7 +144,7 @@ const NewUser = props => {
             <FormInput
               autocomplete="new-password"
               element="input"
-              initialValue={formState.inputs.password.value}
+              initialValue=""
               initialValidate={formState.inputs.password.isValid}
               type="password"
               name="password"
@@ -204,18 +209,7 @@ const NewUser = props => {
               name="country"
               onInput={inputHandler}
             />
-            <div>
-              <FormInput
-                element="input"
-                initialValue={formState.inputs.cgu.value}
-                initialValidate={formState.inputs.cgu.isValid}
-                type="checkbox"
-                name="cgu"
-                validators={[VALIDATOR_REQUIRE()]}
-                onInput={inputHandler}
-              />
-              <label>J'ai lu et accepte les CGU</label>
-            </div>
+            
             {isLoading && <Loading msg="Inscription en cours..." />}
             <Button
               type="submit"
@@ -236,4 +230,4 @@ const NewUser = props => {
   );
 };
 
-export default NewUser;
+export default UserEdit;

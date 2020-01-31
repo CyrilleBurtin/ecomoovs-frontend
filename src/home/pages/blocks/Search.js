@@ -1,27 +1,14 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  InputGroup,
-  FormControl,
-  Dropdown,
-  DropdownButton,
-  Button
-} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import ip from "../../../shared/ip/Ip";
- 
-const Search = () => {
 
+const Search = () => {
   const [tags, setTags] = useState("");
   const [result, setResult] = useState([]);
 
   const searchHanlder = event => {
     event.preventDefault();
-    console.log('toto')
-
     let ponctuation = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
     let cleanTags = tags
@@ -42,7 +29,6 @@ const Search = () => {
       })
       .then(data => {
         setResult(data);
-        console.log("dataaaaaaa", data);
       })
       .catch(error => {
         console.log("Request failed", error);
@@ -53,86 +39,95 @@ const Search = () => {
     setTags(event.target.value);
   };
 
-
-  const liste = result.map((e, i) => <div key={i}>{e.name} {e.location.city}</div>);
-
-
-  console.log("liste", liste);
+  const liste = result.map((e, i) => (
+    <div key={i}>
+      {e.name} {e.location.city}
+    </div>
+  ));
 
   return (
-    <Container fluid className="pl-0 pr-0 pb-5 Home">
-      <Row>
-        <Col>
-          <h1 className="H1Small">
-            Trouver <span className="H1Strong">Magasin zéro déchet </span>
-            près de <span className="H1Strong">Annecy</span>
-          </h1>
+    <div className="pl-0 pr-0 pb-5 Home">
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <h1 className="H1Small" style={{}}>
+          Trouver <span className="H1Strong">Magasin zéro déchet </span>
+          près de <span className="H1Strong">Annecy</span>
+        </h1>
+        <h4 className="H4" style={{}}>
+          Trouvez des initiatives durables près de chez vous
+        </h4>
+      </div>
 
-          <h4 className="H4">
-            Trouvez des initiatives durables près de chez vous
-          </h4>
-        </Col>
-      </Row>
+      <form onSubmit={searchHanlder}>
+        <div
+          style={{
+            marginTop: 30,
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "row"
+          }}
+        >
+          <input
+            placeholder="Que cherchez vous ?"
+            type="input"
+            onChange={inputHandler}
+            style={{ margin: "0 20px" }}
+          />
 
-      <Row style={{ marginTop: 30, justifyContent: "center" }}>
-        <Col sm="10" md="5" className="mb-2">
-          <form type="submit" onSubmit={searchHanlder}>
-            <input
-              placeholder="Que cherchez vous ?"
-              type="input"
-              onChange={inputHandler}
-            />
-            <button >
-              chercher
-            </button>
-          </form>
-          {/* <InputGroup style={{ backgroundColor: "#fff" }}>
-            <FormControl placeholder="Que cherchez-vous ?" />
-            <DropdownButton
-              as={InputGroup.Append}
-              variant="outline-secondary"
-              title="Catégories"
-            >
-              <Dropdown.Item href="#">Action</Dropdown.Item>
-              <Dropdown.Item href="#">Another action</Dropdown.Item>
-              <Dropdown.Item href="#">Something else here</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item href="#">Separated link</Dropdown.Item>
-            </DropdownButton>
-          </InputGroup> */}
+          <input
+            placeholder="Où"
+            type="input"
+            // onChange={whereHandler}
+            style={{ backgroundColor: "#FFF" }}
+          />
 
-          {liste}
-        </Col>
-        <Col sm="10" md="5" className="mb-2">
-          <InputGroup style={{ backgroundColor: "#FFF" }}>
-            <FormControl placeholder="Où" />
-            <InputGroup.Append>
-              <Button variant="outline-secondary">
-                ME LOCALISER{" "}
-                <FontAwesomeIcon icon={faMapMarkerAlt} color="#77eebe" />{" "}
-              </Button>
-              <Button
-                variant="outline-secondary"
-                style={{ backgroundColor: "#77eebe" }}
-              >
-                <FontAwesomeIcon icon={faSearch} color="#fff" />
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
-        </Col>
-      </Row>
+          <button
+            style={{ backgroundColor: "#FFF" }}
+            variant="outline-secondary"
+          >
+            ME LOCALISER{" "}
+            <FontAwesomeIcon icon={faMapMarkerAlt} color="#77eebe" />{" "}
+          </button>
 
-      <Row className="justify-content-center">
+          <button
+            variant="outline-secondary"
+            style={{ backgroundColor: "#77eebe" }}
+          >
+            <FontAwesomeIcon icon={faSearch} color="#fff" />
+          </button>
+        </div>
+        <br />
+        <button type="submit">chercher</button>
+      </form>
+
+      <div
+        style={{
+          backgroundColor: "#fff",
+          display: "inline-flex",
+          flexFlow: "column wrap",
+          justifyContent: "spaceBetween",
+          width: "50%",
+          margin:"auto",
+          textAlign: "center"
+        }}
+      >
+        {liste}
+      </div>
+
+      <div style={{ display: "flex" }} className="justify-content-center">
         <div toto="Navlink" to="/moovsList" className="activeStyle default">
-          <Button
-            className="rounded-0 mt-5 p-3 font-weight-bold border-0"
-            style={{ backgroundColor: "#00e689" }}
+          <button
+            className="mt-5 p-3 font-weight-bold border-0"
+            style={{
+              backgroundColor: "#00e689",
+              color: "#fff",
+              borderRadius: "7px"
+            }}
           >
             SOUMETTRE UNE ACTION
-          </Button>
+          </button>
         </div>
-      </Row>
-    </Container>
+      </div>
+    </div>
   );
 };
 export default Search;

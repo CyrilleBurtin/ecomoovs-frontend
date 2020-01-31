@@ -1,15 +1,16 @@
 import React from 'react'
-import { Container, Row, Button } from 'react-bootstrap'
 import MoovCards from '../../../moovs/components/moovCard/MoovCards'
 
 const Last = (props) => 
 
-    <Container fluid>
+    <div>
         <p className="mt-5" style={{ fontSize: 60, textAlign: "center", fontWeight: "bolder" }}>Les dernières initiatives</p>
-        <MoovCards moovList={props.last} />
-        <Row className="justify-content-center">
-            <Button className="rounded-0 mt-5 p-3 font-weight-bold border-0" style={{ backgroundColor: "#00e689" }}>En voir plus</Button>
-        </Row>
-    </Container>
+        <div style={{display:'flex', flexWrap: 'wrap'}}>
+            <MoovCards moovList={props.last} />
+        </div>
+        <div style={{display:'flex'}} className="justify-content-center">
+            <button className="rounded-0 mt-5 p-3 font-weight-bold border-0" style={{ backgroundColor: "#00e689" }}>En voir plus</button>
+        </div>
+    </div>
 
 export default Last

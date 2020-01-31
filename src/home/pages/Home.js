@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import ip from "../../shared/ip/Ip";
+import React, { useState, useEffect } from 'react';
+import ip from '../../shared/ip/Ip';
 
-import Search from "./blocks/Search";
-import Explain from "./blocks/Explain";
-import Last from "./blocks/Last";
-import Quotations from "./blocks/Quotations";
-import NextEvents from "./blocks/NextEvents";
-import Help from "./blocks/Help";
+import Search from './blocks/Search';
+import Explain from './blocks/Explain';
+import Last from './blocks/Last';
+import Quotations from './blocks/Quotations';
+import NextEvents from './blocks/NextEvents';
+import Help from './blocks/Help';
 
-import "./Home.css";
+import './Home.css';
 
 const Home = () => {
   const [moovs, setMoovs] = useState([]);

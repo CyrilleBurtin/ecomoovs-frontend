@@ -11,7 +11,7 @@ const NewsCard = props => {
       month: "short"
     }).format(date)} ${date.getFullYear()}`;
   };
-  console.log('props', props)
+
   return (
     <>
       {props.news.map((e, i) => {
@@ -19,7 +19,6 @@ const NewsCard = props => {
         let tags = ""
        for (const tag of e.tags) {
            tags = tags + " " + tag
-           console.log(tags)
         }
         return (
           <Row key={i} className="justify-content-md-center NewsCards">

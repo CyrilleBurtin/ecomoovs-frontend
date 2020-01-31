@@ -62,6 +62,7 @@ const FormInput = props => {
         placeholder={props.placeholder}
         onBlur={touchHandler}
         className="FormInput"
+        value={props.initialValue}
       />
     ) : props.element === "select" ? (
       <select name={props.name} onChange={formChangeHandler} type={props.type}>

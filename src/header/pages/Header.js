@@ -38,6 +38,7 @@ const Header = props => {
                 <NavigationItem link="/backOffice">BackOffice</NavigationItem>
                 <NavigationItem link="/addnews">Ajouter une actus</NavigationItem>
                 <NavigationItem link="/addevent">Ajouter un évent</NavigationItem>
+                <NavigationItem link="/info-du-compte">Information du compte</NavigationItem>
               </>
             )}
             {/* login and subscribe menu display handler */}
