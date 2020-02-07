@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../shared/auth/AuthContext';
-
+import BlueButton from '../../shared/uiElements/BlueButton';
 import ip from '../../shared/ip/Ip';
 
-const MyMoovs = () => {
+const MyMoovs = props => {
   const user = useContext(AuthContext);
 
   const [myMoovs, setMyMoovs] = useState([]);
 
-
   useEffect(() => {
     const getMyMoovs = () => {
-
       return fetch(`${ip}/moovs/myMoovs/${user.user._id}`)
         .then(response => response.json())
         .then(data => setMyMoovs(data))
@@ -23,28 +21,33 @@ const MyMoovs = () => {
   }, [user.user._id]);
 
   const deleteMoovHandler = moov => {
-    console.log('moov', moov.moov.img.public_id)
-    fetch(`${ip}/moovs/${moov.moov._id}/${moov.moov.img.public_id}`, { method: 'delete' })
-    .then (response => response.json())
-    .then(console.log('moov deleted'))
+    console.log('moov', moov.moov.img.public_id);
+    fetch(`${ip}/moovs/${moov.moov._id}/${moov.moov.img.public_id}`, {
+      method: 'delete'
+    })
+      .then(response => response.json())
+      .then(console.log('moov deleted'));
   };
 
   let MyMoovsList = myMoovs.map((e, i) => (
     <div style={{ display: 'flex' }} key={i}>
-      <div style={{ width: '20%' }}>{e.name}</div>
-      <div style={{ width: '20%' }}>{e._id}</div>
-      <button>Edit</button>
-      <button
-        style={{ marginLeft: '1%' }}
-        onClick={() => deleteMoovHandler({ moov: e })}
-      >
-        Delete
-      </button>
+      <div style={{ width: '15%' }}>{e.name}</div>
+      <div style={{ width: '15%' }}>{e.type}</div>
+      <BlueButton click={() => props.editMoov({ moov: e })}>Edit</BlueButton>
+      <BlueButton click={e => deleteMoovHandler(e.moov)}>Delete</BlueButton>
     </div>
   ));
 
-  console.log('MyMoovsList', MyMoovsList);
-  return MyMoovsList;
+  return (
+    <>
+      <div>
+        <h1 style={{ backgroundColor: '#eee', textAlign: 'center' }}>
+          Liste de mes Moovs
+        </h1>
+      </div>
+      {MyMoovsList}
+    </>
+  );
 };
 
 export default MyMoovs;

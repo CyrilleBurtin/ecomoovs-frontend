@@ -7,16 +7,14 @@ import FormInput from "../../shared/components/FormInput";
 import { AuthContext } from "../../shared/auth/AuthContext";
 import {
   VALIDATOR_REQUIRE,
-  VALIDATOR_EMAIL,
-  VALIDATOR_PASSWORD
+  VALIDATOR_EMAIL
 } from "../../shared/validators/Validators";
 import Loading from "../../shared/components/Loading";
 import "../../shared/css/forms.css";
 
-const UserEdit = props => {
+const UserEdit = () => {
 
   const Auth = useContext(AuthContext);
- 
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,11 +30,7 @@ const UserEdit = props => {
     email: {
       value: Auth.user.email,
       isValid: true
-    },
-    password: {
-      value: Auth.user.password,
-      isValid: true
-    },
+    },    
     phone: {
       value: Auth.user.phone,
       isValid: true
@@ -64,7 +58,7 @@ const UserEdit = props => {
   },
   true
   );
-console.log('formState', formState)
+
   const handleCLick = event => {
     event.preventDefault();
     setIsLoading(true);
@@ -99,7 +93,7 @@ console.log('formState', formState)
     <Container fluid className="SharedForm">
       <Row>
         <Col className="SharedFormHeader">
-          <p className="text-center SharedFormTitle">Mes Infos</p>
+          <p className="text-center SharedFormTitle">Mon compte</p>
         </Col>
       </Row>
       <Row>
@@ -140,19 +134,7 @@ console.log('formState', formState)
               validators={[VALIDATOR_EMAIL()]}
               errorText="email non valide"
               onInput={inputHandler}
-            />
-            <FormInput
-              autocomplete="new-password"
-              element="input"
-              initialValue=""
-              initialValidate={formState.inputs.password.isValid}
-              type="password"
-              name="password"
-              placeholder="mot de passe"
-              validators={[VALIDATOR_REQUIRE(), VALIDATOR_PASSWORD()]}
-              errorText="Non valide : 10 à 20 caractères avec majuscule, chiffre, caractère spéciaux @$!%*?& "
-              onInput={inputHandler}
-            />
+            />            
             <FormInput
               autocomplete="tel"
               element="input"
@@ -221,7 +203,7 @@ console.log('formState', formState)
               }}
               disabled={!formState.isValid}
             >
-              S'inscrire
+              Enregister les modifications
             </Button>
           </form>
         </Col>

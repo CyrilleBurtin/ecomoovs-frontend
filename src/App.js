@@ -18,6 +18,7 @@ import AddEvent from './events/pages/AddEvent';
 import UserEdit from './backOffice/pages/UserEdit';
 import MoovSubmit from './moovs/pages/moovSubmit/MoovSubmit';
 import Footer from './footer/pages/Footer';
+import EventsList from './events/pages/EventsList';
 
 
 const App = props => {
@@ -32,6 +33,7 @@ const App = props => {
           <Route path='/home' component={Home} />
           <Route path='/annuaire-des-actions' component={MoovsList} />
           <Route path='/actus' component={News} />
+          <Route path='/events' component={EventsList} />
           <Route path='/inscription' component={Registration} />
           <Route path='/connexion' component={Login} />
           <Route path='/backOffice' component={BackOffice} />

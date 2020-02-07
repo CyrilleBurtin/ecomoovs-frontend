@@ -1,9 +1,22 @@
 .Home{
+    padding-top: 10%;
+}
+
+.Home::after{
+    content: "";
     background-image: url('/images/home-bg.jpg');
     background-size: cover;
     background-position: top;
-    padding-top: 150px;
+    opacity: 0.75;
+    top: 0;
+    left: 0;
+    bottom:0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+
 }
+
 .H1Small{
     text-align: center;
     margin-bottom: 20;
@@ -42,4 +55,19 @@ color: #00e689;
     background-image: url('/images/together.jpg');
     background-position: center center;
     background-size: cover;
+}
+
+.Home input{
+    background-color: #FFF;
+    min-width: ;idth: 250px;
+    width: 30%;
+    background-color: rgba(0,0,0,0.3);
+    border: none;
+    border-bottom : 1px solid #777;
+    color: #000;
+    margin: 0 10px
+}
+
+.Home ::placeholder{
+    color: #fff
 }

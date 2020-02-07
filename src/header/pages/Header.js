@@ -16,7 +16,7 @@ const Header = props => {
   };
 
   return (
-    <Navbar expand="sm" className="NavBar">
+    <Navbar expand="sm" className="NavBar" style={{position:'sticky', top:'0', zIndex:'5000'}}>
       <Navbar.Brand>
         <NavLink to="/home">
           <Logo />

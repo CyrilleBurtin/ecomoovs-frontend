@@ -13,12 +13,17 @@ import './Home.css';
 const Home = () => {
   const [moovs, setMoovs] = useState([]);
 
+
   useEffect(() => {
-    const getMoovsList = () => {
-      return fetch(`${ip}/moovs/`)
-        .then(response => response.json())
-        .then(data => setMoovs(data))
-        .catch(error => console.log(error));
+    const getMoovsList = async () => {
+      try {
+        const response = await fetch(`${ip}/moovs/`);
+        const data = await response.json();
+        return setMoovs(data);
+      }
+      catch (error) {
+        return console.log(error);
+      }
     };
     getMoovsList();
   }, []);

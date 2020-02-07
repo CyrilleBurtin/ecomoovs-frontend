@@ -1,5 +1,6 @@
 import React from 'react';
 import './MoovCards.css';
+import BlueButton from '../../../shared/uiElements/BlueButton';
 
 const MoovsCards = props => {
 
@@ -9,7 +10,7 @@ const MoovsCards = props => {
         <div
           key={i + 1}
           className='MoovCards'
-          style={{ border: '1px solid #6DBBAD', borderRadius:'2%', width:'24%', padding:'10px', margin:'0.5%', boxSizing:'border-box', backgroundColor:'#eee' }}
+          style={{ border: '1px solid #6DBBAD', borderRadius:'2%', width:'24%', minWidth:'180px', padding:'10px', margin:'0.5%', boxSizing:'border-box', backgroundColor:'#eee' }}
         >
           <div style={{height: '150px', overflow:'hidden'}}>
             <img src={e.img.eager[0].secure_url} style={{width:'100%', maxHeight:'150px'}} alt="moov"/>
@@ -23,8 +24,8 @@ const MoovsCards = props => {
             <div></div>
             <div>{e.type}</div>
           </div>
-          <div>
-            <small className='text-muted'>{e.email}</small>
+          <div style={{textAlign:'center'}}>
+            <BlueButton>Voir +</BlueButton>
           </div>
         </div>
       ))}
