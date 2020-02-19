@@ -1,4 +1,17 @@
-.MoovList{
-    padding-top: 150px;;
-    background-color: #F0FAFF;
+.Moovs{
+    background-Color: #F0FAFF;
+}
+
+.Moovs .MoovsHeader{
+    background-color: #6DBBAD;
+}
+
+.Moovs .MoovsTitle{
+    color: #fff;
+    font-size: 70px;
+    font-weight: bolder;
+}
+
+.Moovs .MoovList{
+    height: 100vh;
 }

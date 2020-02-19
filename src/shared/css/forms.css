@@ -13,3 +13,7 @@
     font-size: 2rem;
     font-weight: bolder;
 }
+
+.passerror{
+    border: 2px solid red;
+}

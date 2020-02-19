@@ -1,15 +1,10 @@
 import React from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
 
 const Header = () => 
 
-    <Navbar>
-      <Nav>
-        <Nav.Link>A propos</Nav.Link>
-        <Nav.Link>Contact</Nav.Link>
-      </Nav>
-    </Navbar>
-
-
+    <div>
+      <li>A propos</li>
+      <li>Contact</li>
+    </div>
 
 export default Header

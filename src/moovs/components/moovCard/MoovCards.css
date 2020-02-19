@@ -1,5 +1,17 @@
+.MoovCardFlex{
+    display: flex;
+    flex-direction: row;
+}
 .MoovCards{
     min-height: 200px;
+    border: 1px solid #6DBBAD;
+    border-radius:2%;
+    width:24%;
+    min-width:180px;
+    padding:10px;
+    margin:0.5%;
+    box-sizing:border-box;
+    background-color:#eee
 }
 
 .MoovCards .CardBody{

@@ -5,12 +5,11 @@ import BlueButton from '../../../shared/uiElements/BlueButton';
 const MoovsCards = props => {
 
   return (
-    <>
+    <div className='MoovCardFlex'>
       {props.moovList.map((e, i) => (
         <div
           key={i + 1}
-          className='MoovCards'
-          style={{ border: '1px solid #6DBBAD', borderRadius:'2%', width:'24%', minWidth:'180px', padding:'10px', margin:'0.5%', boxSizing:'border-box', backgroundColor:'#eee' }}
+          className='MoovCards'          
         >
           <div style={{height: '150px', overflow:'hidden'}}>
             <img src={e.img.eager[0].secure_url} style={{width:'100%', maxHeight:'150px'}} alt="moov"/>
@@ -29,7 +28,7 @@ const MoovsCards = props => {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

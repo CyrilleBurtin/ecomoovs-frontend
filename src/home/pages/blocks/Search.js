@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ip from '../../../shared/ip/Ip';
 import GreenButton from '../../../shared/uiElements/GreenButton';
+import BlueButton from '../../../shared/uiElements/BlueButton';
 
 const Search = () => {
   const [tags, setTags] = useState('');
@@ -18,20 +19,23 @@ const Search = () => {
       item => item.length > 2 && item !== ponctuation
     );
 
-    fetch(`${ip}/moovs/findTags`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(cleanTags)
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        setResult(data);
-      })
-      .catch(error => {
+    const searchListe = async () => {
+      try {
+        const result = await fetch(`${ip}/moovs/findTags`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(cleanTags)
+        })
+        const data = await result.json();
+        console.log('data', data)
+        setResult(data)
+      } catch(error){
         console.log('Request failed', error);
-      });
+      }
+
+    }
+    searchListe()
+ 
   };
 
   const inputHandler = event => {
@@ -39,8 +43,13 @@ const Search = () => {
   };
 
   const liste = result.map((e, i) => (
-    <div key={i}>
-      {e.name} {e.location.city}
+    <div key={i} style={{display:'flex', alignItems:'center', justifyContent:'space-evenly'}}>
+        <div style={{width: '15%', textAlign:'left'}}><img src={e.img.eager[0].secure_url} width='100px' alt={e.name}/></div>
+        <div style={{width: '15%', textAlign:'left'}}>{e.title}</div>
+        <div style={{width: '15%', textAlign:'left'}}>{e.location.city}</div>
+        <div style={{width: '15%', textAlign:'left'}}>{e.type}</div>
+        <div style={{width: '15%', textAlign:'left'}}>{e.name}</div>
+      <BlueButton>Voir +</BlueButton>
     </div>
   ));
 
@@ -89,7 +98,7 @@ const Search = () => {
           display: 'inline-flex',
           flexFlow: 'column wrap',
           justifyContent: 'spaceBetween',
-          width: '50%',
+          width: '100%',
           margin: 'auto',
           textAlign: 'center'
         }}

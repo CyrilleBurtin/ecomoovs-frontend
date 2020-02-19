@@ -1,62 +1,61 @@
-import React, { useContext } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import React, { useContext } from 'react';
 
-import ip from "../../shared/ip/Ip";
-
-import { AuthContext } from "../../shared/auth/AuthContext";
-import { useForm } from "../../shared/hooks/Form-hook";
-import FormInput from "../../shared/components/FormInput";
+import ip from '../../shared/ip/Ip';
+import { AuthContext } from '../../shared/auth/AuthContext';
+import { useForm } from '../../shared/hooks/Form-hook';
+import FormInput from '../../shared/components/FormInput';
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_EMAIL
-} from "../../shared/validators/Validators";
-import "../../shared/css/forms.css";
+} from '../../shared/validators/Validators';
+import '../../shared/css/forms.css';
+import BlueButton from '../../shared/uiElements/BlueButton';
 
 const AddEvent = () => {
   const Auth = useContext(AuthContext);
   const [formState, inputHandler] = useForm({
     name: {
-      value: "",
+      value: '',
       isValid: false
     },
     punchline: {
-      value: "",
+      value: '',
       isValid: false
     },
     dateIn: {
-      value: "",
+      value: '',
       isValid: false
     },
     dateOut: {
-      value: "",
+      value: '',
       isValid: false
     },
     description: {
-      value: "",
+      value: '',
       isValid: false
     },
     email: {
-      value: "",
+      value: '',
       isValid: false
     },
     phone: {
-      value: "",
+      value: '',
       isValid: false
     },
     zipcode: {
-      value: "",
+      value: '',
       isValid: false
     },
     address: {
-      value: "",
+      value: '',
       isValid: false
     },
     city: {
-      value: "",
+      value: '',
       isValid: false
     },
     country: {
-      value: "France",
+      value: 'France',
       isValid: true
     }
   });
@@ -65,8 +64,8 @@ const AddEvent = () => {
     event.preventDefault();
 
     fetch(`${ip}/event/`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         userId: Auth.user._id,
         name: formState.inputs.name.value,
@@ -85,228 +84,196 @@ const AddEvent = () => {
         return response.json();
       })
       .then(data => {
-        console.log("data", data);
+        console.log('data', data);
       })
       .catch(error => {
-        console.log("Request failed", error);
+        console.log('Request failed', error);
       });
   };
 
   return (
-    <Container fluid className="SharedForm">
-      <Row>
-        <Col className="SharedFormHeader">
-          <p className="text-center SharedFormTitle">AJOUTER UN ÉVÉNEMENT</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="pt-5 pb-5">
-          <form onSubmit={handleClick}>
-            {/* name */}
-            <Form.Row>
-              <Form.Group as={Col}>
-                {/* <Form.Label>Nom</Form.Label> */}
-                <FormInput
-                  element="input"
-                  initialValue={formState.inputs.name.value}
-                  initialValidate={formState.inputs.name.isValid}
-                  type="text"
-                  name="name"
-                  onInput={inputHandler}
-                  placeholder="Nom"
-                  validators={[VALIDATOR_REQUIRE()]}
-                  errorText="Nom non valide"
-                />
-              </Form.Group>
-            </Form.Row>
-            {/* PunchLine */}
-            <Form.Row>
-              <Form.Group as={Col}>
-                {/* <Form.Label>Nom</Form.Label> */}
-                <FormInput
-                  element="input"
-                  initialValue={formState.inputs.punchline.value}
-                  initialValidate={formState.inputs.punchline.isValid}
-                  type="text"
-                  name="punchline"
-                  onInput={inputHandler}
-                  placeholder="Punchline"
-                  validators={[VALIDATOR_REQUIRE()]}
-                  errorText="Punchline non valide"
-                />
-              </Form.Group>
-            </Form.Row>
-            {/* dateIn */}
-            <Form.Row>
-              <Form.Group as={Col}>
-                {/* <Form.Label>Nom</Form.Label> */}
-                <FormInput
-                  element="input"
-                  initialValue={formState.inputs.dateIn.value}
-                  initialValidate={formState.inputs.dateIn.isValid}
-                  type="date"
-                  name="dateIn"
-                  onInput={inputHandler}
-                  placeholder="Date de début"
-                  validators={[VALIDATOR_REQUIRE()]}
-                  errorText="Date non valide"
-                />
-              </Form.Group>
-            </Form.Row>
+    <div fluid className='SharedForm'>
+      <div className='SharedFormHeader'>
+        <p className='text-center SharedFormTitle'>AJOUTER UN ÉVÉNEMENT</p>
+      </div>
 
-            {/* dateOut */}
-            <Form.Row>
-              <Form.Group as={Col}>
-                {/* <Form.Label>Nom</Form.Label> */}
-                <FormInput
-                  element="input"
-                  initialValue={formState.inputs.dateOut.value}
-                  initialValidate={formState.inputs.dateOut.isValid}
-                  type="date"
-                  name="dateOut"
-                  onInput={inputHandler}
-                  placeholder="Date de fin"
-                  validators={[VALIDATOR_REQUIRE()]}
-                  errorText="Date non valide"
-                />
-              </Form.Group>
-            </Form.Row>
+      <div className='pt-5 pb-5'>
+        <form onSubmit={handleClick}>
+          {/* name */}
+          <div>
+            <FormInput
+              element='input'
+              initialValue={formState.inputs.name.value}
+              initialValidate={formState.inputs.name.isValid}
+              type='text'
+              name='name'
+              onInput={inputHandler}
+              placeholder='Nom'
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText='Nom non valide'
+            />
+          </div>
 
-            {/* Descritpion */}
-            <Form.Row>
-              <Form.Group as={Col}>
-                {/* <Form.Label>Nom</Form.Label> */}
-                <FormInput
-                  element="input"
-                  initialValue={formState.inputs.description.value}
-                  initialValidate={formState.inputs.description.isValid}
-                  as="textarea"
-                  rows="10"
-                  name="description"
-                  onInput={inputHandler}
-                  placeholder="Description"
-                  validators={[VALIDATOR_REQUIRE()]}
-                  errorText="Description non valide"
-                />
-              </Form.Group>
-            </Form.Row>
+          {/* PunchLine */}
+          <div>
+            <FormInput
+              element='input'
+              initialValue={formState.inputs.punchline.value}
+              initialValidate={formState.inputs.punchline.isValid}
+              type='text'
+              name='punchline'
+              onInput={inputHandler}
+              placeholder='Punchline'
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText='Punchline non valide'
+            />
+          </div>
 
-            {/* email */}
-            <Form.Row>
-              <Form.Group as={Col}>
-                {/* <Form.Label>Email</Form.Label> */}
-                <FormInput
-                  element="input"
-                  initialValue={formState.inputs.email.value}
-                  initialValidate={formState.inputs.email.isValid}
-                  autoComplete="email"
-                  type="email"
-                  name="email"
-                  onInput={inputHandler}
-                  placeholder="Email"
-                  validators={[VALIDATOR_EMAIL()]}
-                  errorText="Email non valide"
-                />
-              </Form.Group>
-            </Form.Row>
+          {/* dateIn */}
+          <div>
+            <FormInput
+              element='input'
+              initialValue={formState.inputs.dateIn.value}
+              initialValidate={formState.inputs.dateIn.isValid}
+              type='date'
+              name='dateIn'
+              onInput={inputHandler}
+              placeholder='Date de début'
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText='Date non valide'
+            />
+          </div>
 
-            {/* phone */}
-            <Form.Row>
-              <Form.Group as={Col}>
-                {/* <Form.Label>Téléphone</Form.Label> */}
-                <FormInput
-                  element="input"
-                  initialValue={formState.inputs.phone.value}
-                  initialValidate={formState.inputs.phone.isValid}
-                  type="tel"
-                  name="phone"
-                  onInput={inputHandler}
-                  placeholder="Téléphone"
-                  validators={[]}
-                  errorText="téléphone non valide"
-                />
-              </Form.Group>
-            </Form.Row>
+          {/* dateOut */}
 
-            {/* adresse */}
-            <Form.Group>
-              {/* <Form.Label>Adresse</Form.Label> */}
-              <FormInput
-                element="input"
-                initialValue={formState.inputs.address.value}
-                initialValidate={formState.inputs.address.isValid}
-                autoComplete="address-line1"
-                name="address"
-                onInput={inputHandler}
-                placeholder="adresse"
-                validators={[VALIDATOR_REQUIRE()]}
-                errorText="Adresse non valide"
-              />
-            </Form.Group>
+          <div>
+            <FormInput
+              element='input'
+              initialValue={formState.inputs.dateOut.value}
+              initialValidate={formState.inputs.dateOut.isValid}
+              type='date'
+              name='dateOut'
+              onInput={inputHandler}
+              placeholder='Date de fin'
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText='Date non valide'
+            />
+          </div>
 
-            {/* zipcode */}
-            <Form.Row>
-              <Form.Group as={Col}>
-                {/* <Form.Label>Code Postal</Form.Label> */}
-                <FormInput
-                  element="input"
-                  initialValue={formState.inputs.zipcode.value}
-                  initialValidate={formState.inputs.zipcode.isValid}
-                  autoComplete="postal-code"
-                  name="zipcode"
-                  onInput={inputHandler}
-                  placeholder="Code Postal"
-                  validators={[VALIDATOR_REQUIRE()]}
-                  errorText="Code postal non valide"
-                />
-              </Form.Group>
-            </Form.Row>
+          {/* Descritpion */}
+          <div>
+            <FormInput
+              element='input'
+              initialValue={formState.inputs.description.value}
+              initialValidate={formState.inputs.description.isValid}
+              as='textarea'
+              rows='10'
+              name='description'
+              onInput={inputHandler}
+              placeholder='Description'
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText='Description non valide'
+            />
+          </div>
 
-            {/* city */}
-            <Form.Row>
-              <Form.Group as={Col}>
-                {/* <Form.Label>Ville</Form.Label> */}
-                <FormInput
-                  element="input"
-                  initialValue={formState.inputs.city.value}
-                  initialValidate={formState.inputs.city.isValid}
-                  autoComplete="address-level2"
-                  name="city"
-                  onInput={inputHandler}
-                  placeholder="Ville"
-                  validators={[VALIDATOR_REQUIRE()]}
-                  errorText="Ville non valide"
-                />
-              </Form.Group>
-            </Form.Row>
+          {/* email */}
 
-            {/* country */}
-            <Form.Row>
-              <Form.Group as={Col}>
-                {/* <Form.Label>Pays</Form.Label> */}
-                <FormInput
-                  element="select"
-                  initialValue={formState.inputs.country.value}
-                  initialValidate={formState.inputs.country.isValid}
-                  as="select"
-                  name="country"
-                  onInput={inputHandler}
-                  validators={[]}
-                  errorText="Ville non valide"
-                />
-              </Form.Group>
-            </Form.Row>
-            <Button
-              type="submit"
-              variant="primary"
-              disabled={!formState.isValid}
-            >
-              Valider
-            </Button>
-          </form>
-        </Col>
-      </Row>
-    </Container>
+          <div>
+            <FormInput
+              element='input'
+              initialValue={formState.inputs.email.value}
+              initialValidate={formState.inputs.email.isValid}
+              autoComplete='email'
+              type='email'
+              name='email'
+              onInput={inputHandler}
+              placeholder='Email'
+              validators={[VALIDATOR_EMAIL()]}
+              errorText='Email non valide'
+            />
+          </div>
+
+          {/* phone */}
+          <div>
+            <FormInput
+              element='input'
+              initialValue={formState.inputs.phone.value}
+              initialValidate={formState.inputs.phone.isValid}
+              type='tel'
+              name='phone'
+              onInput={inputHandler}
+              placeholder='Téléphone'
+              validators={[]}
+              errorText='téléphone non valide'
+            />
+          </div>
+
+          {/* adresse */}
+          <div>
+            <FormInput
+              element='input'
+              initialValue={formState.inputs.address.value}
+              initialValidate={formState.inputs.address.isValid}
+              autoComplete='address-line1'
+              name='address'
+              onInput={inputHandler}
+              placeholder='adresse'
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText='Adresse non valide'
+            />
+          </div>
+
+          {/* zipcode */}
+          <div>
+            <FormInput
+              element='input'
+              initialValue={formState.inputs.zipcode.value}
+              initialValidate={formState.inputs.zipcode.isValid}
+              autoComplete='postal-code'
+              name='zipcode'
+              onInput={inputHandler}
+              placeholder='Code Postal'
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText='Code postal non valide'
+            />
+          </div>
+
+          {/* city */}
+
+          <div>
+            <FormInput
+              element='input'
+              initialValue={formState.inputs.city.value}
+              initialValidate={formState.inputs.city.isValid}
+              autoComplete='address-level2'
+              name='city'
+              onInput={inputHandler}
+              placeholder='Ville'
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText='Ville non valide'
+            />
+          </div>
+
+          {/* country */}
+          <div>
+            <FormInput
+              element='select'
+              initialValue={formState.inputs.country.value}
+              initialValidate={formState.inputs.country.isValid}
+              as='select'
+              name='country'
+              onInput={inputHandler}
+              validators={[]}
+              errorText='Ville non valide'
+            />
+          </div>
+
+          <BlueButton type='submit' disabled={!formState.isValid}>
+            Valider
+          </BlueButton>
+        </form>
+      </div>
+    </div>
   );
 };
 

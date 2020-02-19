@@ -14,11 +14,17 @@ const MoovsList = () => {
   }, []);
 
   return (
-    <>
-      <div className="MoovList pl-5 pr-5">
+
+     <div className="Moovs">
+      
+      <div className="MoovsHeader">
+        <p className="text-center MoovsTitle">Nouveaux Moovs</p>
+      </div>
+      <div className="MoovList">
         <MoovsCards moovList={moovs} />
       </div>
-    </>
+      </div>
+  
   );
 };
 

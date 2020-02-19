@@ -3,30 +3,23 @@ import BlueButton from '../../../shared/uiElements/BlueButton';
 
 const MoovsList = props => {
   return (
-    <div style={{ width: '50%', margin: '10px auto' }}>
+    <div style={{ width: '90%', margin: '10px auto' }}>
+
       {props.moovList.map((e, i) => (
-        <div
-          style={{
-            display: 'flex',
-            justifyItems: 'middle',
-            justifyContent: 'center',
-            marginTop: '5px',
-            height: '30px',
-            lineHeight: '30px'
-          }}
-          key={i}
-        >
-          <div style={{ display: 'flex', width: '90%', flexFlow: 'row wrap'  }}>
-            <p style={{ width: '15%', minWidth:'150px' }}>12 déc 2020</p>{' '}
-            <p style={{ width: '15%', minWidth:'150px' }}>{e.name}</p>{' '}
-            <p style={{ width: '20%', minWidth:'150px' }}>{e.location.city}</p>{' '}
-            <p style={{ width: '25%', minWidth:'150px' }}>{e.title}</p>
-            <p style={{ width: '25%', minWidth:'150px' }}>{e.punchline}</p>
+
+        <div style={{ display: 'flex' }} key={i} >
+          <div style={{ display: 'flex', width: '90%', justifyContent: 'space-around', flexFlow: 'row wrap', borderBottom: '1px solid #ddd', marginBottom: '5px'  }}>
+            <p style={{ width: '15%', minWidth:'150px', margin: '5px 0'}}>12 déc 2020</p>
+            <p style={{ width: '15%', minWidth:'150px', margin: '5px 0'}}>{e.name}</p>
+            <p style={{ width: '15%', minWidth:'150px', margin: '5px 0'}}>{e.location.city}</p>
+            <p style={{ width: '20%', minWidth:'150px', margin: '5px 0'}}>{e.title}</p>
+            <div style={{width: '5%', minWidth: '60px'}}><BlueButton click={() => {}}>Voir +</BlueButton></div>
           </div>
-          <BlueButton click={() => {}}>Voir +</BlueButton>
         </div>
+
       ))}
-    </div>
+
+  </div>
   );
 };
 

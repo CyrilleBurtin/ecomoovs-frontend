@@ -59,13 +59,13 @@ color: #00e689;
 
 .Home input{
     background-color: #FFF;
-    min-width: ;idth: 250px;
+    min-width: 250px;
     width: 30%;
     background-color: rgba(0,0,0,0.3);
     border: none;
     border-bottom : 1px solid #777;
-    color: #000;
-    margin: 0 10px
+    color: #FFF;
+    margin: 0 10px 10px
 }
 
 .Home ::placeholder{

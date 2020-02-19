@@ -33,8 +33,8 @@ const MyMoovs = props => {
     <div style={{ display: 'flex' }} key={i}>
       <div style={{ width: '15%' }}>{e.name}</div>
       <div style={{ width: '15%' }}>{e.type}</div>
-      <BlueButton click={() => props.editMoov({ moov: e })}>Edit</BlueButton>
-      <BlueButton click={e => deleteMoovHandler(e.moov)}>Delete</BlueButton>
+      <div><BlueButton click={() => props.editMoov({ moov: e })}>Edit</BlueButton></div>
+      <div><BlueButton click={e => deleteMoovHandler(e.moov)}>Delete</BlueButton></div>
     </div>
   ));
 

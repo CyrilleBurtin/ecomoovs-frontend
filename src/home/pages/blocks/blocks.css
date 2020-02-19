@@ -1,0 +1,100 @@
+/* explain */
+.explain {
+  display: grid;
+  grid-template: 'a' 'b' 'c';
+}
+.explain > div{
+    padding:20px;
+    color: #fff;
+}
+.explain1 {
+  background-color: #00e689;
+  grid-area: a;
+}
+
+.explain2 {
+  background-color: rgb(97, 170, 147);
+  grid-area: b;
+}
+
+.explain3 {
+  background-color: #6dbbad;
+  grid-area: c;
+}
+
+/* help */
+.help{
+    padding:7%;
+    text-align: center;
+    background-color: #6DBBAD;
+}
+
+.help p{
+    color:#fff;
+    font-weight: bold;
+}
+
+
+/* last */
+.last{
+    background-color: #fff;
+    padding: 50px 15px;
+}
+
+.last .cards{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.last .button{
+    text-align: center;
+}
+
+.last p.title{
+    font-size: 60px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+/* quotation */
+.quotation{
+    padding: 50px 15px;
+    text-align: center;
+    background-color: #6dbbad;
+    display: grid;
+    grid-template: "a" "b";
+}
+
+.quotation .text{
+    color: #fff;
+    padding: 5%;
+}
+
+.quotation .text p{
+    margin: 0;
+    font-size: 18px;
+}
+
+.quotation .a{
+    grid-area: a;
+}
+
+.quatation .b{
+    grid-area: b;
+}
+.quotation .text p:first-child{
+    font-size: 27px;
+    font-style: italic;
+}
+
+@media only screen and (min-width: 600px) {
+    .explain {
+      display: grid;
+      grid-template: 'a b c' / 1fr 1fr 1fr;
+    }
+
+    .quotation{
+        grid-template: "a b" / 1fr 1fr;
+    }
+
+  }

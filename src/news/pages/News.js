@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import NewsCard from "../components/NewsCard";
 import ip from "../../shared/ip/Ip";
 import "./News.css";
@@ -15,14 +14,14 @@ const News = () => {
   }, []);
 
   return (
-    <Container fluid className="News">
-      <Row>
-        <Col className="NewsHeader">
+    <div className="News">
+      
+        <div className="NewsHeader">
           <p className="text-center NewsTitle">Nouvelles Actus</p>
-        </Col>
-      </Row>
+        </div>
+      
       <NewsCard news={news} />
-    </Container>
+    </div>
   );
 };
 
