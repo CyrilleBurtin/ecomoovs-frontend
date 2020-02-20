@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import UserManagement from './UserMangement';
 import MyMoovs from './MyMoovs';
 import MoovEdit from '../../moovs/pages/moovSubmit/MoovEdit';
+import UserManagement from './UserManagement';
 
 const BackOffice = () => {
 
