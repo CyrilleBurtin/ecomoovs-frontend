@@ -12,6 +12,7 @@ import {
 } from '../../../shared/validators/Validators';
 import '../../../shared/css/forms.css';
 import Loading from '../../../shared/components/Loading';
+import { removeDiacritics } from '../../../shared/components/DiacriticsRemover';
 
 const MoovEdit = props => {
   const Auth = useContext(AuthContext);
@@ -109,11 +110,14 @@ const MoovEdit = props => {
     setIsLoading(true);
     // shapping tags into array with removal of special charatcers space and uppecase
     let ponctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
-    let tags = formState.inputs.tags.value
-      .toLowerCase()
-      .trim()
-      .split(' ');
+    
+    let rowTags = formState.inputs.tags.value.toLowerCase().trim();
+
+    let tags = rowTags.split(' ');    
     tags = tags.filter(item => item.length > 2 && item !== ponctuation);
+
+    let searchTags = removeDiacritics(rowTags);
+    searchTags = searchTags.split(' ')
 
     const formData = new FormData();
 
@@ -132,6 +136,7 @@ const MoovEdit = props => {
     formData.append('description', formState.inputs.description.value);
     formData.append('regNumber', formState.inputs.regNumber.value);
     formData.append('tags', tags);
+    formData.append('searchTags', searchTags);
     formData.append('image', formState.inputs.image.value);
     formData.append('facebook', formState.inputs.facebook.value);
     formData.append('instagram', formState.inputs.instagram.value);

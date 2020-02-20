@@ -87,7 +87,7 @@
     font-style: italic;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 768px) {
     .explain {
       display: grid;
       grid-template: 'a b c' / 1fr 1fr 1fr;

@@ -92,7 +92,7 @@ const AddEvent = () => {
   };
 
   return (
-    <div fluid className='SharedForm'>
+    <div className='SharedForm'>
       <div className='SharedFormHeader'>
         <p className='text-center SharedFormTitle'>AJOUTER UN ÉVÉNEMENT</p>
       </div>

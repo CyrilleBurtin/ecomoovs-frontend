@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ip from '../../../shared/ip/Ip';
 import GreenButton from '../../../shared/uiElements/GreenButton';
 import BlueButton from '../../../shared/uiElements/BlueButton';
+import { removeDiacritics } from '../../../shared/components/DiacriticsRemover';
 
 const Search = () => {
   const [tags, setTags] = useState('');
@@ -10,12 +11,12 @@ const Search = () => {
   const searchHanlder = event => {
     event.preventDefault();
     let ponctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
-
-    let cleanTags = tags
+    let removedAccent = removeDiacritics(tags)
+    let cleanTags = removedAccent
       .toLowerCase()
       .trim()
       .split(' ');
-    cleanTags = cleanTags.filter(
+      cleanTags = cleanTags.filter(
       item => item.length > 2 && item !== ponctuation
     );
 
