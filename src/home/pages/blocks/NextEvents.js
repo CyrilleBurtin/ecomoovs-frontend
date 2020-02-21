@@ -5,14 +5,9 @@ import MoovList from '../../../moovs/components/moovList/MoovList';
 const NextEvents = props => {
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <p
-          style={{
-            fontSize: 60,
-            textAlign: 'center',
-            verticalAlign: 'center',
-            fontWeight: 'bolder'
-          }}
+      <div className="next">
+        <p className="title"
+          
         >
           Les prochains événements
         </p>

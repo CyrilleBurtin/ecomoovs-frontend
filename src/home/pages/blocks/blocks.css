@@ -87,6 +87,18 @@
     font-style: italic;
 }
 
+.next{
+    display: flex;
+    flex-direction: column;
+}
+
+.next .title{
+    font-size: 2rem;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bolder;
+}
+
 @media only screen and (min-width: 768px) {
     .explain {
       display: grid;
