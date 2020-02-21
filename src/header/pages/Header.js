@@ -23,7 +23,7 @@ const Header = props => {
 
       burger.addEventListener('click', () => {
         nav.classList.toggle('nav-active');
-        admin.classList.remove('nav-active');
+        admin.classList.remove('admin-active');
       });
 
       nav.addEventListener('mouseleave', () => {
@@ -31,12 +31,12 @@ const Header = props => {
       })
 
       initials.addEventListener('click', () => {
-        admin.classList.toggle('nav-active');
+        admin.classList.toggle('admin-active');
         nav.classList.remove('nav-active');
       });
 
       admin.addEventListener('mouseleave', () => {
-        admin.classList.remove('nav-active');
+        admin.classList.remove('admin-active');
       })
     };
 
