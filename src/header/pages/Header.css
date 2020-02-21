@@ -1,7 +1,3 @@
-html, body {
-  overflow-x: hidden;
-}
-
 #root {
   font-family: 'Poppins', sans-serif;
   letter-spacing: 1px;
@@ -33,7 +29,8 @@ html, body {
   border-radius: 0 0 2px 2px;
 }
 
-.nav-links, .admin-links {
+.nav-links,
+.admin-links {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,16 +40,22 @@ html, body {
   top: 8vh;
   height: 92vh;
   background-color: rgba(0, 0, 0, 0.8);
-  transform: translateX(100%);
-  transition: transform 0.2s ease-in;
+  display: none;
 }
 
 .nav-active {
-  transform: translateX(0%);
+  display: block;
+  display: block;
+  animation: fadeIn 0.3s ease-in;
 }
 
-.admin-active {
-  transform: translateX(0%);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .initials {
@@ -68,13 +71,13 @@ html, body {
   margin-top: 10px;
   cursor: pointer;
 }
-a.logout{
-    color:#fff
+a.logout {
+  color: #fff;
 }
 a.logout:hover,
 a.logout:active,
-a.logout.active{
-    color: #00E689 !important;
+a.logout.active {
+  color: #00e689 !important;
 }
 
 @media only screen and (min-width: 768px) {
@@ -94,7 +97,7 @@ a.logout.active{
     top: 0;
   }
 
-  .admin-links{
-      justify-content: start;
+  .admin-links {
+    justify-content: start;
   }
 }
