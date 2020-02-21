@@ -1,19 +1,17 @@
-.MoovCardFlex{
-    display: flex;
-    flex-direction: row;
+.MoovCardFlex {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-column-gap: 6px;
+  grid-row-gap: 6px;
 }
-.MoovCards{
-    min-height: 200px;
-    border: 1px solid #6DBBAD;
-    border-radius:2%;
-    width:24%;
-    min-width:180px;
-    padding:10px;
-    margin:0.5%;
-    box-sizing:border-box;
-    background-color:#eee
+.MoovCards {
+  border: 1px solid #6dbbad;
+  border-radius: 2%;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #eee;
 }
 
-.MoovCards .CardBody{
-    min-height: 124px;;
+.MoovCards .CardBody {
+  min-height: 124px;
 }
