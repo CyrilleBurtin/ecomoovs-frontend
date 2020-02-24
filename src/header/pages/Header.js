@@ -6,6 +6,9 @@ import './Header.css';
 import { withRouter } from 'react-router-dom';
 import { AuthContext } from '../../shared/auth/AuthContext';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+
 const Header = props => {
   const Auth = useContext(AuthContext);
 
@@ -95,7 +98,7 @@ const Header = props => {
       <p className='initials'>
         {Auth.isLoggedIn
           ? Auth.user.firstname.slice(0, 1) + Auth.user.lastname.slice(0, 1)
-          : '?'}
+          : <FontAwesomeIcon icon={faSignInAlt}/>}
       </p>
     </nav>
   );

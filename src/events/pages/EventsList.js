@@ -11,9 +11,9 @@ const EventsList = () => {
         const response = await fetch(`${ip}/event`);
         const data = await response.json();
         console.log('data', data);
-        return setEvents(data);
+        setEvents(data);
       } catch (error) {
-        return console.log(error);
+        console.log(error);
       }
     };
     eventlist();

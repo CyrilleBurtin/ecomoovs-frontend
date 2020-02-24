@@ -29,32 +29,31 @@ const Login = props => {
     false
   );
 
-  const loginHandler = event => {
+  const loginHandler = async event => {
     event.preventDefault();
     setIsLoading(true);
-    fetch(`${ip}/users/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: formState.inputs.email.value,
-        password: formState.inputs.password.value
-      })
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(token => {
-        setIsLoading(false);
-        Auth.login(token);
-        props.history.push('/home');
-      })
-      .catch(error => {
-        console.log(error);
+    try {
+      const response = await fetch(`${ip}/users/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formState.inputs.email.value,
+          password: formState.inputs.password.value
+        })
       });
+      const token = await response.json();
+      setIsLoading(false);
+      Auth.login(token);
+      props.history.push('/home');
+    } catch (error) {
+      console.log(error);
+    }
+   
   };
 
+ 
   return (
-    <div className="SharedForm">
+    <div className='SharedForm'>
       <div className='SharedFormHeader'>
         <p className='text-center SharedFormTitle'>CONNEXION</p>
       </div>

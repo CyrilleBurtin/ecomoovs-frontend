@@ -1,8 +1,8 @@
 import React from 'react'
-
+import './Footer.css'
 const Header = () => 
 
-    <div>
+    <div className="footer">
       <li>A propos</li>
       <li>Contact</li>
     </div>

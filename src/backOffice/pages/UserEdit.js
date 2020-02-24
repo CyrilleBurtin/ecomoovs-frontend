@@ -58,40 +58,36 @@ const UserEdit = () => {
     },
     true
   );
-
   const [password, setPassword] = useState({
     currentPassword: '',
     newPassword: ''
   });
 
-  const handleCLick = event => {
+  const handleCLick = async event => {
     event.preventDefault();
     setIsLoading(true);
-    fetch(`${ip}/users/${Auth.user._id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        firstname: formState.inputs.firstname.value,
-        lastname: formState.inputs.lastname.value,
-        email: formState.inputs.email.value,
-        phone: formState.inputs.phone.value,
-        address: formState.inputs.address.value,
-        zipcode: formState.inputs.zipcode.value,
-        city: formState.inputs.city.value,
-        country: formState.inputs.country.value
-      })
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        localStorage.setItem('AUTH_TOKEN', JSON.stringify(data));
-        setIsLoading(false);
-        Auth.login(data.token);
-      })
-      .catch(error => {
-        console.log('Request failed', error);
+    try {
+      const response = await fetch(`${ip}/users/${Auth.user._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstname: formState.inputs.firstname.value,
+          lastname: formState.inputs.lastname.value,
+          email: formState.inputs.email.value,
+          phone: formState.inputs.phone.value,
+          address: formState.inputs.address.value,
+          zipcode: formState.inputs.zipcode.value,
+          city: formState.inputs.city.value,
+          country: formState.inputs.country.value
+        })
       });
+      const data = await response.json();
+      localStorage.setItem('AUTH_TOKEN', JSON.stringify(data));
+      setIsLoading(false);
+      Auth.login(data.token);
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
   const handleCurrentPassword = event => {
@@ -103,28 +99,26 @@ const UserEdit = () => {
     setPassword({ ...password, newPassword: event.target.value });
   };
 
-  const changePassword = event => {
+  const changePassword = async event => {
     event.preventDefault();
     setIsLoading(true);
-
-    fetch(`${ip}/users/password`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id: Auth.user._id,
-        password: password
-      })
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('data', data);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        console.log('mot de passe incorrect', error);
-        setPasswordError(true);
-        setIsLoading(false);
+    try {
+      const response = await fetch(`${ip}/users/password`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: Auth.user._id,
+          password: password
+        })
       });
+      const data = await response.json();
+      console.log('data', data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log('mot de passe incorrect', error);
+      setPasswordError(true);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -234,7 +228,7 @@ const UserEdit = () => {
           </BlueButton>
         </form>
       </div>
-    <hr/>
+      <hr />
       <div style={{ marginTop: '30px' }}>
         {passwordError && (
           <label

@@ -60,35 +60,31 @@ const AddEvent = () => {
     }
   });
 
-  const handleClick = event => {
+  const handleClick = async event => {
     event.preventDefault();
-
-    fetch(`${ip}/event/`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userId: Auth.user._id,
-        name: formState.inputs.name.value,
-        punchline: formState.inputs.punchline.value,
-        dateIn: formState.inputs.dateIn.value,
-        dateOut: formState.inputs.dateOut.value,
-        description: formState.inputs.description.value,
-        email: formState.inputs.email.value,
-        phone: formState.inputs.phone.value,
-        zipcode: formState.inputs.zipcode.value,
-        city: formState.inputs.city.value,
-        country: formState.inputs.country.value
-      })
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        console.log('data', data);
-      })
-      .catch(error => {
-        console.log('Request failed', error);
+    try {
+      const response = await fetch(`${ip}/event/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: Auth.user._id,
+          name: formState.inputs.name.value,
+          punchline: formState.inputs.punchline.value,
+          dateIn: formState.inputs.dateIn.value,
+          dateOut: formState.inputs.dateOut.value,
+          description: formState.inputs.description.value,
+          email: formState.inputs.email.value,
+          phone: formState.inputs.phone.value,
+          zipcode: formState.inputs.zipcode.value,
+          city: formState.inputs.city.value,
+          country: formState.inputs.country.value
+        })
       });
+      const data = await response.json();
+      console.log('data', data);
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
   return (
