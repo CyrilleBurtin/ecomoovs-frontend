@@ -61,35 +61,33 @@ const NewUser = props => {
     false
   );
 
-  const handleCLick = event => {
+  const handleCLick = async event => {
     event.preventDefault();
     setIsLoading(true);
-    fetch(`${ip}/users/`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        firstname: formState.inputs.firstname.value,
-        lastname: formState.inputs.lastname.value,
-        email: formState.inputs.email.value,
-        password: formState.inputs.password.value,
-        phone: formState.inputs.phone.value,
-        address: formState.inputs.address.value,
-        zipcode: formState.inputs.zipcode.value,
-        city: formState.inputs.city.value,
-        country: formState.inputs.country.value
-      })
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        setIsLoading(false);
-        Auth.login(data.token);
-        props.history.push('/home');
-      })
-      .catch(error => {
-        console.log('Request failed', error);
+    try {
+      const response = await fetch(`${ip}/users/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstname: formState.inputs.firstname.value,
+          lastname: formState.inputs.lastname.value,
+          email: formState.inputs.email.value,
+          password: formState.inputs.password.value,
+          phone: formState.inputs.phone.value,
+          address: formState.inputs.address.value,
+          zipcode: formState.inputs.zipcode.value,
+          city: formState.inputs.city.value,
+          country: formState.inputs.country.value
+        })
       });
+
+      const data = await response.json();
+      setIsLoading(false);
+      Auth.login(data.token);
+      props.history.push('/home');
+    } catch (error) {
+      console.log('Request failed', error);
+    }
   };
 
   return (

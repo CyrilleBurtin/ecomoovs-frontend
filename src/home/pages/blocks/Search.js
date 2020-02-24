@@ -28,7 +28,6 @@ const Search = () => {
           body: JSON.stringify(cleanTags)
         })
         const data = await result.json();
-        console.log('data', data)
         setResult(data)
       } catch(error){
         console.log('Request failed', error);

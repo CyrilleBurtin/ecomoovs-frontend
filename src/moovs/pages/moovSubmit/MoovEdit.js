@@ -105,19 +105,19 @@ const MoovEdit = props => {
     true
   );
 
-  const handleClick = event => {
+  const handleClick = async event => {
     event.preventDefault();
     setIsLoading(true);
     // shapping tags into array with removal of special charatcers space and uppecase
     let ponctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
-    
+
     let rowTags = formState.inputs.tags.value.toLowerCase().trim();
 
-    let tags = rowTags.split(' ');    
+    let tags = rowTags.split(' ');
     tags = tags.filter(item => item.length > 2 && item !== ponctuation);
 
     let searchTags = removeDiacritics(rowTags);
-    searchTags = searchTags.split(' ')
+    searchTags = searchTags.split(' ');
 
     const formData = new FormData();
 
@@ -143,21 +143,19 @@ const MoovEdit = props => {
     formData.append('twitter', formState.inputs.twitter.value);
     formData.append('userId', Auth.user._id);
 
-    fetch(`${ip}/moovs`, {
-      method: 'PUT',
-      body: formData,
-      headers: { authorization: `Bearer ${Auth.token}` }
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        console.log('Request failed', error);
+    try {
+      const response = await fetch(`${ip}/moovs`, {
+        method: 'PUT',
+        body: formData,
+        headers: { authorization: `Bearer ${Auth.token}` }
       });
+
+      const data = await response.json();
+      console.log(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log('Request failed', error);
+    }
   };
 
   return (
