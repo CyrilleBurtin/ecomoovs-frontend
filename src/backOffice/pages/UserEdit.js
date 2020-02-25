@@ -12,11 +12,12 @@ import Loading from '../../shared/components/Loading';
 import '../../shared/css/forms.css';
 import BlueButton from '../../shared/uiElements/BlueButton';
 
-const UserEdit = () => {
+const UserEdit = props => {
   const Auth = useContext(AuthContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
   const [formState, inputHandler] = useForm(
     {
       firstname: {
@@ -62,6 +63,8 @@ const UserEdit = () => {
     currentPassword: '',
     newPassword: ''
   });
+
+
 
   const handleCLick = async event => {
     event.preventDefault();

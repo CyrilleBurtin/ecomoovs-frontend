@@ -20,6 +20,9 @@ import MoovSubmit from './moovs/pages/moovSubmit/MoovSubmit';
 import Footer from './footer/pages/Footer';
 import EventsList from './events/pages/EventsList';
 
+import MoovFullCard from './moovs/components/fullCard/MoovFullCard';
+import EventFullCard from './events/pages/EventFullCard';
+
 
 const App = props => {
   const { user, token, login, logout, isLoggedIn } = useLogin();
@@ -41,6 +44,9 @@ const App = props => {
           <Route path='/addevent' component={AddEvent} />
           <Route path='/info-du-compte' component={UserEdit} />
           <Route path='/soumettre-une-nouvelle-action' component={MoovSubmit} />
+          <Route path='/moov' component={MoovFullCard} />
+          <Route path='/event' component={EventFullCard} />
+
           <Redirect to='/' />
         </Switch>
         <Footer />

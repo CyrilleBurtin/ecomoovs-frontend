@@ -1,0 +1,19 @@
+.nextEventsList{
+    width: 90%;
+    margin: 10px auto;
+}
+
+.nextEventsList .container{
+    display: flex;
+    width: 90%;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    border-bottom: 1 px solid #ddd;
+    margin-bottom: 5px;
+}
+
+.nextEventsList p{
+    min-width: 150px;
+    margin: 5px 0;
+    font-weight: bold;
+}

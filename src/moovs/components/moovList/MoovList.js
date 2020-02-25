@@ -1,5 +1,6 @@
 import React from 'react';
 import BlueButton from '../../../shared/uiElements/BlueButton';
+import { NavLink } from 'react-router-dom';
 
 const MoovsList = props => {
   return (
@@ -13,7 +14,11 @@ const MoovsList = props => {
             <p style={{ width: '15%', minWidth:'150px', margin: '5px 0'}}>{e.name}</p>
             <p style={{ width: '15%', minWidth:'150px', margin: '5px 0'}}>{e.location.city}</p>
             <p style={{ width: '20%', minWidth:'150px', margin: '5px 0'}}>{e.title}</p>
-            <div style={{width: '5%', minWidth: '60px'}}><BlueButton click={() => {}}>Voir +</BlueButton></div>
+            <div style={{width: '5%', minWidth: '60px'}}>
+            <NavLink to={{pathname: '/moov', moovData: e}} activeClassName='active'>
+                <BlueButton>Voir +</BlueButton>
+              </NavLink>
+            </div>
           </div>
         </div>
 
