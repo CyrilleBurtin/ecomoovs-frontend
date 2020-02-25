@@ -13,7 +13,7 @@ const MyMoovs = props => {
       try {
         const response = await fetch(`${ip}/moovs/myMoovs/${user.user._id}`);
         const data = await response.json();
-        setMyMoovs(data).catch(error => console.log(error));
+        setMyMoovs(data);
       } catch (error) {
         console.log(error);
       }
@@ -22,7 +22,6 @@ const MyMoovs = props => {
       getMyMoovs();
     }
   }, [user.user._id]);
-
 
   const deleteMoovHandler = async moov => {
     try {

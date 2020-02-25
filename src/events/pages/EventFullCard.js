@@ -5,6 +5,7 @@ const EventFullCard = props => {
 
   if (!event) {
     props.history.push('/home');
+    return false
   }
 
   console.log('props.location.eventData', props.location.eventData);
