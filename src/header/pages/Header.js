@@ -48,7 +48,7 @@ const Header = props => {
 
   return (
     <nav className='header'>
-      <NavLink to='/home'>
+      <NavLink to='/home' style={{textDecoration: 'none'}}>
         <Logo />
       </NavLink>
       <div className='burger'>

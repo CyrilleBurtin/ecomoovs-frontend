@@ -1,14 +1,12 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTint } from '@fortawesome/free-solid-svg-icons'
-import './Logo.css'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTint } from '@fortawesome/free-solid-svg-icons';
+import './Logo.css';
 
 const Logo = () => (
-    <>
-        <p className='Logo'>
-            <FontAwesomeIcon icon={faTint}/> ECOMOOVS
-        </p>
-    </>
-)
+  <p className='Logo'>
+    <FontAwesomeIcon icon={faTint} style={{textDecoration:'none'}} /> ECOMOOVS
+  </p>
+);
 
-export default Logo
+export default Logo;
