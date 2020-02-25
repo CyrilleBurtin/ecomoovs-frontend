@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 import BlueButton from '../../shared/uiElements/BlueButton';
 
 const EventsList = () => {
-
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -24,33 +23,29 @@ const EventsList = () => {
   console.log('events', events);
   return (
     <>
-      <div className='nextEventsList'>
-        <div className='container'>
-          <p style={{ width: '15%', fontWeight: 'bold' }}>Dates</p>
-          <p style={{ width: '15%', fontWeight: 'bold' }}>Nom</p>
-          <p style={{ width: '15%', fontWeight: 'bold' }}>Ville</p>
-          <p style={{ width: '20%', fontWeight: 'bold' }}>Punchline</p>
-          <div style={{ width: '5%', minWidth: '60px' }}></div>
-        </div>
-
+      <div className='nextEventsList'>        
         {events.map((e, i) => (
           <div className='container' key={i}>
-            <p style={{ width: '15%' }}>
+            <p>{e.name}</p>
+            <p>
               du {e.dateIn}
               <br /> au {e.dateOut}
             </p>
-            <p style={{ width: '15%' }}>{e.name}</p>
-            <p style={{ width: '15%' }}>{e.city}</p>
-            <p style={{ width: '20%' }}>{e.punchline}</p>
-            <div style={{ width: '5%', minWidth: '60px' }}>
-            <NavLink to={{pathname: '/event', eventData: e}} activeClassName='active'>
+            <p>{e.city}</p>
+            <p>{e.punchline}</p>
+            <p>
+              <NavLink
+                to={{ pathname: '/event', eventData: e }}
+                activeClassName='active'
+              >
                 <BlueButton>Voir +</BlueButton>
               </NavLink>
-            </div>
+            </p>
           </div>
         ))}
       </div>
     </>
   );
 };
+
 export default EventsList;

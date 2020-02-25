@@ -30,7 +30,7 @@ const Home = () => {
 
   return (
     <>
-      <p>hello</p>
+      <Search />
       <Explain />
       <Last last={moovs} />
       <Quotations />

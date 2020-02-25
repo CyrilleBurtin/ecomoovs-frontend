@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import BlueButton from '../uiElements/BlueButton';
+
 const ImageUpload = props => {
   const [file, setFile] = useState();
   const [previewUrl, setPreviewUrl] = useState();
@@ -52,9 +53,9 @@ const ImageUpload = props => {
           {previewUrl && <img src={previewUrl} alt="Preview" width="100%" />}
           {!previewUrl && <p>Choisissez une photo</p>}
           </div>
-        <Button type="button" onClick={pickImageHandler}>
+        <BlueButton type="button" onClick={pickImageHandler}>
           PICK IMAGE
-        </Button>
+        </BlueButton>
         {!isValid && <p>{props.errorText}</p>}
       </div>
     </div>

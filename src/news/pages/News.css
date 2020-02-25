@@ -8,6 +8,8 @@
 
 .News .NewsTitle{
     color: #fff;
-    font-size: 70px;
+    font-size: 50px;
     font-weight: bolder;
+    margin:0;
+    text-align: center;
 }

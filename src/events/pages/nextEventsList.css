@@ -1,19 +1,30 @@
 .nextEventsList{
-    width: 90%;
+    width: 95%;
     margin: 10px auto;
 }
 
 .nextEventsList .container{
-    display: flex;
-    width: 90%;
-    justify-content: space-around;
-    flex-flow: row wrap;
-    border-bottom: 1 px solid #ddd;
-    margin-bottom: 5px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-column-gap: 6px;
+    grid-row-gap: 6px;
+    border: 1px solid #6DBBAD;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color:#EEEEEE;
+    padding: 10px;
+}
+.nextEventsList p{
+    margin: 0;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:#454545;
 }
 
-.nextEventsList p{
-    min-width: 150px;
-    margin: 5px 0;
-    font-weight: bold;
+@media screen and (min-width: 700px){
+    .nextEventsList .container{
+        padding: 0;
+    }
 }

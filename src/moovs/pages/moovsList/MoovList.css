@@ -4,12 +4,15 @@
 
 .Moovs .MoovsHeader{
     background-color: #6DBBAD;
+    margin-bottom: 20px;
 }
 
 .Moovs .MoovsTitle{
     color: #fff;
-    font-size: 70px;
+    font-size: 50px;
     font-weight: bolder;
+    margin:0;
+    text-align: center;
 }
 
 .Moovs .MoovList{

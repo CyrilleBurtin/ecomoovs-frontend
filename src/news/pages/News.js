@@ -22,7 +22,7 @@ const News = () => {
   return (
     <div className='News'>
       <div className='NewsHeader'>
-        <p className='text-center NewsTitle'>Nouvelles Actus</p>
+        <p className='NewsTitle'>Nouvelles Actus</p>
       </div>
 
       <NewsCard news={news} />

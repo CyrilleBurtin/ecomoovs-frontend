@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
 
 import ip from "../../../shared/ip/Ip";
 import { useForm } from "../../../shared/hooks/Form-hook";
@@ -10,10 +9,11 @@ import {
   VALIDATOR_REQUIRE
 } from "../../../shared/validators/Validators";
 import "../../../shared/css/forms.css";
+import BlueButton from '../../../shared/uiElements/BlueButton';
 
 const AddNews = () => {
   const Auth = useContext(AuthContext);
-console.log('Auth', Auth)
+
   const [formState, inputHandler] = useForm({
     author: {
       value: "",
@@ -83,14 +83,14 @@ console.log('Auth', Auth)
   };
 
   return (
-    <Container fluid className="SharedForm">
-      <Row>
-        <Col className="SharedFormHeader">
+    <div className="SharedForm">
+      
+        <div className="SharedFormHeader">
           <p className="text-center SharedFormTitle">AJOUTER UNE NEWS</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
+        </div>
+     
+      
+        <div>
           <form onSubmit={handleClick}>
             <FormInput
               name="author"
@@ -165,22 +165,15 @@ console.log('Auth', Auth)
               onInput={inputHandler}
               errorText="Votre Image n'est pas valide"
             />
-            <Button
-              type="submit"
-              variant="primary"
-              style={{
-                margin: "50px Auto",
-                textAlign: "center",
-                display: "block"
-              }}
+            <BlueButton
+              type="submit"             
               disabled={!formState.isValid}
             >
               Valider
-            </Button>
+            </BlueButton>
           </form>
-        </Col>
-      </Row>
-    </Container>
+        </div>
+    </div>
   );
 };
 

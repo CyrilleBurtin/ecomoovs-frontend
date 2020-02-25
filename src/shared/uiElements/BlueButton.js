@@ -8,6 +8,7 @@ const BlueButton = props => {
         backgroundColor: '#0da7db',
         border: 'none',
         borderRadius: '4px',
+        padding: '7px 15px'
       }}
       onClick={props.click}
     >
