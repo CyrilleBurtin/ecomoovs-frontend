@@ -1,41 +1,42 @@
 import React, { useState } from 'react';
+
 import ip from '../../../shared/ip/Ip';
+import { removeDiacritics } from '../../../shared/components/DiacriticsRemover';
+
 import GreenButton from '../../../shared/uiElements/GreenButton';
 import BlueButton from '../../../shared/uiElements/BlueButton';
-import { removeDiacritics } from '../../../shared/components/DiacriticsRemover';
 
 const Search = () => {
   const [tags, setTags] = useState('');
   const [result, setResult] = useState([]);
 
+  const searchListe = async cleanTags => {
+    try {
+      const result = await fetch(`${ip}/moovs/findTags`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cleanTags)
+      });
+      const data = await result.json();
+      setResult(data);
+    } catch (error) {
+      console.log('Request failed', error);
+    }
+  };
+
   const searchHanlder = event => {
     event.preventDefault();
     let ponctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
-    let removedAccent = removeDiacritics(tags)
+    let removedAccent = removeDiacritics(tags);
     let cleanTags = removedAccent
       .toLowerCase()
       .trim()
       .split(' ');
-      cleanTags = cleanTags.filter(
+    cleanTags = cleanTags.filter(
       item => item.length > 2 && item !== ponctuation
     );
 
-    const searchListe = async () => {
-      try {
-        const result = await fetch(`${ip}/moovs/findTags`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(cleanTags)
-        })
-        const data = await result.json();
-        setResult(data)
-      } catch(error){
-        console.log('Request failed', error);
-      }
-
-    }
-    searchListe()
- 
+    searchListe(cleanTags);
   };
 
   const inputHandler = event => {
@@ -43,18 +44,22 @@ const Search = () => {
   };
 
   const liste = result.map((e, i) => (
-    <div key={i} style={{display:'flex', alignItems:'center', justifyContent:'space-evenly'}}>
-        <div style={{width: '15%', textAlign:'left'}}><img src={e.img.eager[0].secure_url} width='100px' alt={e.name}/></div>
-        <div style={{width: '15%', textAlign:'left'}}>{e.title}</div>
-        <div style={{width: '15%', textAlign:'left'}}>{e.location.city}</div>
-        <div style={{width: '15%', textAlign:'left'}}>{e.type}</div>
-        <div style={{width: '15%', textAlign:'left'}}>{e.name}</div>
-      <BlueButton>Voir +</BlueButton>
+    <div className='search' key={i}>
+      <div>
+        <img src={e.img.eager[0].secure_url} width='100px' alt={e.name} />
+      </div>
+      <div>{e.title}</div>
+      <div>{e.location.city}</div>
+      <div>{e.type}</div>
+      <div>{e.name}</div>
+      <div>
+        <BlueButton>Voir +</BlueButton>
+      </div>
     </div>
   ));
 
   return (
-    <div className='pl-0 pr-0 pb-5 Home'>
+    <div className='home'>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <h1 className='H1Small' style={{}}>
           Trouver <span className='H1Strong'>Magasin zéro déchet </span>
@@ -92,19 +97,7 @@ const Search = () => {
         </div>
       </form>
 
-      <div
-        style={{
-          backgroundColor: '#fff',
-          display: 'inline-flex',
-          flexFlow: 'column wrap',
-          justifyContent: 'spaceBetween',
-          width: '100%',
-          margin: 'auto',
-          textAlign: 'center'
-        }}
-      >
-        {liste}
-      </div>
+      {liste}
 
       <div style={{ display: 'flex' }} className='justify-content-center'>
         <div toto='Navlink' to='/moovsList' className='activeStyle default'>

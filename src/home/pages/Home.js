@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import ip from '../../shared/ip/Ip';
+import React from 'react';
 
 import Search from './blocks/Search';
 import Explain from './blocks/Explain';
-import Last from './blocks/Last';
+import LastMoovs from './blocks/LastMoovs';
 import Quotations from './blocks/Quotations';
 import NextEvents from './blocks/NextEvents';
 import Help from './blocks/Help';
@@ -11,30 +10,13 @@ import Help from './blocks/Help';
 import './Home.css';
 
 const Home = () => {
-  const [moovs, setMoovs] = useState([]);
-
-
-  useEffect(() => {
-    const getMoovsList = async () => {
-      try {
-        const response = await fetch(`${ip}/moovs/`);
-        const data = await response.json();
-        return setMoovs(data);
-      }
-      catch (error) {
-        return console.log(error);
-      }
-    };
-    getMoovsList();
-  }, []);
-
   return (
     <>
       <Search />
       <Explain />
-      <Last last={moovs} />
+      <LastMoovs />
       <Quotations />
-      <NextEvents nextEvents={moovs} />
+      <NextEvents />
       <Help />
     </>
   );

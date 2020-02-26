@@ -1,6 +1,11 @@
-.Logo{
+.logo{
     color: #fff;
-    margin-top: 15px;
     letter-spacing: 3px;
-    font-size: 30px;
-} 
+    font-size: 25px;
+}
+
+@media only screen and (min-width: 768px) {
+    .logo{
+        font-size: 30px;
+    }
+}

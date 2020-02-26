@@ -1,18 +1,7 @@
-.Home{
-    padding-top: 10%;
-}
-
-.Home::after{
-    content: "";
+.home{
     background-image: url('/images/home-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.75;
-    top: 0;
-    left: 0;
-    bottom:0;
-    right: 0;
-    position: absolute;
+    background-size: cover;  
+    opacity: 1;
     z-index: -1;
 }
 
@@ -21,16 +10,19 @@
     margin-bottom: 20;
     font-size: 28px;
     font-weight: bold;
+    text-shadow: 1px 1px #fff;
 }
 .H1Strong{
     font-size: 43px;
     font-weight: bold;
     color:#77eebe;
+    text-shadow: 1px 1px #000;
 }
 H4{
     font-size: 21px;
     font-weight: bold;
     text-align: center;
+    text-shadow: 1px 1px #fff;
 }
 .greens{
     background-color:#6dbbad;
@@ -56,17 +48,22 @@ color: #00e689;
     background-size: cover;
 }
 
-.Home input{
+.home input{
     background-color: #FFF;
     min-width: 250px;
     width: 30%;
-    background-color: rgba(0,0,0,0.3);
+    /* background-color: rgba(0,0,0,0.3); */
+    background-color: transparent;
     border: none;
     border-bottom : 1px solid #777;
     color: #FFF;
-    margin: 0 10px 10px
+    margin: 0 10px 10px;
+    padding: 10px;
+    font-size: 18px;
+    text-shadow: 1px 1px #000;
+    border-radius: 5px;
 }
 
-.Home ::placeholder{
+.home ::placeholder{
     color: #fff
 }

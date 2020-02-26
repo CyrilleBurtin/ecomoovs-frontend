@@ -4,7 +4,7 @@ import { faTint } from '@fortawesome/free-solid-svg-icons';
 import './Logo.css';
 
 const Logo = () => (
-  <p className='Logo'>
+  <p className='logo'>
     <FontAwesomeIcon icon={faTint} style={{textDecoration:'none'}} /> ECOMOOVS
   </p>
 );
