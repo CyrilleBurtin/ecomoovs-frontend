@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import ip from '../../../shared/ip/Ip';
 import { removeDiacritics } from '../../../shared/components/DiacriticsRemover';
-
 import GreenButton from '../../../shared/uiElements/GreenButton';
 import BlueButton from '../../../shared/uiElements/BlueButton';
 
@@ -53,7 +53,9 @@ const Search = () => {
       <div>{e.type}</div>
       <div>{e.name}</div>
       <div>
-        <BlueButton>Voir +</BlueButton>
+        <NavLink to={{pathname: '/moov', moovData: e}} activeClassName='active'>
+                <BlueButton>Voir +</BlueButton>
+              </NavLink>
       </div>
     </div>
   ));
