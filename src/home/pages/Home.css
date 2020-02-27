@@ -4,7 +4,9 @@
     opacity: 1;
     z-index: -1;
 }
-
+.homebgc{
+    background-color: rgba(45,90,45,0.2) ;
+}
 .H1Small{
     text-align: center;
     font-size: 28px;
@@ -64,4 +66,8 @@ color: #00e689;
 
 .home ::placeholder{
     color: #fff
+}
+
+.home .searchButton{
+    text-align: center;
 }

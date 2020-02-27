@@ -5,6 +5,7 @@ import ip from '../../../shared/ip/Ip';
 import { removeDiacritics } from '../../../shared/components/DiacriticsRemover';
 import GreenButton from '../../../shared/uiElements/GreenButton';
 import BlueButton from '../../../shared/uiElements/BlueButton';
+import './blocks.css'
 
 const Search = () => {
   const [tags, setTags] = useState('');
@@ -53,57 +54,62 @@ const Search = () => {
       <div>{e.type}</div>
       <div>{e.name}</div>
       <div>
-        <NavLink to={{pathname: '/moov', moovData: e}} activeClassName='active'>
-                <BlueButton>Voir +</BlueButton>
-              </NavLink>
+        <NavLink
+          to={{ pathname: '/moov', moovData: e }}
+          activeClassName='active'
+        >
+          <BlueButton>Voir +</BlueButton>
+        </NavLink>
       </div>
     </div>
   ));
 
   return (
     <div className='home'>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <h1 className='H1Small' style={{}}>
-          Trouver <span className='H1Strong'>Magasin zéro déchet </span>
-          près de <span className='H1Strong'>Annecy</span>
-        </h1>
-        <h4 className='H4' style={{}}>
-          Trouvez des initiatives durables près de chez vous
-        </h4>
-      </div>
-
-      <form onSubmit={searchHanlder}>
-        <div
-          style={{
-            marginTop: 30,
-            display: 'flex',
-            justifyContent: 'center',
-            flexFlow: 'row wrap'
-          }}
-        >
-          <input
-            placeholder='Que cherchez vous ?'
-            type='input'
-            onChange={inputHandler}
-          />
-
-          <input
-            placeholder='Où'
-            type='input'
-            // onChange={whereHandler}
-          />
+      <div className='homebgc'>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <h1 className='H1Small' style={{}}>
+            Trouver <span className='H1Strong'>Magasin zéro déchet </span>
+            près de <span className='H1Strong'>Annecy</span>
+          </h1>
+          <h4 className='H4' style={{}}>
+            Trouvez des initiatives durables près de chez vous
+          </h4>
         </div>
-        <br />
-        <div style={{ textAlign: 'center' }}>
-          <GreenButton type='submit'>Chercher</GreenButton>
-        </div>
-      </form>
 
-      {liste}
+        <form onSubmit={searchHanlder}>
+          <div
+            style={{
+              marginTop: 30,
+              display: 'flex',
+              justifyContent: 'center',
+              flexFlow: 'row wrap'
+            }}
+          >
+            <input
+              placeholder='Que cherchez vous ?'
+              type='input'
+              onChange={inputHandler}
+            />
 
-      <div style={{ display: 'flex' }} className='justify-content-center'>
-        <div toto='Navlink' to='/moovsList' className='activeStyle default'>
-          <GreenButton>SOUMETTRE UNE ACTION</GreenButton>
+            <input
+              placeholder='Où'
+              type='input'
+              // onChange={whereHandler}
+            />
+          </div>
+          <br />
+          <div className='searchButton'>
+            <GreenButton type='submit'>Chercher</GreenButton>
+          </div>
+        </form>
+
+        {liste}
+
+        <div className='searchButton'>
+          <NavLink to={'/moov'} activeClassName='active'>
+            <GreenButton>SOUMETTRE UNE ACTION</GreenButton>
+          </NavLink>
         </div>
       </div>
     </div>
