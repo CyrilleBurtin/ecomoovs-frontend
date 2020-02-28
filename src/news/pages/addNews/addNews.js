@@ -44,7 +44,7 @@ const AddNews = () => {
       isValid: false
     },
   });
-  console.log('formState', formState)
+ 
   const handleClick = event => {
     event.preventDefault();
 

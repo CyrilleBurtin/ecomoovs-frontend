@@ -6,8 +6,8 @@ import './Header.css';
 import { withRouter } from 'react-router-dom';
 import { AuthContext } from '../../shared/auth/AuthContext';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Header = props => {
   const Auth = useContext(AuthContext);
@@ -18,12 +18,13 @@ const Header = props => {
   };
 
   useEffect(() => {
-    const navSlide = () => {
-      const burger = document.querySelector('.burger');
-      const nav = document.querySelector('.nav-links');
-      const initials = document.querySelector('.initials');
-      const admin = document.querySelector('.admin-links');
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.nav-links');
+    const initials = document.querySelector('.initials');
+    const admin = document.querySelector('.admin-links');
 
+    const navSlide = () => {
+   
       burger.addEventListener('click', () => {
         nav.classList.toggle('nav-active');
         admin.classList.remove('nav-active');
@@ -31,7 +32,7 @@ const Header = props => {
 
       nav.addEventListener('mouseleave', () => {
         nav.classList.remove('nav-active');
-      })
+      });
 
       initials.addEventListener('click', () => {
         admin.classList.toggle('nav-active');
@@ -40,15 +41,16 @@ const Header = props => {
 
       admin.addEventListener('mouseleave', () => {
         admin.classList.remove('nav-active');
-      })
+      });
+      
     };
-
+  
     navSlide();
   }, []);
 
   return (
     <nav className='header'>
-      <NavLink to='/home' style={{textDecoration: 'none'}}>
+      <NavLink to='/home' style={{ textDecoration: 'none' }}>
         <Logo />
       </NavLink>
       <div className='burger'>
@@ -62,10 +64,9 @@ const Header = props => {
         <NavigationItem link='/annuaire-des-actions'>Moovs</NavigationItem>
         <NavigationItem link='/actus'>Actus</NavigationItem>
         <NavigationItem link='/events'>Events</NavigationItem>
-        
       </div>
       <div className='admin-links'>
-      {/* login and subscribe menu display handler */}
+        {/* login and subscribe menu display handler */}
         {!Auth.isLoggedIn && (
           <>
             <NavigationItem link='/inscription'>Inscription</NavigationItem>
@@ -77,7 +78,6 @@ const Header = props => {
           <>
             <NavigationItem link='/backOffice'>BackOffice</NavigationItem>
             <NavigationItem link='/addnews'>Ajouter une actus</NavigationItem>
-            <NavigationItem link='/addevent'>Ajouter un évent</NavigationItem>
             <NavigationItem link='/info-du-compte'>
               Information du compte
             </NavigationItem>
@@ -85,10 +85,10 @@ const Header = props => {
         )}
         {Auth.isLoggedIn && (
           <>
+            <NavigationItem link='/addevent'>Ajouter un évent</NavigationItem>
             <NavigationItem link='/soumettre-une-nouvelle-action'>
               Ajouter un Moov
             </NavigationItem>
-
             <a href='/home' className='logout' onClick={logout}>
               Déconnexion
             </a>
@@ -96,9 +96,11 @@ const Header = props => {
         )}
       </div>
       <p className='initials'>
-        {Auth.isLoggedIn
-          ? Auth.user.firstname.slice(0, 1) + Auth.user.lastname.slice(0, 1)
-          : <FontAwesomeIcon icon={faSignInAlt}/>}
+        {Auth.isLoggedIn ? (
+          Auth.user.firstname.slice(0, 1) + Auth.user.lastname.slice(0, 1)
+        ) : (
+          <FontAwesomeIcon icon={faSignInAlt} />
+        )}
       </p>
     </nav>
   );

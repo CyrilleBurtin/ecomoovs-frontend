@@ -32,7 +32,6 @@ const NewsCard = props => {
                       <img
                         src="/images/monkey.jpg"
                         style={{ width: "30px" }}
-                        roundedCircle
                         alt='user'
                       />
                     </div>

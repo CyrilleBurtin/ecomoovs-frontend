@@ -11,10 +11,15 @@ import '../../../shared/css/forms.css';
 import Loading from '../../../shared/components/Loading';
 
 const Login = props => {
+  console.log('props.history', props.history.location.linkdata)
   const Auth = useContext(AuthContext);
 
-  const [isLoading, setIsLoading] = useState(false);
+  let dest = '/home'
+  if ( props.history.location.linkdata){
+    dest =  props.history.location.linkdata
+  }
 
+  const [isLoading, setIsLoading] = useState(false);
   const [formState, inputHandler] = useForm(
     {
       email: {
@@ -44,7 +49,7 @@ const Login = props => {
       const token = await response.json();
       setIsLoading(false);
       Auth.login(token);
-      props.history.push('/home');
+      props.history.push(dest);
     } catch (error) {
       console.log(error);
     }

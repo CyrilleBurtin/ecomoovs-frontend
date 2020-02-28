@@ -7,16 +7,24 @@ const MoovsList = () => {
   const [moovs, setMoovs] = useState([]);
 
   useEffect(() => {
+
+    const abortController = new AbortController();
+
     const moovList = async () => {
       try {
-        const response = await fetch(`${ip}/moovs/`);
+        const response = await fetch(`${ip}/moovs/`, { signal: abortController.signal });
         const data = await response.json();
         setMoovs(data);
       } catch (error) {
-        console.log('error', error);
+        if (!abortController.signal.aborted) {
+        console.log(error);
+        }
       }
     };
     moovList();
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   return (

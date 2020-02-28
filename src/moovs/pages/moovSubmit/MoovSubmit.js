@@ -15,7 +15,7 @@ import { removeDiacritics } from '../../../shared/components/DiacriticsRemover';
 import BlueButton from '../../../shared/uiElements/BlueButton';
 const MoovSubmit = props => {
   const Auth = useContext(AuthContext);
-
+  console.log('Auth', Auth)
   const [isLoading, setIsLoading] = useState(false);
 
   const [formState, inputHandler] = useForm({

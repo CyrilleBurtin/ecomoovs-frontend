@@ -7,16 +7,24 @@ const News = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
+
+    const abortController = new AbortController();
+
     const getNews = async () => {
       try {
-        const response = await fetch(`${ip}/news/`);
+        const response = await fetch(`${ip}/news/`, { signal: abortController.signal });
         const data = await response.json();
         setNews(data);
       } catch (error) {
-        console.log('error', error);
+        if (!abortController.signal.aborted) {
+          console.log(error);
+        }
       }
     };
     getNews();
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   return (

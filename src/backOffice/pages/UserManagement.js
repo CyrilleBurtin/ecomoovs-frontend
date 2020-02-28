@@ -9,6 +9,9 @@ const UserManagement = () => {
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
+
+    const abortController = new AbortController();
+
     const userList = async () => {
       try {
         const response = await fetch(`${ip}/users`, {
@@ -18,14 +21,19 @@ const UserManagement = () => {
             authorization: `Bearer ${Auth.token}`,
             'Content-Type': 'application/x-www-form-urlencoded'
           })
-        });
+        }, { signal: abortController.signal });
         const user = await response.json();
         return setUserList(user);
       } catch (error) {
-        return console.log(error);
+        if (!abortController.signal.aborted) {
+        console.log(error);
+        }
       }
     };
     userList();
+    return () => {
+      abortController.abort();
+    };
   }, [Auth]);
 
   var list = userList.map((user, i) => (

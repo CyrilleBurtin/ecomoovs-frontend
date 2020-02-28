@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+
+import { AuthContext } from '../../../shared/auth/AuthContext';
 
 import ip from '../../../shared/ip/Ip';
 import { removeDiacritics } from '../../../shared/components/DiacriticsRemover';
 import GreenButton from '../../../shared/uiElements/GreenButton';
 import BlueButton from '../../../shared/uiElements/BlueButton';
-import './blocks.css'
+import './blocks.css';
 
 const Search = () => {
+  const Auth = useContext(AuthContext);
+  
+
   const [tags, setTags] = useState('');
   const [result, setResult] = useState([]);
+
+  let submitLink = '/connexion';
+  if (Auth.isLoggedIn) {
+    submitLink = '/soumettre-une-nouvelle-action';
+  }
 
   const searchListe = async cleanTags => {
     try {
@@ -107,7 +117,7 @@ const Search = () => {
         {liste}
 
         <div className='searchButton'>
-          <NavLink to={'/moov'} activeClassName='active'>
+          <NavLink to={{pathname:submitLink, linkdata:'/soumettre-une-nouvelle-action'}} activeClassName='active'>
             <GreenButton>SOUMETTRE UNE ACTION</GreenButton>
           </NavLink>
         </div>

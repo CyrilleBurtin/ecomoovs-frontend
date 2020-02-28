@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 
 import { AuthContext } from './shared/auth/AuthContext';
 
@@ -23,7 +28,6 @@ import EventsList from './events/pages/EventsList';
 import MoovFullCard from './moovs/components/fullCard/MoovFullCard';
 import EventFullCard from './events/pages/EventFullCard';
 
-
 const App = props => {
   const { user, token, login, logout, isLoggedIn } = useLogin();
 
@@ -35,18 +39,19 @@ const App = props => {
           <Route path='/' exact component={Home} />
           <Route path='/home' component={Home} />
           <Route path='/annuaire-des-actions' component={MoovsList} />
+          <Route path='/moov' component={MoovFullCard} />
           <Route path='/actus' component={News} />
           <Route path='/events' component={EventsList} />
-          <Route path='/inscription' component={Registration} />
-          <Route path='/connexion' component={Login} />
-          <Route path='/backOffice' component={BackOffice} />
-          <Route path='/addnews' component={AddNews} />
-          <Route path='/addevent' component={AddEvent} />
-          <Route path='/info-du-compte' component={UserEdit} />
-          <Route path='/soumettre-une-nouvelle-action' component={MoovSubmit} />
-          <Route path='/moov' component={MoovFullCard} />
           <Route path='/event' component={EventFullCard} />
 
+          {!isLoggedIn && <Route path='/inscription' component={Registration} />}
+          {!isLoggedIn && <Route path='/connexion' component={Login} />}
+
+          {isLoggedIn && user.admin && <Route path='/backOffice' component={BackOffice} />}
+          {isLoggedIn && <Route path='/addnews' component={AddNews} />}
+          {isLoggedIn && <Route path='/addevent' component={AddEvent} />}
+          {isLoggedIn && <Route path='/info-du-compte' component={UserEdit} />}
+          {isLoggedIn && <Route path='/soumettre-une-nouvelle-action' component={MoovSubmit} />}
           <Redirect to='/' />
         </Switch>
         <Footer />

@@ -2,9 +2,7 @@ import React from 'react';
 
 const moovFullCard = props => {
 
-  console.log('props.navigation.moovData', props.location.moovData);
-  if (props.location.moovData === undefined){
-      console.log('hello')
+   if (props.location.moovData === undefined){
       props.history.push('/home');
       return false
   }

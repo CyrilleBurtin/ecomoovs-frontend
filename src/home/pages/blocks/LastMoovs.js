@@ -6,18 +6,31 @@ import ip from '../../../shared/ip/Ip';
 
 const LastMoovs = () => {
   const [moovs, setMoovs] = useState([]);
+console.log('moovs', moovs)
 
   useEffect(() => {
+
+    const abortController = new AbortController();
+
     const getMoovsList = async () => {
       try {
-        const response = await fetch(`${ip}/moovs/`);
+        const response = await fetch(`${ip}/moovs/`, { signal: abortController.signal });
         const data = await response.json();
-        return setMoovs(data);
+        setMoovs(data);
+
       } catch (error) {
-        return console.log(error);
+        if (!abortController.signal.aborted) {
+        console.log(error);
+        }
       }
     };
+
     getMoovsList();
+
+    return () => {
+      abortController.abort();
+    };
+    
   }, []);
 
   return (
