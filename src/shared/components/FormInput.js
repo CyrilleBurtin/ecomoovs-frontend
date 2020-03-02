@@ -14,7 +14,7 @@ const inputReducer = (state, action) => {
       return {
         ...state,
         touched: true
-      };
+      };    
     default:
       return state;
   }
@@ -45,6 +45,18 @@ const FormInput = props => {
     );
   };
 
+  const checkboxHandler = event => {
+    console.log('event.target.value', event.target.checked);
+    dispatch(
+      {
+        type: 'CHANGE',
+        val: event.target.checked,
+        validators: props.validators
+      },
+      []
+    );
+  };
+
   const touchHandler = () => {
     dispatch({
       type: 'TOUCHED'
@@ -52,7 +64,7 @@ const FormInput = props => {
   };
 
   const element =
-    props.element === 'input' ? (
+    props.element === 'input' && props.name !== 'cgu' ? (
       <input
         autoComplete={props.autocomplete}
         type={props.type}
@@ -71,6 +83,15 @@ const FormInput = props => {
         <option>Luxembourg</option>
         <option>Monaco</option>
       </select>
+    ) : props.name === 'cgu' ? (
+      <input
+        type={props.type}
+        name={props.name}
+        onChange={checkboxHandler}
+        onBlur={touchHandler}
+        className='FormInput'
+        checked={props.checked}
+      />
     ) : null;
 
   return (
@@ -80,6 +101,8 @@ const FormInput = props => {
         'form-control--invalid'}`}
     >
       {element}
+
+      {/* error message */}
       {!inputState.isValid && inputState.touched ? (
         <p style={{ marginTop: '5px' }}>{props.errorText}</p>
       ) : null}

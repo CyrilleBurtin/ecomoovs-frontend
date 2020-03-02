@@ -8,7 +8,8 @@ import { AuthContext } from '../../../shared/auth/AuthContext';
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_EMAIL,
-  VALIDATOR_PASSWORD
+  VALIDATOR_PASSWORD,
+  VALIDATOR_CHECKED
 } from '../../../shared/validators/Validators';
 import '../../../shared/css/forms.css';
 
@@ -54,13 +55,14 @@ const NewUser = props => {
         isValid: true
       },
       cgu: {
-        value: 0,
+        value: false,
         isValid: false
       }
     },
     false
   );
-
+  
+console.log('formState', formState)
   const handleCLick = async event => {
     event.preventDefault();
     setIsLoading(true);
@@ -89,6 +91,7 @@ const NewUser = props => {
       console.log('Request failed', error);
     }
   };
+
 
   return (
     <div className='SharedForm'>
@@ -204,13 +207,13 @@ const NewUser = props => {
           />
           <div>
             <FormInput
-              element='input'
-              initialValue={formState.inputs.cgu.value}
+              element='input'            
               initialValidate={formState.inputs.cgu.isValid}
               type='checkbox'
               name='cgu'
-              validators={[VALIDATOR_REQUIRE()]}
+              validators={[VALIDATOR_CHECKED()]}
               onInput={inputHandler}
+              checked={formState.inputs.cgu.value}
             />
             <label>J'ai lu et accepte les CGU</label>
           </div>
