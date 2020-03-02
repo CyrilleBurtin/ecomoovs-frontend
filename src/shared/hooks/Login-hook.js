@@ -17,9 +17,10 @@ export const useLogin = () => {
     getToken => {
       if (getToken) {
         setToken(getToken);
-        localStorage.setItem("AUTH_TOKEN", JSON.stringify(getToken));
+        localStorage.setItem("AUTH_TOKEN", getToken);
       }
       const localData = localStorage.getItem("AUTH_TOKEN");
+    
       if (localData) {
         setToken(localData);
         let decodedToken = jwtDecode(localData);

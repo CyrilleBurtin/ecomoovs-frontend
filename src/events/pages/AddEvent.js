@@ -13,6 +13,7 @@ import BlueButton from '../../shared/uiElements/BlueButton';
 
 const AddEvent = () => {
   const Auth = useContext(AuthContext);
+
   const [formState, inputHandler] = useForm({
     name: {
       value: '',
@@ -65,7 +66,7 @@ const AddEvent = () => {
     try {
       const response = await fetch(`${ip}/event/`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { authorization: `Bearer ${Auth.token}` },
         body: JSON.stringify({
           userId: Auth.user._id,
           name: formState.inputs.name.value,

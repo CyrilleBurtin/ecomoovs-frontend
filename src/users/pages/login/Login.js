@@ -11,7 +11,7 @@ import '../../../shared/css/forms.css';
 import Loading from '../../../shared/components/Loading';
 
 const Login = props => {
-  console.log('props.history', props.history.location.linkdata)
+  
   const Auth = useContext(AuthContext);
 
   let dest = '/home'
