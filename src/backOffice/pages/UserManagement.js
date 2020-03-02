@@ -23,7 +23,7 @@ const UserManagement = () => {
           })
         }, { signal: abortController.signal });
         const user = await response.json();
-        return setUserList(user);
+        setUserList(user);
       } catch (error) {
         if (!abortController.signal.aborted) {
         console.log(error);

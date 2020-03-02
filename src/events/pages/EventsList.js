@@ -13,7 +13,7 @@ const EventsList = () => {
       try {
         const response = await fetch(`${ip}/event`);
         const data = await response.json();
-        return () => setEvents(data);
+        setEvents(data);
       } catch (error) {
         if (!abortController.signal.aborted) {
         console.log(error);

@@ -6,7 +6,7 @@ import ip from '../../../shared/ip/Ip';
 
 const LastMoovs = () => {
   const [moovs, setMoovs] = useState([]);
-console.log('moovs', moovs)
+
 
   useEffect(() => {
 
