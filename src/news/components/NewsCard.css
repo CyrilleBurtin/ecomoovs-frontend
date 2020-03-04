@@ -1,17 +1,52 @@
-.NewsCards{
-    margin: 25px auto;
-    height: 400px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    width: 70%
+.newsCardGrid {
+  margin: 25px 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  column-gap: 6px;
+  gap: 6px;
 }
 
-.CardContent{
-    height: 100%;
-    border: 0;
+.newsCards {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 0 5px 5px 5px;
+  min-height: 400px;
+  justify-content: space-around;
 }
 
-.NewsCards p{
-    font-size: 12px;
-    margin-bottom: 5px;
+.cardContent,
+.author {
+  display: flex;
+  justify-content: space-around;
+}
+
+.newsCards p {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.newsCards .description {
+  letter-spacing: 0;
+  font-size: 12px;
+}
+
+.newsCards .tag {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.newsCards .tag span {
+  display: inline;
+  background: #0da7db;
+  border-radius: 5px;
+  font-size: 10px;
+  padding: 2px 5px;
+  margin: 2px;
+  color: #fff;
+  letter-spacing: 0;
 }

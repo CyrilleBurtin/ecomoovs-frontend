@@ -5,7 +5,7 @@ import './News.css';
 
 const News = () => {
   const [news, setNews] = useState([]);
-
+  console.log('news', news[0])
   useEffect(() => {
 
     const abortController = new AbortController();
@@ -32,7 +32,6 @@ const News = () => {
       <div className='NewsHeader'>
         <p className='NewsTitle'>Nouvelles Actus</p>
       </div>
-
       <NewsCard news={news} />
     </div>
   );
