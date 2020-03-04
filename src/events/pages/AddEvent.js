@@ -60,13 +60,18 @@ const AddEvent = () => {
       isValid: true
     }
   });
+  console.log('formState', formState);
 
   const handleClick = async event => {
     event.preventDefault();
+
     try {
-      const response = await fetch(`${ip}/event/`, {
+      const response = await fetch(`${ip}/event`, {
         method: 'POST',
-        headers: { authorization: `Bearer ${Auth.token}` },
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${Auth.token}`
+        },
         body: JSON.stringify({
           userId: Auth.user._id,
           name: formState.inputs.name.value,

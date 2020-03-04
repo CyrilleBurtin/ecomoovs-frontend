@@ -13,48 +13,47 @@ import '../../shared/css/forms.css';
 import BlueButton from '../../shared/uiElements/BlueButton';
 
 const UserEdit = props => {
-
   const Auth = useContext(AuthContext);
- 
+
   const [isLoading, setIsLoading] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [password, setPassword] = useState({
     currentPassword: '',
     newPassword: ''
   });
-  
+
   const [formState, inputHandler] = useForm(
     {
       firstname: {
-        value: Auth.user ? Auth.user.firstname : '' ,
+        value: Auth.user ? Auth.user.firstname : '',
         isValid: true
       },
       lastname: {
-        value: Auth.user ? Auth.user.lastname : '' ,
+        value: Auth.user ? Auth.user.lastname : '',
         isValid: true
       },
       email: {
-        value: Auth.user ? Auth.user.email : '' ,
+        value: Auth.user ? Auth.user.email : '',
         isValid: true
       },
       phone: {
-        value: Auth.user ? Auth.user.phone : '' ,
+        value: Auth.user ? Auth.user.phone : '',
         isValid: true
       },
       address: {
-        value: Auth.user ? Auth.user.location.address : '' ,
+        value: Auth.user ? Auth.user.location.address : '',
         isValid: true
       },
       zipcode: {
-        value: Auth.user ? Auth.user.location.zipcode : '' ,
+        value: Auth.user ? Auth.user.location.zipcode : '',
         isValid: true
       },
       city: {
-        value: Auth.user ? Auth.user.location.city : '' ,
+        value: Auth.user ? Auth.user.location.city : '',
         isValid: true
       },
       country: {
-        value: Auth.user ? Auth.user.location.country : '' ,
+        value: Auth.user ? Auth.user.location.country : '',
         isValid: true
       },
       cgu: {
@@ -66,11 +65,9 @@ const UserEdit = props => {
   );
 
   if (!Auth.user) {
-    props.history.push('/backoffice')
-    return false
+    props.history.push('/backoffice');
+    return false;
   }
-
-
 
   const handleCLick = async event => {
     event.preventDefault();
@@ -78,7 +75,10 @@ const UserEdit = props => {
     try {
       const response = await fetch(`${ip}/users/${Auth.user._id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${Auth.token}`
+        },
         body: JSON.stringify({
           firstname: formState.inputs.firstname.value,
           lastname: formState.inputs.lastname.value,
