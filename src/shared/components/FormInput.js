@@ -84,14 +84,17 @@ const FormInput = props => {
         <option>Monaco</option>
       </select>
     ) : props.name === 'cgu' ? (
+      <>
       <input
         type={props.type}
         name={props.name}
         onChange={checkboxHandler}
         onBlur={touchHandler}
-        className='FormInput'
-        checked={props.checked}
+        className='checkbox'
+        checked={props.checked}        
       />
+      <label>{props.label}</label>
+      </>
     ) : null;
 
   return (
@@ -104,7 +107,7 @@ const FormInput = props => {
 
       {/* error message */}
       {!inputState.isValid && inputState.touched ? (
-        <p style={{ marginTop: '5px' }}>{props.errorText}</p>
+        <p>{props.errorText}</p>
       ) : null}
     </div>
   );

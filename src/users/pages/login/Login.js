@@ -9,6 +9,8 @@ import {
 } from '../../../shared/validators/Validators';
 import '../../../shared/css/forms.css';
 import Loading from '../../../shared/components/Loading';
+import BlueButton from '../../../shared/uiElements/BlueButton';
+
 
 const Login = props => {
   
@@ -60,10 +62,10 @@ const Login = props => {
   return (
     <div className='SharedForm'>
       <div className='SharedFormHeader'>
-        <p className='text-center SharedFormTitle'>CONNEXION</p>
+        <p className='SharedFormTitle'>CONNEXION</p>
       </div>
       <div>
-        <form onSubmit={loginHandler}>
+        <form onSubmit={loginHandler} className="formFlex">
           <FormInput
             element='input'
             type='text'
@@ -85,18 +87,14 @@ const Login = props => {
             onInput={inputHandler}
           />
           {isLoading && <Loading msg='Connexion en cours' />}
-          <button
-            type='submit'
-            variant='primary'
-            style={{
-              margin: '50px Auto',
-              textAlign: 'center',
-              display: 'block'
-            }}
+          <div style={{textAlign:'center'}}>
+          <BlueButton
+            type='submit'       
             disabled={!formState.isValid}
           >
             Connexion
-          </button>
+          </BlueButton>
+          </div>
         </form>
       </div>
     </div>

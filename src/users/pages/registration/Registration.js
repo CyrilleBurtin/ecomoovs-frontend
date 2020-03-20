@@ -12,6 +12,7 @@ import {
   VALIDATOR_CHECKED
 } from '../../../shared/validators/Validators';
 import '../../../shared/css/forms.css';
+import BlueButton from '../../../shared/uiElements/BlueButton';
 
 const NewUser = props => {
   const Auth = useContext(AuthContext);
@@ -61,8 +62,8 @@ const NewUser = props => {
     },
     false
   );
-  
-console.log('formState', formState)
+
+  console.log('formState', formState);
   const handleCLick = async event => {
     event.preventDefault();
     setIsLoading(true);
@@ -92,15 +93,18 @@ console.log('formState', formState)
     }
   };
 
-
   return (
     <div className='SharedForm'>
       <div className='SharedFormHeader'>
         <p className='text-center SharedFormTitle'>INSCRIPTION</p>
       </div>
-
+      
       <div>
-        <form encType='multipart/form-data' onSubmit={handleCLick}>
+        <form
+          encType='multipart/form-data'
+          onSubmit={handleCLick}
+          className='formFlex'
+        >
           <FormInput
             autocomplete='given-name'
             element='input'
@@ -204,32 +208,27 @@ console.log('formState', formState)
             type='select'
             name='country'
             onInput={inputHandler}
+            validators={[]}
           />
-          <div>
+          <div className='cgu'>
             <FormInput
-              element='input'            
+              element='input'
               initialValidate={formState.inputs.cgu.isValid}
               type='checkbox'
               name='cgu'
               validators={[VALIDATOR_CHECKED()]}
               onInput={inputHandler}
               checked={formState.inputs.cgu.value}
+              label="J'ai lu et accepte les CGU"
             />
-            <label>J'ai lu et accepte les CGU</label>
+            <label></label>
           </div>
-          {isLoading && <Loading msg='Inscription en cours...' />}
-          <button
-            type='submit'
-            variant='primary'
-            style={{
-              margin: '50px Auto',
-              textAlign: 'center',
-              display: 'block'
-            }}
-            disabled={!formState.isValid}
-          >
+          {isLoading && <Loading msg='Connexion en cours' />}
+          <div style={{textAlign:'center'}}>
+          <BlueButton type='submit' disabled={!formState.isValid}>
             S'inscrire
-          </button>
+          </BlueButton>
+          </div>
         </form>
       </div>
     </div>

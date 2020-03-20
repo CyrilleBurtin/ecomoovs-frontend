@@ -1,17 +1,41 @@
 .MoovCardFlex {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  grid-column-gap: 6px;
-  grid-row-gap: 6px;
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
 }
-.MoovCards {
+/* .MoovCards {
   border: 1px solid #6dbbad;
   border-radius: 2%;
   padding: 10px;
   box-sizing: border-box;
   background-color: #eee;
+} */
+.MoovCards {
+  border-radius: 13px;
+  background: #ffffff;
+  box-shadow: 5px 5px 8px #bbb, -5px -5px 8px #f8f8f8;
+  overflow: hidden;
+  padding: 4%;
+}
+
+.MoovCards img {
+  width: 90%;
+  margin: 10px auto;
+  display: block;
+  border-radius: 5%;
+  box-shadow: 5px 5px 8px #bbb, -5px -5px 8px #f8f8f8;
+  overflow: hidden;
 }
 
 .MoovCards .CardBody {
   min-height: 124px;
+}
+
+.MoovCards .CardBody {
+  width: 90%;
+  margin: 20px auto;
+  display: block;
+  border-radius: 5%;
+  box-shadow: 5px 5px 8px #bbb, -5px -5px 8px #f8f8f8;
 }

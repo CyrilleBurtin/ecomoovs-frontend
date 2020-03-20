@@ -8,12 +8,12 @@
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     grid-column-gap: 6px;
     grid-row-gap: 6px;
-    border: 1px solid #6DBBAD;
-    border-radius: 4px;
     text-align: center;
     margin-bottom: 10px;
-    background-color:#EEEEEE;
+    background-color:#fff;
     padding: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 8px #bbb, -5px -5px 8px #f8f8f8;
 }
 .nextEventsList p{
     margin: 0;

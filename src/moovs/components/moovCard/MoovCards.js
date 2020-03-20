@@ -10,10 +10,9 @@ const MoovsCards = props => {
       {props.moovList &&
         props.moovList.map((e, i) => (
           <div key={i + 1} className='MoovCards'>
-            <div style={{ height: '150px', overflow: 'hidden' }}>
+            <div>
               <img
-                src={e.img.eager[0].secure_url}
-                style={{ width: '100%', maxHeight: '150px' }}
+                src={e.img.eager[0].secure_url}               
                 alt='moov'
               />
             </div>

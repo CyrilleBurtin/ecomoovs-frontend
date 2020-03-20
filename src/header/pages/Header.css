@@ -58,22 +58,24 @@
 }
 
 .initials {
-  color: #333333;
+  color: #00e689;
   font-size: 1.5em;
   text-align: center;
   line-height: 40px;
   font-weight: bold;
-  background-color: #00e689;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
   cursor: pointer;
+  border-radius: 50%;
+background: #333333;
+box-shadow:  4px 4px 8px #2b2b2b, 
+             -4px -4px 8px #3b3b3b;
 }
-a.logout { 
-    color: #fff;
-    text-decoration: none;
-    padding: 0 10px;
-    box-sizing: border-box;
+a.logout {
+  color: #fff;
+  text-decoration: none;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 a.logout:hover,

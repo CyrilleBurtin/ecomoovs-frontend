@@ -108,7 +108,7 @@ const Search = () => {
               // onChange={whereHandler}
             />
           </div>
-          <br />
+
           <div className='searchButton'>
             <GreenButton type='submit'>Chercher</GreenButton>
           </div>
