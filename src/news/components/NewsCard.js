@@ -30,7 +30,7 @@ const NewsCard = props => {
           <div className='author'>
             <img
               src='/images/monkey.jpg'
-              style={{ width: '30px' }}
+              style={{ width: '30px', height: '30px' }}
               alt='user'
             />
             <p>
