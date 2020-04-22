@@ -102,11 +102,11 @@ const Search = () => {
               onChange={inputHandler}
             />
 
-            <input
+            {/* <input
               placeholder='Où'
               type='input'
               // onChange={whereHandler}
-            />
+            /> */}
           </div>
 
           <div className='searchButton'>

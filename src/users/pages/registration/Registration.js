@@ -60,7 +60,7 @@ const NewUser = props => {
         isValid: false
       }
     },
-    false
+    true
   );
 
   console.log('formState', formState);
@@ -150,7 +150,7 @@ const NewUser = props => {
             name='password'
             placeholder='mot de passe'
             validators={[VALIDATOR_REQUIRE(), VALIDATOR_PASSWORD()]}
-            errorText='Non valide : 10 à 20 caractères avec majuscule, chiffre, caractère spéciaux @$!%*?& '
+            errorText='10 à 20 caractères avec au moins une majuscule, un chiffre et un caractères spécial : @ $ ! % * ? & '
             onInput={inputHandler}
           />
           <FormInput

@@ -7,7 +7,7 @@ const Explain = () => (
       <h3>Notre Mission</h3>
       <p>
         Notre mission est de promouvoir, d'encourager et de soutenir les
-        initiatives ayant un impact positif sur notre planète.{' '}
+        initiatives ayant un impact positif sur notre planète.
       </p>
     </div>
     <div className='explain2'>

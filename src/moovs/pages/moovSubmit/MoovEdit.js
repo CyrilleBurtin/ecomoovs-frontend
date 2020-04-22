@@ -361,13 +361,7 @@ const MoovEdit = props => {
           />
           {isLoading && <Loading msg='Enregistrement du moov en cours ...' />}
           <BlueButton
-            type='submit'
-            variant='primary'
-            style={{
-              margin: '50px Auto',
-              textAlign: 'center',
-              display: 'block'
-            }}
+            type='submit' 
             disabled={!formState.isValid}
           >
             Valider les modifications

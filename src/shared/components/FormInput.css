@@ -1,14 +1,13 @@
 .FormInput {
   width: 100%;
-  border: none;
-  background: #ebebeb;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  box-shadow: 3px 3px 7px #c8c8c8, -3px -3px 7px #fff;
-  font-size: 1rem;
-  padding: 5px 5px 5px;
   box-sizing: border-box;
-  color: #386b0f;
+  border-radius: 10px;
+background: #d7d7d7;
+box-shadow: inset 5px 5px 14px #c2c2c2, 
+            inset -5px -5px 14px #ededed;
+  padding: 5px;
+  color: #666;
+  font-size: 18px;
 }
 
 .cgu {
@@ -23,7 +22,7 @@
   transform: scale(1.5);
 }
 
-input:-webkit-autofill,
+/* input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
@@ -34,7 +33,7 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   background-color: #b1de8c !important ;
   -webkit-text-fill-color: green;
-}
+} */
 
 .form-control {
   margin-top: 20px;
