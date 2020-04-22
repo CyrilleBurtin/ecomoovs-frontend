@@ -72,7 +72,7 @@ const Login = props => {
             name='email'
             autocomplete='email'
             placeholder='email'
-            errorText='Email non valid'
+            errorText='Email non valide'
             validators={[VALIDATOR_EMAIL()]}
             onInput={inputHandler}
           />
