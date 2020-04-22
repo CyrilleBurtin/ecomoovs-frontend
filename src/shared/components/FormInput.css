@@ -22,19 +22,6 @@ box-shadow: inset 5px 5px 14px #c2c2c2,
   transform: scale(1.5);
 }
 
-/* input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-  background-color: #b1de8c !important ;
-  -webkit-text-fill-color: green;
-} */
-
 .form-control {
   margin-top: 20px;
   background-color: transparent;
