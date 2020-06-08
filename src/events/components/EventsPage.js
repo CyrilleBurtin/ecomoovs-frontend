@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EventsPage = props => {
+const EventsPage = (props) => {
   let event = props.data;
   console.log('event', event);
 
@@ -12,16 +12,16 @@ const EventsPage = props => {
         <div>{event.dateOut}</div>
       </div>
       <div>{event.title}</div>
-     <div className='cardContent'>
-      <div>{event.punchline}</div>
-      <div className='description'>{event.description}</div>
-      <div>{event.email}</div>
-      <div>{event.phone}</div>
-      <div className='address'>
-      <div>{event.zipcode}</div>
-      <div>{event.city}</div>
-      <div>{event.country}</div>
-      </div>
+      <div className='cardContent'>
+        <div>{event.punchline}</div>
+        <div className='description'>{event.description}</div>
+        <div>{event.email}</div>
+        <div>{event.phone}</div>
+        <div className='address'>
+          <div>{event.zipcode}</div>
+          <div>{event.city}</div>
+          <div>{event.country}</div>
+        </div>
       </div>
     </div>
   );

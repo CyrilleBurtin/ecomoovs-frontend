@@ -8,21 +8,16 @@ const VALIDATOR_TYPE_EMAIL = "EMAIL";
 const VALIDATOR_TYPE_FILE = "FILE";
 const VALIDATOR_TYPE_PASSWORD = "PASSWORD";
 
-export const VALIDATOR_REQUIRE = () => ({ type: VALIDATOR_TYPE_REQUIRE });
-export const VALIDATOR_CHECKED = () => ({ type: VALIDATOR_TYPE_CHECKED });
-export const VALIDATOR_FILE = () => ({ type: VALIDATOR_TYPE_FILE });
-export const VALIDATOR_MINLENGTH = val => ({
-  type: VALIDATOR_TYPE_MINLENGTH,
-  val: val
-});
-export const VALIDATOR_MAXLENGTH = val => ({
-  type: VALIDATOR_TYPE_MAXLENGTH,
-  val: val
-});
-export const VALIDATOR_MIN = val => ({ type: VALIDATOR_TYPE_MIN, val: val });
-export const VALIDATOR_MAX = val => ({ type: VALIDATOR_TYPE_MAX, val: val });
-export const VALIDATOR_PASSWORD = () => ({ type: VALIDATOR_TYPE_PASSWORD})
-export const VALIDATOR_EMAIL = () => ({ type: VALIDATOR_TYPE_EMAIL });
+export const VALIDATOR_REQUIRE    = ( ) => ({ type: VALIDATOR_TYPE_REQUIRE });
+export const VALIDATOR_CHECKED    = ( ) => ({ type: VALIDATOR_TYPE_CHECKED });
+export const VALIDATOR_FILE       = ( ) => ({ type: VALIDATOR_TYPE_FILE });
+export const VALIDATOR_MINLENGTH  = val => ({ type: VALIDATOR_TYPE_MINLENGTH, val: val });
+export const VALIDATOR_MAXLENGTH  = val => ({ type: VALIDATOR_TYPE_MAXLENGTH, val: val });
+export const VALIDATOR_MIN        = val => ({ type: VALIDATOR_TYPE_MIN, val: val });
+export const VALIDATOR_MAX        = val => ({ type: VALIDATOR_TYPE_MAX, val: val });
+export const VALIDATOR_PASSWORD   = ( ) => ({ type: VALIDATOR_TYPE_PASSWORD})
+export const VALIDATOR_EMAIL      = ( ) => ({ type: VALIDATOR_TYPE_EMAIL });
+
 export const validate = (value, validators) => {
   let isValid = true;
   for (const validator of validators) {

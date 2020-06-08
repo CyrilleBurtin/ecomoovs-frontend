@@ -8,31 +8,22 @@ const EventsList = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    
-    const abortController = new AbortController();
-
     const eventlist = async () => {
       try {
-        const response = await fetch(`${ip}/event`, { signal: abortController.signal });
+        const response = await fetch(`${ip}/event`);
         const data = await response.json();
         setEvents(data);
       } catch (error) {
-        if (!abortController.signal.aborted) {
         console.log(error);
-        }
       }
     };
 
     eventlist();
-
-     return () => {
-      abortController.abort();
-    };
   }, []);
 
   return (
     <>
-      <div className='nextEventsList'>        
+      <div className='nextEventsList'>
         {events.map((e, i) => (
           <div className='container' key={i}>
             <p>{e.name}</p>

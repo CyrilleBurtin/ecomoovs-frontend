@@ -15,8 +15,10 @@ import '../../../shared/css/forms.css';
 import BlueButton from '../../../shared/uiElements/BlueButton';
 
 const NewUser = props => {
+
   const Auth = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
+  
   const [formState, inputHandler] = useForm(
     {
       firstname: {

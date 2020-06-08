@@ -16,12 +16,10 @@ const Login = props => {
   
   const Auth = useContext(AuthContext);
 
-  let dest = '/home'
-  if ( props.history.location.linkdata){
-    dest =  props.history.location.linkdata
-  }
+  let dest = props.history.location.linkdata || '/home';
 
   const [isLoading, setIsLoading] = useState(false);
+
   const [formState, inputHandler] = useForm(
     {
       email: {
@@ -42,7 +40,7 @@ const Login = props => {
     try {
       const response = await fetch(`${ip}/users/login`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },       
         body: JSON.stringify({
           email: formState.inputs.email.value,
           password: formState.inputs.password.value

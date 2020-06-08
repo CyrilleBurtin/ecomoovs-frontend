@@ -2,9 +2,8 @@
   width: 100%;
   box-sizing: border-box;
   border-radius: 10px;
-background: #d7d7d7;
-box-shadow: inset 5px 5px 14px #c2c2c2, 
-            inset -5px -5px 14px #ededed;
+  background: #d7d7d7;
+  box-shadow: inset 5px 5px 14px #c2c2c2, inset -5px -5px 14px #ededed;
   padding: 5px;
   color: #666;
   font-size: 18px;

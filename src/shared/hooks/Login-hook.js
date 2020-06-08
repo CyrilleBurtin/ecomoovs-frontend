@@ -20,7 +20,8 @@ export const useLogin = () => {
         localStorage.setItem("AUTH_TOKEN", getToken);
       }
       const localData = localStorage.getItem("AUTH_TOKEN");
-    
+      
+    console.log('localData', localData)
       if (localData) {
         setToken(localData);
         let decodedToken = jwtDecode(localData);

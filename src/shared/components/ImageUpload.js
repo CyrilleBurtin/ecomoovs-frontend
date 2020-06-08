@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import BlueButton from '../uiElements/BlueButton';
 
 const ImageUpload = props => {
+  
   const [file, setFile] = useState();
   const [previewUrl, setPreviewUrl] = useState();
   const [isValid, setIsValid] = useState();

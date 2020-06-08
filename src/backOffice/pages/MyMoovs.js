@@ -10,11 +10,9 @@ const MyMoovs = props => {
 
   useEffect(() => {
 
-    const abortController = new AbortController();
-
     const getMyMoovs = async () => {
       try {
-        const response = await fetch(`${ip}/moovs/myMoovs/${user.user._id}`, { signal: abortController.signal });
+        const response = await fetch(`${ip}/moovs/myMoovs/${user.user._id}`);
         const data = await response.json();
         setMyMoovs(data);
       } catch (error) {
@@ -24,9 +22,6 @@ const MyMoovs = props => {
     if (user.user._id) {
       getMyMoovs();
     }
-    return () => {
-      abortController.abort();
-    };
     
   }, [user.user._id]);
 

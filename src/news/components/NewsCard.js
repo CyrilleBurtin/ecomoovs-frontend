@@ -7,9 +7,7 @@ const NewsCard = props => {
   // News insert date
   const dateGen = insertDate => {
     let date = new Date(insertDate);
-    return ` ${date.getDate()} ${new Intl.DateTimeFormat('fr-FR', {
-      month: 'short'
-    }).format(date)} ${date.getFullYear()}`;
+    return ` ${date.getDate()} ${new Intl.DateTimeFormat('fr-FR', { month: 'short'}).format(date)} ${date.getFullYear()}`;
   };
 
   const newscard = props.news.map((e, i) => {

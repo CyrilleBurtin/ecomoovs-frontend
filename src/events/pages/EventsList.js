@@ -7,24 +7,17 @@ const EventsList = () => {
 
   useEffect(() => {
     
-    const abortController = new AbortController();
-
-    const eventlist = async () => {
+       const eventlist = async () => {
       try {
         const response = await fetch(`${ip}/event`);
         const data = await response.json();
         setEvents(data);
-      } catch (error) {
-        if (!abortController.signal.aborted) {
+      } catch (error) { 
         console.log(error);
-        }
       }
     };
     eventlist();
 
-     return () => {
-      abortController.abort();
-    };
 
   }, []);
 
