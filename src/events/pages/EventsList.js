@@ -21,7 +21,7 @@ const EventsList = () => {
 
   }, []);
 
-  const eventsList = events.map((e,i) => <EventsPage key={i} data={e} />)
+  let eventsList = events.map((e,i) => <EventsPage key={i} data={e} />)
 
   return (
     <>

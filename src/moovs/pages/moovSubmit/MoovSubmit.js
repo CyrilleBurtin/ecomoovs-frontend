@@ -11,7 +11,6 @@ import {
 } from '../../../shared/validators/Validators';
 import '../../../shared/css/forms.css';
 import Loading from '../../../shared/components/Loading';
-import { removeDiacritics } from '../../../shared/components/DiacriticsRemover';
 import BlueButton from '../../../shared/uiElements/BlueButton';
 const MoovSubmit = props => {
   const Auth = useContext(AuthContext);
@@ -105,8 +104,7 @@ const MoovSubmit = props => {
     let tags = rowTags.split(' ');
     tags = tags.filter(item => item.length > 2 && item !== ponctuation);
 
-    let searchTags = removeDiacritics(rowTags);
-    searchTags = searchTags.split(' ');
+   let searchTags = rowTags.split(' ');
 
     console.log('searchTags', searchTags);
 

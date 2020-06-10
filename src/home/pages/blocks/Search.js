@@ -4,16 +4,14 @@ import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../shared/auth/AuthContext';
 
 import ip from '../../../shared/ip/Ip';
-import { removeDiacritics } from '../../../shared/components/DiacriticsRemover';
 import GreenButton from '../../../shared/uiElements/GreenButton';
 import BlueButton from '../../../shared/uiElements/BlueButton';
 import './blocks.css';
 
 const Search = () => {
   const Auth = useContext(AuthContext);
-  
 
-  const [tags, setTags] = useState('');
+  const [query, setQuery] = useState({});
   const [result, setResult] = useState([]);
 
   let submitLink = '/connexion';
@@ -21,37 +19,47 @@ const Search = () => {
     submitLink = '/soumettre-une-nouvelle-action';
   }
 
-  const searchListe = async cleanTags => {
+  const inputHandler = (event, queryType) => {    
+    setQuery({...query, [queryType]: event.target.value});
+  };
+
+  const searchHanlder = (event) => {
+    event.preventDefault();
+    searchListe(query);
+  };
+
+
+  const cleanQuery = (query) => {
+
+    let queryObj = {}
+    
+    for ( const element in query ){
+
+      let ponctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+      let cleanQuery = query[element].trim().split(' '); 
+      cleanQuery = cleanQuery.filter(item => item.length > 2 && item !== ponctuation);
+
+      queryObj = {...queryObj, [element]: cleanQuery}
+
+    }
+    return queryObj
+  }
+
+  const searchListe = async (query) => {
+   
+    const postQuery = cleanQuery(query)
+
     try {
       const result = await fetch(`${ip}/moovs/findTags`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cleanTags)
+        body: JSON.stringify(postQuery),
       });
       const data = await result.json();
       setResult(data);
     } catch (error) {
       console.log('Request failed', error);
     }
-  };
-
-  const searchHanlder = event => {
-    event.preventDefault();
-    let ponctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
-    let removedAccent = removeDiacritics(tags);
-    let cleanTags = removedAccent
-      .toLowerCase()
-      .trim()
-      .split(' ');
-    cleanTags = cleanTags.filter(
-      item => item.length > 2 && item !== ponctuation
-    );
-
-    searchListe(cleanTags);
-  };
-
-  const inputHandler = event => {
-    setTags(event.target.value);
   };
 
   const liste = result.map((e, i) => (
@@ -93,20 +101,20 @@ const Search = () => {
               marginTop: 30,
               display: 'flex',
               justifyContent: 'center',
-              flexFlow: 'row wrap'
+              flexFlow: 'row wrap',
             }}
           >
             <input
               placeholder='Que cherchez vous ?'
               type='input'
-              onChange={inputHandler}
+              onChange={(e) => inputHandler(e, 'what')}
             />
 
-            {/* <input
+            <input
               placeholder='Où'
               type='input'
-              // onChange={whereHandler}
-            /> */}
+              onChange={(e) => inputHandler(e, 'where')}
+            />
           </div>
 
           <div className='searchButton'>
@@ -117,7 +125,13 @@ const Search = () => {
         {liste}
 
         <div className='searchButton'>
-          <NavLink to={{pathname:submitLink, linkdata:'/soumettre-une-nouvelle-action'}} activeClassName='active'>
+          <NavLink
+            to={{
+              pathname: submitLink,
+              linkdata: '/soumettre-une-nouvelle-action',
+            }}
+            activeClassName='active'
+          >
             <GreenButton>SOUMETTRE UNE ACTION</GreenButton>
           </NavLink>
         </div>

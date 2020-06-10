@@ -9,7 +9,7 @@ import { AuthContext } from '../../shared/auth/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
-const Header = props => {
+const Header = (props) => {
   const Auth = useContext(AuthContext);
 
   const logout = () => {
@@ -21,10 +21,9 @@ const Header = props => {
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
     const initials = document.querySelector('.initials');
-    const admin = document.querySelector('.admin-links');
+    const admin = document.querySelector('.linksBox');
 
     const navSlide = () => {
-   
       burger.addEventListener('click', () => {
         nav.classList.toggle('nav-active');
         admin.classList.remove('nav-active');
@@ -42,9 +41,8 @@ const Header = props => {
       admin.addEventListener('mouseleave', () => {
         admin.classList.remove('nav-active');
       });
-      
     };
-  
+
     navSlide();
   }, []);
 
@@ -58,42 +56,52 @@ const Header = props => {
         <div></div>
         <div></div>
       </div>
+      
+        
+        <div className='nav-links'>
+          <NavigationItem link='/home'>Home</NavigationItem>
+          <NavigationItem link='/annuaire-des-actions'>Moovs</NavigationItem>
+          <NavigationItem link='/actus'>Actus</NavigationItem>
+          <NavigationItem link='/events'>Events</NavigationItem>
+        </div>
 
-      <div className='nav-links'>
-        <NavigationItem link='/home'>Home</NavigationItem>
-        <NavigationItem link='/annuaire-des-actions'>Moovs</NavigationItem>
-        <NavigationItem link='/actus'>Actus</NavigationItem>
-        <NavigationItem link='/events'>Events</NavigationItem>
-      </div>
-      <div className='admin-links'>
-        {/* login and subscribe menu display handler */}
-        {!Auth.isLoggedIn && (
-          <>
-            <NavigationItem link='/inscription'>Inscription</NavigationItem>
-            <NavigationItem link='/connexion'>Connexion</NavigationItem>
-          </>
-        )}
-        {/* backoffice menu display handler */}
-        {Auth.isLoggedIn && Auth.user.admin && (
-          <>
-            <NavigationItem link='/backOffice'>BackOffice</NavigationItem>
-            <NavigationItem link='/addnews'>Ajouter une actus</NavigationItem>
-            <NavigationItem link='/info-du-compte'>
-              Information du compte
-            </NavigationItem>
-          </>
-        )}
-        {Auth.isLoggedIn && (
-          <>
-            <NavigationItem link='/addevent'>Ajouter un évent</NavigationItem>
-            <NavigationItem link='/soumettre-une-nouvelle-action'>
-              Ajouter un Moov
-            </NavigationItem>
-            <a href='/home' className='logout' onClick={logout}>
-              Déconnexion
-            </a>
-          </>
-        )}
+      <div className='linksBox'>
+
+        <div className='admin-links'>
+          {/* login and subscribe menu display handler */}
+          {!Auth.isLoggedIn && (
+            <>
+              <NavigationItem link='/inscription'>Inscription</NavigationItem>
+              <NavigationItem link='/connexion'>Connexion</NavigationItem>
+            </>
+          )}
+
+          {/* backoffice menu display handler */}
+          {Auth.isLoggedIn && Auth.user.role === 'admin' && (
+            <>
+              <NavigationItem link='/backOffice'>BackOffice</NavigationItem>
+              <NavigationItem link='/addnews'>Ajouter une actus</NavigationItem>
+              <NavigationItem link='/info-du-compte'>
+                Information du compte
+              </NavigationItem>
+              <hr />
+            </>
+          )}
+
+          {Auth.isLoggedIn && (
+            <>
+              <NavigationItem link='/addevent'>Ajouter un évent</NavigationItem>
+              <NavigationItem link='/soumettre-une-nouvelle-action'>
+                Ajouter un Moov
+              </NavigationItem>
+              <hr />
+              <a href='/home' className='logout' onClick={logout}>
+                Déconnexion
+              </a>
+            </>
+          )}
+
+        </div>
       </div>
       <p className='initials'>
         {Auth.isLoggedIn ? (

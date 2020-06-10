@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import ip from '../../shared/ip/Ip';
-import './nextEventsList.css';
 import { NavLink } from 'react-router-dom';
 import BlueButton from '../../shared/uiElements/BlueButton';
+import './nextEventsList.css';
 
 const EventsList = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
+
     const eventlist = async () => {
       try {
         const response = await fetch(`${ip}/event`);
@@ -17,12 +18,12 @@ const EventsList = () => {
         console.log(error);
       }
     };
-
     eventlist();
   }, []);
 
-  return (
-    <>
+ 
+
+  return (  
       <div className='nextEventsList'>
         {events.map((e, i) => (
           <div className='container' key={i}>
@@ -44,7 +45,6 @@ const EventsList = () => {
           </div>
         ))}
       </div>
-    </>
   );
 };
 

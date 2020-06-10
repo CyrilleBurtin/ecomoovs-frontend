@@ -48,7 +48,7 @@ const AddNews = () => {
   const handleClick = event => {
     event.preventDefault();
 
-    // shapping tags into array with removal of special charatcers space and uppecase
+    // shaping tags into array with removal of special charatcers - space and uppercase
     let ponctuation = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
     let tags = formState.inputs.tags.value
       .toLowerCase()

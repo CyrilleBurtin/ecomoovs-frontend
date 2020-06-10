@@ -62,7 +62,7 @@ const NewUser = props => {
         isValid: false
       }
     },
-    true
+    'user'
   );
 
   console.log('formState', formState);
