@@ -4,13 +4,7 @@
   grid-column-gap: 40px;
   grid-row-gap: 40px;
 }
-/* .MoovCards {
-  border: 1px solid #6dbbad;
-  border-radius: 2%;
-  padding: 10px;
-  box-sizing: border-box;
-  background-color: #eee;
-} */
+
 .MoovCards {
   border-radius: 13px;
   background: #ffffff;
@@ -32,10 +26,54 @@
   min-height: 124px;
 }
 
-.MoovCards .CardBody {
-  width: 90%;
-  margin: 20px auto;
-  display: block;
-  border-radius: 5%;
-  box-shadow: 5px 5px 8px #bbb, -5px -5px 8px #f8f8f8;
+.MoovCards .CardBody .name{
+  margin: 20px 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.MoovCards .CardBody .geoType{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.MoovCards .CardBody .city{
+  font-weight: bold;
+  color: #61AA93;
+}
+
+.MoovCards .CardBody .type{
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 0;
+}
+
+.MoovCards .CardBody .description{
+  margin: 5px 0;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.MoovCards .CardBody .tagsHolder{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.MoovCards .CardBody .tags{
+  margin: 2px 3px;
+  padding: 1px 4px;
+  background-color: #878787;
+  font-size: 10px;
+  border-radius: 5px;
+  color: #fff;
+  letter-spacing: 0;
+}
+
+.seeMore{
+  text-align: center;
+  margin-top: 20px;
 }

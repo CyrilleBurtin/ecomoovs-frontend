@@ -19,8 +19,8 @@ const Search = () => {
     submitLink = '/soumettre-une-nouvelle-action';
   }
 
-  const inputHandler = (event, queryType) => {    
-    setQuery({...query, [queryType]: event.target.value});
+  const inputHandler = (event, queryType) => {
+    setQuery({ ...query, [queryType]: event.target.value });
   };
 
   const searchHanlder = (event) => {
@@ -28,35 +28,32 @@ const Search = () => {
     searchListe(query);
   };
 
-
   const cleanQuery = (query) => {
-
-    let queryObj = {}
-    
-    for ( const element in query ){
-
+    let queryObj = {};
+    for (const element in query) {
       let ponctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
-      let cleanQuery = query[element].trim().split(' '); 
-      cleanQuery = cleanQuery.filter(item => item.length > 2 && item !== ponctuation);
-
-      queryObj = {...queryObj, [element]: cleanQuery}
-
+      let cleanQuery = query[element].trim().split(' ');
+      cleanQuery = cleanQuery.filter(
+        (item) => item.length > 2 && item !== ponctuation
+      );
+      queryObj = { ...queryObj, [element]: cleanQuery };
     }
-    return queryObj
-  }
+    return queryObj;
+  };
 
   const searchListe = async (query) => {
-   
-    const postQuery = cleanQuery(query)
+    const postQuery = cleanQuery(query);
 
     try {
-      const result = await fetch(`${ip}/moovs/findTags`, {
+      const result = await fetch(`${ip}/moovs/findMoovs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(postQuery),
       });
+
       const data = await result.json();
       setResult(data);
+
     } catch (error) {
       console.log('Request failed', error);
     }
@@ -132,7 +129,7 @@ const Search = () => {
             }}
             activeClassName='active'
           >
-            <GreenButton>SOUMETTRE UNE ACTION</GreenButton>
+            <GreenButton>SOUMETTRE UN MOOV</GreenButton>
           </NavLink>
         </div>
       </div>

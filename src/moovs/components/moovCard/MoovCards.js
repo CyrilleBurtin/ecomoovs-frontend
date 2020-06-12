@@ -4,29 +4,36 @@ import { NavLink } from 'react-router-dom';
 import './MoovCards.css';
 import BlueButton from '../../../shared/uiElements/BlueButton';
 
-const MoovsCards = props => {
+const MoovsCards = (props) => {
+  console.log('props.moovList', props.moovList);
   return (
     <div className='MoovCardFlex'>
       {props.moovList &&
         props.moovList.map((e, i) => (
           <div key={i + 1} className='MoovCards'>
             <div>
-              <img
-                src={e.img.eager[0].secure_url}               
-                alt='moov'
-              />
+              <img src={e.img.eager[0].secure_url} alt='moov' />
             </div>
             <div className='CardBody'>
-              <div>
-                {i + 1}. {e.name}
+              <div className='name'>{e.name}</div>
+              <div className='geoType'>
+                <div className='city'>{e.location.city}&nbsp;&nbsp;&nbsp;</div>
+                <div className='type'>{e.type}</div>
               </div>
-              <div>{e.description}</div>
-              <div>{e.location.city}</div>
-              <div></div>
-              <div>{e.type}</div>
+              <div className='description'>{e.description}</div>
+
+              <div className='tagsHolder'>
+                {e.tags.map((e) => (
+                  <div className='tags'>{e}</div>
+                ))}
+              </div>
             </div>
-            <div style={{ textAlign: 'center' }}>
-              <NavLink to={{pathname: '/moov', moovData: e}} activeClassName='active'>
+
+            <div className='seeMore'>
+              <NavLink
+                to={{ pathname: '/moov', moovData: e }}
+                activeClassName='active'
+              >
                 <BlueButton>Voir +</BlueButton>
               </NavLink>
             </div>

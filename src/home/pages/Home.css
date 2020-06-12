@@ -1,73 +1,72 @@
-.home{
-    background-image: url('/images/home-bg.jpg');
-    background-size: cover;  
-    opacity: 1;
-    z-index: -1;
+.home {
+  background-image: url('/images/home-bg.jpg');
+  background-size: cover;
+  opacity: 1;
+  z-index: -1;
 }
-.homebgc{
-    background-color: rgba(45,90,45,0.2) ;
+.homebgc {
+  background-color: rgba(45, 90, 45, 0.2);
 }
-.H1Small{
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    text-shadow: 1px 1px #fff;
+.H1Small {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 1px 1px #fff;
 }
-.H1Strong{
-    font-size: 43px;
-    font-weight: bold;
-    color:#77eebe;
-    text-shadow: 1px 1px #000;
+.H1Strong {
+  font-size: 43px;
+  font-weight: bold;
+  color: #77eebe;
+  text-shadow: 1px 1px #000;
 }
-H4{
-    font-size: 21px;
-    font-weight: bold;
-    text-align: center;
-    text-shadow: 1px 1px #fff;
+H4 {
+  font-size: 21px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 1px 1px #fff;
 }
-.greens{
-    background-color:#6dbbad;
-    color: #fff;
-    display: flex;
-    justify-content : space-evenly;
-    flex-direction: column;
-    align-items: center;
+.greens {
+  background-color: #6dbbad;
+  color: #fff;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
 }
-.default{ 
-    color: #f6f6f6;
-    text-decoration: none;
-    margin-right: 8;
-    margin-left: 8
+.default {
+  color: #f6f6f6;
+  text-decoration: none;
+  margin-right: 8;
+  margin-left: 8;
 }
-.activeStyle{
-color: #00e689;
-}
-
-.bottom{
-    background-image: url('/images/together.jpg');
-    background-position: center center;
-    background-size: cover;
+.activeStyle {
+  color: #00e689;
 }
 
-.home input{
-    background-color: #FFF;
-    min-width: 250px;
-    width: 30%;
-    background-color: rgba(0,0,0,0.2);    
-    border: none;
-    border-bottom : 1px solid #777;
-    color: #FFF;
-    margin: 0 10px 10px;
-    padding: 10px;
-    font-size: 18px;
-    text-shadow: 1px 1px #000;
-    border-radius: 5px;
+.bottom {
+  background-image: url('/images/together.jpg');
+  background-position: center center;
+  background-size: cover;
 }
 
-.home ::placeholder{
-    color: #fff
+.home input {
+  background-color: #fff;
+  min-width: 250px;
+  width: 30%;
+  border: none;
+  border-bottom: 1px solid #777;
+  color: #000;
+  margin: 0 10px 10px;
+  padding: 10px;
+  font-size: 18px;
+
+  border-radius: 5px;
 }
 
-.home .searchButton{
-    text-align: center;
+.home ::placeholder {
+  color: #999;
+}
+
+.home .searchButton {
+  text-align: center;
 }

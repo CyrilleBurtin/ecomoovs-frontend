@@ -33,7 +33,7 @@ const LastMoovs = () => {
       <div className='cards'>
         <MoovCards moovList={moovs} />
       </div>
-      <div className='button'>
+      <div className='button' style={{marginTop:'30px'}}>
         <GreenButton>En voir plus</GreenButton>
       </div>
     </div>
