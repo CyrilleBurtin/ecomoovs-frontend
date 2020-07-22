@@ -98,7 +98,6 @@ const AddEvent = () => {
       <div className='SharedFormHeader'>
         <p className='text-center SharedFormTitle'>AJOUTER UN ÉVÉNEMENT</p>
       </div>
-
       <div className='pt-5 pb-5'>
         <form onSubmit={handleClick}>
           {/* name */}

@@ -24,6 +24,7 @@ import UserEdit from './backOffice/pages/UserEdit';
 import MoovSubmit from './moovs/pages/moovSubmit/MoovSubmit';
 import Footer from './footer/pages/Footer';
 import EventsList from './events/pages/EventsList';
+import CsvReader from './moovs/pages/moovSubmit/CsvReader'
 
 import MoovFullCard from './moovs/components/fullCard/MoovFullCard';
 import EventFullCard from './events/pages/EventFullCard';
@@ -47,7 +48,8 @@ const App = props => {
           {!isLoggedIn && <Route path='/inscription' component={Registration} />}
           {!isLoggedIn && <Route path='/connexion' component={Login} />}
 
-          {isLoggedIn && user.admin && <Route path='/backOffice' component={BackOffice} />}
+          {isLoggedIn && user.role === 'admin' && <Route path='/backOffice' component={BackOffice} />}
+          {isLoggedIn && user.role === 'admin' && <Route path='/CsvReader' component={CsvReader} />}
           {isLoggedIn && <Route path='/addnews' component={AddNews} />}
           {isLoggedIn && <Route path='/addevent' component={AddEvent} />}
           {isLoggedIn && <Route path='/info-du-compte' component={UserEdit} />}

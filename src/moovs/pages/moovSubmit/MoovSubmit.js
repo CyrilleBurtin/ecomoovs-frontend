@@ -7,106 +7,106 @@ import { AuthContext } from '../../../shared/auth/AuthContext';
 import ImageUpload from '../../../shared/components/ImageUpload';
 import {
   VALIDATOR_REQUIRE,
-  VALIDATOR_EMAIL
-} from '../../../shared/validators/Validators';
+  VALIDATOR_EMAIL,
+} from '../../../shared/validators/Validators'; 
 import '../../../shared/css/forms.css';
 import Loading from '../../../shared/components/Loading';
 import BlueButton from '../../../shared/uiElements/BlueButton';
-const MoovSubmit = props => {
+import { NavLink } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
+const MoovSubmit = (props) => {
   const Auth = useContext(AuthContext);
-  console.log('Auth', Auth)
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [formState, inputHandler] = useForm({
     type: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     name: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     address: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     zipcode: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     city: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     country: {
       value: 'France',
-      isValid: true
+      isValid: true,
     },
     email: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     phone: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     url: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     title: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     punchline: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     description: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     regNumber: {
       value: '',
-      isValid: false
+      isValid: false,
     },
     tags: {
       value: [],
-      isValid: false
+      isValid: false,
     },
     image: {
       value: null,
-      isValid: false
+      isValid: false,
     },
     facebook: {
       value: '',
-      isValid: true
+      isValid: true,
     },
     instagram: {
       value: '',
-      isValid: true
+      isValid: true,
     },
     twitter: {
       value: '',
-      isValid: true
-    }
+      isValid: true,
+    },
   });
 
-  const handleClick = async event => {
+console.log('formState.image', formState.image)
+
+  const handleClick = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-    // shapping tags into array with removal of special charatcers space and uppecase
 
+    // shaping tags into array with removal of special charatcers space and uppecase
     let ponctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
-
     let rowTags = formState.inputs.tags.value.toLowerCase().trim();
+    let tags = rowTags.split(' ');    
+    tags = tags.filter((item) => item.length > 2 && item !== ponctuation);
 
-    let tags = rowTags.split(' ');
-    tags = tags.filter(item => item.length > 2 && item !== ponctuation);
-
-   let searchTags = rowTags.split(' ');
-
-    console.log('searchTags', searchTags);
+    let searchTags = rowTags.split(' ');
 
     const formData = new FormData();
     formData.append('type', formState.inputs.type.value);
@@ -134,7 +134,7 @@ const MoovSubmit = props => {
       const response = await fetch(`${ip}/moovs`, {
         method: 'POST',
         body: formData,
-        headers: { authorization: `Bearer ${Auth.token}` }
+        headers: { authorization: `Bearer ${Auth.token}` },
       });
       const data = await response.json();
       console.log(data);
@@ -150,6 +150,17 @@ const MoovSubmit = props => {
       <div className='SharedFormHeader'>
         <p className='text-center SharedFormTitle'>AJOUTER UN MOOV</p>
       </div>
+
+      {Auth.user.role === 'admin' && (
+        <div className='seeMore'>
+          <NavLink
+            to={{ pathname: '/CsvReader' }}
+          >
+            <BlueButton>Importer CSV</BlueButton>
+          </NavLink>
+        </div>
+      )}
+
       <div>
         <form onSubmit={handleClick}>
           <FormInput
@@ -352,7 +363,7 @@ const MoovSubmit = props => {
             style={{
               margin: '50px Auto',
               textAlign: 'center',
-              display: 'block'
+              display: 'block',
             }}
             disabled={!formState.isValid}
           >

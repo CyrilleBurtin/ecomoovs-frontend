@@ -5,7 +5,7 @@ import './MoovCards.css';
 import BlueButton from '../../../shared/uiElements/BlueButton';
 
 const MoovsCards = (props) => {
-  console.log('props.moovList', props.moovList);
+
   return (
     <div className='MoovCardFlex'>
       {props.moovList &&
@@ -23,8 +23,8 @@ const MoovsCards = (props) => {
               <div className='description'>{e.description}</div>
 
               <div className='tagsHolder'>
-                {e.tags.map((e) => (
-                  <div className='tags'>{e}</div>
+                {e.tags.map((el, j) => (
+                  <div key={j} className='tags'>{el}</div>
                 ))}
               </div>
             </div>

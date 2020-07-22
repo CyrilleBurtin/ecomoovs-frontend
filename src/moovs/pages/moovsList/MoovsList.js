@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import ip from '../../../shared/ip/Ip';
 import MoovsCards from '../../components/moovCard/MoovCards';
 import './MoovList.css';
-
+import useFetch from '../../../hooks/useFetch';
 const MoovsList = () => {
-  const [moovs, setMoovs] = useState([]);
+  const [moovs, setMoovs] = useState();
 
-  useEffect(() => {
-    const moovList = async () => {
-      try {
-        const response = await fetch(`${ip}/moovs/`);
-        const data = await response.json();
-        setMoovs(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    moovList();
-  }, []);
+  const res = useFetch('moovs');
+
+  useEffect(()=> {
+    if (res.response) {
+      setMoovs(res.response);
+    }
+  },[res])
 
   return (
     <div className='Moovs'>

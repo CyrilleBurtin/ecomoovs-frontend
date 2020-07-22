@@ -81,7 +81,7 @@ const MoovEdit = props => {
         isValid: true
       },
       image: {
-        value: props.moov.img.public_id,
+        value: props.moov.img.eager[0].secure_url,
         isValid: true
       },
       facebook: {
@@ -103,7 +103,7 @@ const MoovEdit = props => {
     },
     true
   );
-
+console.log(props.moov.img.eager[0].secure_url)
   const handleClick = async event => {
     event.preventDefault();
     setIsLoading(true);
@@ -137,7 +137,7 @@ const MoovEdit = props => {
     formData.append('instagram', formState.inputs.instagram.value);
     formData.append('twitter', formState.inputs.twitter.value);
     formData.append('userId', Auth.user._id);
-
+    console.log('formState.inputs.image.value', formState.inputs.image.value)
     try {
       const response = await fetch(`${ip}/moovs`, {
         method: 'PUT',
@@ -321,6 +321,7 @@ const MoovEdit = props => {
             onInput={inputHandler}
             errorText="Votre Image n'est pas valide"
           />
+            <img src={formState.inputs.image.value} alt='logo'style={{width: '150px'}}/>
           <FormInput
             name='facebook'
             element='input'
